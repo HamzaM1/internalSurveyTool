@@ -157,6 +157,7 @@ sap.ui.define([
 		
 		_onObjectMatched : function (oEvent) {
 			sObjectId =  oEvent.getParameter("arguments").type;
+			
 		}
 	});
 });

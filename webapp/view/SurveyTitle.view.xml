@@ -9,7 +9,7 @@
 		width="auto">
         <content>
 			<Text class="myHeader"
-    			text="{i18n>createSTitlePanelTitle}"/> 
+    			text="{new>/titleType} Title"/> 
 		</content>
     </Panel>
 	

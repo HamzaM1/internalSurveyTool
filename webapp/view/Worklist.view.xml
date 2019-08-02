@@ -1,8 +1,20 @@
-<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" controllerName="demo.survey2.SurveyDemo2.controller.Worklist">
+<mvc:View
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	controllerName="demo.survey2.SurveyDemo2.controller.Worklist">
 
 	<ScrollContainer id="scroll" vertical="true" width="98%" height="500px" visible="true">
 		<content>
-			<List id="list" width="auto" items="{path:'/SQ', sorter:[{path:'SQ_TYPE',descending:false, group:true}]}" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true"  updateFinished=".onUpdateFinished">
+			<List
+			
+				id="list"
+				width="auto"
+				items="{path:'/SQ', sorter:[{path:'SQ_TYPE',descending:false, group:true}]}"
+				noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				growing="true" 
+				updateFinished=".onUpdateFinished">
 
 				<headerToolbar>
 					<OverflowToolbar>
@@ -17,11 +29,15 @@
 				</headerToolbar>
 
 				<items>
-        		<ObjectListItem title="{SQ_TITLE}" type="Navigation" number="{DATE}" press="onPress" numberUnit="{SQ_OWNER}"/>
+        			<ObjectListItem
+        				title="{SQ_TITLE}"
+        				type="Navigation"
+        				number="{DATE}"
+        				press="onPress"
+        				numberUnit="{SQ_OWNER}"/>
     			</items>
     		
 			</List>
 		</content>
 	</ScrollContainer>
-	
 </mvc:View>

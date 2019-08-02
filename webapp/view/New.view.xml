@@ -5,7 +5,7 @@
 	xmlns:semantic="sap.f.semantic">
 	
 	<Page
-		title="{i18n>newTitle}"
+		title="New {new>/titleType}"
 		showNavButton="true"
 		navButtonPress=".onNavBack">
         <headerContent
@@ -18,20 +18,10 @@
 				text="Publish"
 				press=".onPressPublish"/>
 		</headerContent>
+		
 		<content>
 			<mvc:XMLView viewName="demo.survey2.SurveyDemo2.view.SurveyTitle"/>
 			<mvc:XMLView viewName="demo.survey2.SurveyDemo2.view.Dropdown"/>
-		
-			<Panel
-				backgroundDesign="Transparent"
-				class="sapUiResponsiveMargin">
-				<content>
-					<Button
-						text="Add Question"
-						icon="sap-icon://add"
-					/>
-				</content>
-			</Panel> 
 		</content>
 	</Page>
 </mvc:View>

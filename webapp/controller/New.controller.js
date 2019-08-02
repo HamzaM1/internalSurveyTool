@@ -10,6 +10,9 @@ sap.ui.define([
    return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
    		onInit : function(){
    			this.getRouter().getRoute("new").attachPatternMatched(this._onObjectMatched, this);
+   			this.titleType = "" + sObjectId;
+   			var oViewModel = new JSONModel({titleType : this.titleType});
+   			this.getView().setModel(oViewModel, "new");
    		},
    		
 		onNavBack : function() {
@@ -50,7 +53,7 @@ sap.ui.define([
 				SQID: oOwner + oQuizCount,
 				SQ_TITLE: oTitle, 
 				SQ_LINK: "www.placeholder.com", //to do
-				SQ_TYPE: sObjectId,
+				SQ_TYPE: sObjectId,		// this seems to be saving as undefined??
 				DATE: d /**(d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()) */,
 				SQ_OWNER: oOwner,
 				NUM_OF_QUESTIONS: 10 //to do
@@ -112,7 +115,7 @@ sap.ui.define([
 
 		_onObjectMatched : function (oEvent) {
 			sObjectId =  oEvent.getParameter("arguments").type;
-		}
+		},
 	
 	});
 
