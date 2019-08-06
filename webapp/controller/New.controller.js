@@ -43,7 +43,7 @@ sap.ui.define([
 			var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 			var oTitle = sap.ui.getCore().getModel("title").getData().title;
 			var oOwner = sap.ui.getCore().getModel("user").getData().user;
-			var oQuizCount = "004";
+			var oQuizCount = "005";
 			var oQuestionCount = "0"; //to do
 			var d = new Date();
 			
@@ -61,13 +61,13 @@ sap.ui.define([
 			
 			// create questions
 			var i = 0;
-			var oAnswersCount = sap.ui.getCore().getModel("answersCount").getData().answersCount;
-			var oQuestion;
+			var oAnswersCount = 1; //sap.ui.getCore().getModel("answersCount").getData().answersCount;
+			var oQuestion = "test";
 			var QuestionsoData;
 			
 			while (i < 1) { //need to make "1" amount of questions on quiz
 				//oQuestion = sap.ui.getCore().getModel("question" + i).getData.question;
-				oQuestion = sap.ui.getCore().getModel("question" + i).getData().question;
+				//oQuestion = sap.ui.getCore().getModel("question" + i).getData().question;
 				
 				QuestionsoData = {
 					QUESTIONID: oOwner + oQuizCount + oQuestionCount,

@@ -125,7 +125,7 @@
 						QUESTIONID :  sObjectId + i
 					}));
 				var j = 0;
-				while (j < sap.ui.getCore().getModel("answersCount").getData().answersCount) {
+				while (j < 1 /** sap.ui.getCore().getModel("answersCount").getData().answersCount */) {
 					oModel.remove(this.getModel().createKey("/Answers", {
 						ANSWERID :  sObjectId + i + j
 					}));
