@@ -10,9 +10,8 @@ sap.ui.define([
    return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
    		onInit : function(){
    			this.getRouter().getRoute("new").attachPatternMatched(this._onObjectMatched, this);
-   			this.titleType = "" + sObjectId;
-   			var oViewModel = new JSONModel({titleType : this.titleType});
-   			this.getView().setModel(oViewModel, "new");
+   			
+   			this.setModel(sap.ui.getCore().getModel("titleType"), "new");
    		},
    		
 		onNavBack : function() {
@@ -115,7 +114,7 @@ sap.ui.define([
 
 		_onObjectMatched : function (oEvent) {
 			sObjectId =  oEvent.getParameter("arguments").type;
-		},
+		}
 	
 	});
 

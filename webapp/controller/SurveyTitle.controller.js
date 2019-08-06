@@ -1,19 +1,20 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+	"./BaseController",
 	"sap/m/MessageToast",
 	"sap/ui/core/Fragment",
 	"sap/ui/model/json/JSONModel"
-], function (Controller, MessageToast, Fragment, JSONModel) {
+], function (BaseController, MessageToast, Fragment, JSONModel) {
 	"use strict";
 	
-	return Controller.extend("demo.survey2.SurveyDemo2.controller.SurveyTitle", {
-		onInit	   : function () {
+	return BaseController.extend("demo.survey2.SurveyDemo2.controller.SurveyTitle", {
+		onInit: function () {
 			//var oJsonModel = new sap.ui.model.json.JSONModel({data : {}});
 			//sap.ui.getCore().setModel(oJsonModel, "title");
 
 			//var oData = sap.ui.getCore().getModel("title").getData();
 			//var oJsonModel = new JSONModel({data : {}});
 			//this.getView().setModel(oJsonModel);
+			this.setModel(sap.ui.getCore().getModel("titleType"), "new");
 		},
 		
 		getTitle   : function () {
