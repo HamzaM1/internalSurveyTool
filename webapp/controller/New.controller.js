@@ -6,9 +6,20 @@ sap.ui.define([
    "use strict";
 
 	var sObjectId;
-
+	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
+	var oOwner = sap.ui.getCore().getModel("user").getData().user;
+	
    return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
    		onInit : function(){
+   			oModel.read(
+				"/Users('" + oOwner + "')",
+				{
+					success: function(oData) {
+    					var oCount = new sap.ui.model.json.JSONModel({count : oData.NUM_OF_SQ});
+						sap.ui.getCore().setModel(oCount, "count");
+						}
+					}
+				);
    			this.getRouter().getRoute("new").attachPatternMatched(this._onObjectMatched, this);
    			
    			this.setModel(sap.ui.getCore().getModel("titleType"), "new");
@@ -40,10 +51,18 @@ sap.ui.define([
 		
 		
 		  onPressPublish: function (oEvent) {
-			var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
+			
 			var oTitle = sap.ui.getCore().getModel("title").getData().title;
-			var oOwner = sap.ui.getCore().getModel("user").getData().user;
-			var oQuizCount = "005";
+			
+			//var oQuizCount = "005";
+			
+			//var oCount = new sap.ui.model.json.JSONModel({count : 0});
+			//sap.ui.getCore().setModel(oCount, "count");
+			
+			alert(sap.ui.getCore().getModel("count").getData().count);
+			var oQuizCount = ("00" + (sap.ui.getCore().getModel("count").getData().count)).slice(-3);
+			//alert(oQuizCount);
+			
 			var oQuestionCount = "0"; //to do
 			var d = new Date();
 			
@@ -99,6 +118,20 @@ sap.ui.define([
 				oModel.create("/Answers", AnswersoData);
 				i += 1; 
 		  	}
+		  	
+		  	var oUpdate = {
+				USERID: oOwner,
+				NUM_OF_SQ: (sap.ui.getCore().getModel("count").getData().count) + 1
+				}
+
+			oModel.update(
+				"/Users('" + oOwner + "')",
+				oUpdate
+			);
+			
+			var oCount = new sap.ui.model.json.JSONModel({count : (sap.ui.getCore().getModel("count").getData().count + 1)});
+			sap.ui.getCore().setModel(oCount, "count");
+			
 		  },
 		
 		/* =========================================================== */

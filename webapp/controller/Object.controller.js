@@ -7,7 +7,7 @@
 	"use strict";
 	
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
-
+	var oOwner = sap.ui.getCore().getModel("user").getData().user;
 	var sObjectId;
 	
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.Object", {
@@ -17,6 +17,16 @@
 		
 		// Initialization of application
 		onInit:function(){
+			
+			oModel.read(
+				"/Users('" + oOwner + "')",
+				{
+					success: function(oData) {
+    					var oCount = new sap.ui.model.json.JSONModel({count : oData.NUM_OF_SQ});
+						sap.ui.getCore().setModel(oCount, "count");
+						}
+					}
+				);
 			
 			/**
 			var oChart = this.byId("pieid");
@@ -134,7 +144,18 @@
 			i += 1;
 			}
 			
+			var oUpdate = {
+				USERID: oOwner,
+				NUM_OF_SQ: (sap.ui.getCore().getModel("count").getData().count) - 1
+				}
+
+			oModel.update(
+				"/Users('" + oOwner + "')",
+				oUpdate
+			);
 			
+			var oCount = new sap.ui.model.json.JSONModel({count : (sap.ui.getCore().getModel("count").getData().count - 1)});
+			sap.ui.getCore().setModel(oCount, "count");
 			
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("overview");
