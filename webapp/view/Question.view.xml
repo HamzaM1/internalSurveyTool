@@ -14,38 +14,36 @@
 		</headerContent>
 		<content>
 			<Panel
-					backgroundDesign="Transparent"
-					class="sapUiResponsiveMargin">
-					<content>
-						<Text
-							class="myResults myHeader"
-							text="{QUESTION TITLE}"/>
+				backgroundDesign="Transparent"
+				class="sapUiResponsiveMargin">
+				<content>
+					<Text
+						class="myResults myHeader"
+						text="{QUESTION_TITLE}"/>
 
-					</content>
-				</Panel>
-				
-				<!-- Question + Link to Survey -->
-				
-				<Panel 
-					backgroundDesign="Transparent"
-					class="sapUiResponsiveMargin">
-					<content> 
-						<Text
-							class="myResults myText"
-							text="{QUESTION}"/>
-				</Panel>
-				
-				<!-- -->
-				
-				<Panel
-					backgroundDesign="Transparent"
-					class="sapUiResponsiveMargin">
-					<content> 
-						<Text
-							class="myResults myHeader"
-							text="{SQ_TYPE} Answers:"/>
-					</content>
-				</Panel>
+				</content>
+			</Panel>
+
+			<Panel 
+				backgroundDesign="Transparent"
+				class="sapUiResponsiveMargin">
+				<content>
+					<Text
+						class="myResults myText"
+						text="{QUESTION}"/>
+				</content>
+			</Panel>
+
+			<Panel
+				backgroundDesign="Transparent"
+				class="sapUiResponsiveMargin">
+				<content> 
+					<Text
+						class="myResults myHeader"
+						text="{SQ_TYPE} Answers:"/>
+				</content>
+			</Panel>
+			
 		</content>
 	</Page>
 </mvc:View>
