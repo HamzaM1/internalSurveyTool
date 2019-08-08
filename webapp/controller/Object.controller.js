@@ -130,7 +130,19 @@
 				oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("questionNoDataWithSearchText"));
 			}
 		}, 
-
+		
+		onPress : function (oEvent) {
+			// The source is the list item that got pressed
+			this._showObject(oEvent.getSource());
+		},
+		
+		_showObject : function (oItem) {
+			//if (oItem.getBindingContext().getProperty("quiz_owner") === sap.ui.getCore().getModel("user").getData().user){
+				this.getRouter().navTo("question"); //, {
+					//objectId: oItem.getBindingContext().getProperty("QUESTIONID")
+				//});
+			//}
+		},
 		
 		onNavBack : function() {
 			var sPreviousHash = History.getInstance().getPreviousHash();

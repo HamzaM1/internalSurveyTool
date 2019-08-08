@@ -201,6 +201,13 @@
 					"target": [
 						"questionRadio"
 					]
+				},
+				{
+					"pattern": "question",
+					"name": "question",
+					"target": [
+						"question"
+					]
 				}
 			],
 			"targets": {
@@ -269,6 +276,10 @@
 				"questionRadio": {
 					"viewName": "QuestionRadio",
 					"viewId": "questionRadio"
+				},
+				"question": {
+					"viewName": "Question",
+					"viewId": "question"
 				}
 			}
 		},

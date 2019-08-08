@@ -1,0 +1,18 @@
+<mvc:View
+	controllerName="demo.survey2.SurveyDemo2.controller.Question"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+	
+	<Page title="{QUESTION_TITLE}" id="page" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" showNavButton="true"
+			navButtonPress=".onNavBack">
+        <headerContent
+        	class="header">
+			<Button
+				icon="sap-icon://home"
+				press=".onPressHome"/>
+		</headerContent>
+		<content>
+		</content>
+	</Page>
+</mvc:View>

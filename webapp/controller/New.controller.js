@@ -57,21 +57,19 @@ sap.ui.define([
 			
 			var oTitle = sap.ui.getCore().getModel("title").getData().title;
 			
-			//var oQuizCount = "005";
-			
 			//var oCount = new sap.ui.model.json.JSONModel({count : 0});
 			//sap.ui.getCore().setModel(oCount, "count");
 			
 			var oQuizCount = ("00" + (sap.ui.getCore().getModel("count").getData().count)).slice(-3);
 			//alert(oQuizCount);
-			var oQuestionCount = "0"; //to do
 			var d = new Date();
+
 			
 			// create survey
 			var SQoData = {
 				SQID: oOwner + oQuizCount,
 				SQ_TITLE: oTitle, 
-				SQ_LINK: "www.placeholder.com", //to do
+				SQ_LINK: "www." + oTitle + ".com", //to do
 				SQ_TYPE: sObjectId,		// this seems to be saving as undefined??
 				DATE: d /**(d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()) */,
 				SQ_OWNER: oOwner,
@@ -81,44 +79,48 @@ sap.ui.define([
 			
 			// create questions
 			var i = 0;
+			var j = 0;
 			var oAnswersCount = 1; //sap.ui.getCore().getModel("answersCount").getData().answersCount;
+			var oQuestionsCount = 2; //to do
 			var oQuestion = "test";
 			var QuestionsoData;
+			// create answers
+			var oAnswer = "test";
+			var AnswersoData;
 			
-			while (i < 1) { //need to make "1" amount of questions on quiz
+			while (i < oQuestionsCount) { //need to make "1" amount of questions on quiz
 				//oQuestion = sap.ui.getCore().getModel("question" + i).getData.question;
 				//oQuestion = sap.ui.getCore().getModel("question" + i).getData().question;
 				
 				QuestionsoData = {
-					QUESTIONID: oOwner + oQuizCount + oQuestionCount,
+					QUESTIONID: oOwner + oQuizCount + i,
 					SQID: oOwner + oQuizCount,
-					QUESTION_TITLE: "Title", //Needed?
+					QUESTION_TITLE: "Question" + (i + 1), 
 					QUESTION: oQuestion,
 					ANSWER_TYPE: "Radio", //to do
 					NUM_OF_ANSWERS: oAnswersCount
 				};
 				oModel.create("/Questions", QuestionsoData);
+				
+				j = 0;
+		  		while (j < oAnswersCount) { //need to make "1" amount of questions on quiz
+					//oQuestion = sap.ui.getCore().getModel("question" + i).getData.question;
+					//oAnswer = sap.ui.getCore().getModel("answer" + i).getData().answer;
+					AnswersoData = {
+						ANSWERID: oOwner + oQuizCount + i + j,
+						QUESTIONID: oOwner + oQuizCount + oQuestionsCount,
+						ANSWER: "Answer" + (j + 1),
+						ANSWER_CORRECT: 0,
+						ORDER: i
+					};
+					oModel.create("/Answers", AnswersoData);
+					j += 1; 
+		  		}
 				i += 1; 
 			}
 			
-			// create answers
-			var oAnswer;
-			var AnswersoData;
-			i = 0;
 			
-		  	while (i < oAnswersCount) { //need to make "1" amount of questions on quiz
-				//oQuestion = sap.ui.getCore().getModel("question" + i).getData.question;
-				//oAnswer = sap.ui.getCore().getModel("answer" + i).getData().answer;
-				AnswersoData = {
-					ANSWERID: oOwner + oQuizCount + oQuestionCount + i,
-					QUESTIONID: oOwner + oQuizCount + oQuestionCount,
-					ANSWER: "xxx",
-					ANSWER_CORRECT: 0,
-					ORDER: i
-				};
-				oModel.create("/Answers", AnswersoData);
-				i += 1; 
-		  	}
+			
 		  	
 		  	var oUpdate = {
 				USERID: oOwner,
