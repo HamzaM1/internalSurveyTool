@@ -138,9 +138,9 @@
 		
 		_showObject : function (oItem) {
 			//if (oItem.getBindingContext().getProperty("quiz_owner") === sap.ui.getCore().getModel("user").getData().user){
-				this.getRouter().navTo("question"); //, {
-					//objectId: oItem.getBindingContext().getProperty("QUESTIONID")
-				//});
+				this.getRouter().navTo("question", {
+					objectId: oItem.getBindingContext().getProperty("QUESTIONID")
+				});
 			//}
 		},
 		

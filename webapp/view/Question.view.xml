@@ -13,6 +13,39 @@
 				press=".onPressHome"/>
 		</headerContent>
 		<content>
+			<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Text
+							class="myResults myHeader"
+							text="{QUESTION TITLE}"/>
+
+					</content>
+				</Panel>
+				
+				<!-- Question + Link to Survey -->
+				
+				<Panel 
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content> 
+						<Text
+							class="myResults myText"
+							text="{QUESTION}"/>
+				</Panel>
+				
+				<!-- -->
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content> 
+						<Text
+							class="myResults myHeader"
+							text="{SQ_TYPE} Answers:"/>
+					</content>
+				</Panel>
 		</content>
 	</Page>
 </mvc:View>

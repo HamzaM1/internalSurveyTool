@@ -203,7 +203,7 @@
 					]
 				},
 				{
-					"pattern": "question",
+					"pattern": "question/{objectId}",
 					"name": "question",
 					"target": [
 						"question"
