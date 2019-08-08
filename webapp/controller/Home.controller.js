@@ -8,6 +8,8 @@ sap.ui.define([
    	onInit: function () {
 			var userModel = new sap.ui.model.json.JSONModel("/services/userapi/currentUser");
 			this.getView().setModel(userModel, "userapi");
+			sap.ui.getCore().setModel(userModel, "userapi");
+			
 		},
 	onPressS: function (oEvent) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

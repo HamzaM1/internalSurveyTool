@@ -7,7 +7,7 @@
 	"use strict";
 	
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
-	var oOwner = sap.ui.getCore().getModel("user").getData().user;
+	var oOwner;
 	var sObjectId;
 	
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.Object", {
@@ -17,7 +17,7 @@
 		
 		// Initialization of application
 		onInit:function(){
-			
+			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
 			oModel.read(
 				"/Users('" + oOwner + "')",
 				{

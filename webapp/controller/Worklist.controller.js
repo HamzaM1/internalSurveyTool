@@ -8,7 +8,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, formatter, Filter, FilterOperator) {
 	"use strict";
 	
-	var oJsonModel = new sap.ui.model.json.JSONModel({user: "i505340"}); //Put user HERE
+	var oJsonModel = new sap.ui.model.json.JSONModel({user: "I505340"}); //Put user HERE
 			sap.ui.getCore().setModel(oJsonModel, "user");
 			
 	var oFilter = new Filter({

@@ -42,7 +42,7 @@
 							class="myResults myText"
 							text="{SQ_TITLE}"/>
 						<Input
-							value="www.placeholder.com"
+							value="{SQ_LINK}"
 							class="myResults myHeader"
 							editable="false"
 							width="30%"/>
@@ -60,10 +60,7 @@
 					<content> 
 						<Text
 							class="myResults myHeader"
-							text="{SQ_TYPE} Question:"/>
-						<Text
-							class="myResults myHeader"
-							text="Available Responses:"/>
+							text="{SQ_TYPE} Questions:"/>
 					</content>
 				</Panel>
 				

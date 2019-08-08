@@ -7,15 +7,18 @@ sap.ui.define([
 
 	var sObjectId;
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
-	var oOwner = sap.ui.getCore().getModel("user").getData().user;
+	var oOwner;
 	
    return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
    		onInit : function(){
+   			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
+   			//alert("/Users('" + oOwner + "')");
    			oModel.read(
 				"/Users('" + oOwner + "')",
 				{
 					success: function(oData) {
     					var oCount = new sap.ui.model.json.JSONModel({count : oData.NUM_OF_SQ});
+    					
 						sap.ui.getCore().setModel(oCount, "count");
 						}
 					}
@@ -59,10 +62,8 @@ sap.ui.define([
 			//var oCount = new sap.ui.model.json.JSONModel({count : 0});
 			//sap.ui.getCore().setModel(oCount, "count");
 			
-			alert(sap.ui.getCore().getModel("count").getData().count);
 			var oQuizCount = ("00" + (sap.ui.getCore().getModel("count").getData().count)).slice(-3);
 			//alert(oQuizCount);
-			
 			var oQuestionCount = "0"; //to do
 			var d = new Date();
 			
@@ -123,7 +124,6 @@ sap.ui.define([
 				USERID: oOwner,
 				NUM_OF_SQ: (sap.ui.getCore().getModel("count").getData().count) + 1
 				}
-
 			oModel.update(
 				"/Users('" + oOwner + "')",
 				oUpdate
