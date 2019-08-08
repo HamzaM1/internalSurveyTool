@@ -64,9 +64,44 @@
 					</content>
 				</Panel>
 				
+				<!-- Questions List -->
+				
+				<List
+			
+				id="list"
+				width="auto"
+				items="{path:'/Questions'}"
+				noDataText="{questionView>/tableNoDataText}"
+				busyIndicatorDelay="{questionView>/tableBusyDelay}"
+				growing="true" 
+				updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<OverflowToolbar>
+						
+						<ToolbarSpacer/>
+						<SearchField id="searchField" tooltip="{i18n>questionSearchTooltip}" search=".onSearch">
+							<layoutData>
+								<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+					</OverflowToolbar>
+				</headerToolbar>
+
+				<items>
+        			<ObjectListItem
+        				title="{QUESTION_TITLE}"
+        				number="{SQID}"
+        				type="Navigation"
+        				press="onPress"/>
+    			</items>
+    		
+			</List>
+				
+				
 				<!-- Available Responses ( Buttons )  -->
 				
-				<Panel 
+		<!--	<Panel 
 					backgroundDesign="Transparent"
 					class="sapUiResponsiveMargin">
 					<content>
@@ -85,7 +120,7 @@
 						</RadioButtonGroup>
 					</content>
 				</Panel>
-				
+		-->		
 				<!-- Results header !-->
 				
 				<Panel
@@ -97,9 +132,9 @@
 							text="{SQ_TYPE} Results:"/>
 					</content>
 				</Panel>
-				
+			
 				<!-- Yes/No Result !-->
-				
+		<!--		
 				<Panel
 					backgroundDesign="Transparent"
 					class="sapUiResponsiveMargin">
@@ -112,6 +147,7 @@
 							width="100%"
 							text="Placeholder: Placeholder"/>
 				</Panel>
+			-->
 				<!--
 				<Panel>
 					<viz:VizFrame height='100%' width="100%" vizType='pie' id="pieid">
