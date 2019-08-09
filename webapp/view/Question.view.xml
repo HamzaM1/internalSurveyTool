@@ -23,7 +23,8 @@
 
 				</content>
 			</Panel>
-
+			
+			
 			<Panel 
 				backgroundDesign="Transparent"
 				class="sapUiResponsiveMargin">
@@ -41,6 +42,27 @@
 					<Text
 						class="myResults myHeader"
 						text="{SQ_TYPE} Answers:"/>
+				</content>
+			</Panel>
+			
+			<Panel
+				backgroundDesign="Transparent"
+				class="sapUiResponsiveMargin">
+				<content> 
+					<Text
+						class="myResults myText"
+						text="--- PUT ANSWERS HERE ---"/>
+				</content>
+			</Panel>
+			
+			
+			<Panel
+				backgroundDesign="Transparent"
+				class="sapUiResponsiveMargin">
+				<content> 
+					<Text
+						class="myResults myHeader"
+						text="Results:"/>
 				</content>
 			</Panel>
 			

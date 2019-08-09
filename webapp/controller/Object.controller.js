@@ -31,33 +31,7 @@
 					}
 				);
 			
-			/**
-			var oChart = this.byId("pieid");
-			oChart.setVizProperties({
-				legend:{
-    				title:{visible:false}
-				},
-			title: {
-    			text: "Surveys Test"
-				}
-			});
-			
-			var oJsonModel = new sap.ui.model.json.JSONModel('/SurveycrocdbDest/survey_pkg/myservice.xsodata/SURVEYS/?$format=json');
-			
-			//var oModel = new sap.ui.model.odata.v2.ODataModel("/SURVEYS");
-		
-			// Loading data to model
-			//json.loadData("placeholder.json",null,false);
-		
-			// Setting model to current view
-			//this.getView().setModel(oJsonModel);
-    		//          OR
-			// Setting model to pie chart
-			oChart.setModel(oJsonModel);
-			//}
-			*/
-	//	});
-	//});
+
 
 
 		/* =========================================================== */
@@ -229,6 +203,9 @@
 				});
 				this._bindView("/" + sObjectPath);
 			}.bind(this));
+			var oTable = this.byId("list"),
+				oViewModel = this.getModel("questionView");
+			oTable.getBinding("items").filter(oFilter, "Application");
 		},
 
 		/**
@@ -291,3 +268,31 @@
 });
 
  
+ 
+ 			/** ATTEMPTS AT PIE CHART
+			var oChart = this.byId("pieid");
+			oChart.setVizProperties({
+				legend:{
+    				title:{visible:false}
+				},
+			title: {
+    			text: "Surveys Test"
+				}
+			});
+			
+			var oJsonModel = new sap.ui.model.json.JSONModel('/SurveycrocdbDest/survey_pkg/myservice.xsodata/SURVEYS/?$format=json');
+			
+			//var oModel = new sap.ui.model.odata.v2.ODataModel("/SURVEYS");
+		
+			// Loading data to model
+			//json.loadData("placeholder.json",null,false);
+		
+			// Setting model to current view
+			//this.getView().setModel(oJsonModel);
+    		//          OR
+			// Setting model to pie chart
+			oChart.setModel(oJsonModel);
+			//}
+			*/
+	//	});
+	//});

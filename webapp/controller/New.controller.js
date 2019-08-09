@@ -149,8 +149,9 @@ sap.ui.define([
 
 		_onObjectMatched : function (oEvent) {
 			sObjectId =  oEvent.getParameter("arguments").type;
+			this.setModel(sap.ui.getCore().getModel("titleType"), "new");
 		}
-	
+		
 	});
 
 });
