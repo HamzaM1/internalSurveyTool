@@ -10,6 +10,11 @@
         <content>
 			<Text class="myHeader"
     			text="{new>/titleType} Title"/> 
+    			<ToggleButton text="Toggle Anonymous" enabled="true" press="onPress" class="myAnomBtn" >
+					<layoutData>
+						<FlexItemData growFactor="1" />
+					</layoutData>
+				</ToggleButton>
 		</content>
     </Panel>
 	
@@ -30,6 +35,7 @@
 					width="50%"
 					/>
 			</form:SimpleForm>
+		
 		</content>
 	</Panel>
 </mvc:View>

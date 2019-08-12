@@ -31,6 +31,14 @@ sap.ui.define([
 			var oJsonModel = new sap.ui.model.json.JSONModel({title : sValue});
 			sap.ui.getCore().setModel(oJsonModel, "title");
 			//this.byId("enterT").setText(sValue);
+		},
+		
+		onPress : function (oEvent) {
+			 if (oEvent.getSource().getPressed()) {
+				alert("Pressed");
+			} else {
+					alert("Unpressed");
+			}
 		}
 	});
 });

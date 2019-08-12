@@ -17,6 +17,7 @@
 				icon="sap-icon://share-2"
 				text="Publish"
 				press=".onPressPublish"/>
+				
 		</headerContent>
 		
 		<content>
