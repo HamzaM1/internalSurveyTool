@@ -208,6 +208,13 @@
 					"target": [
 						"question"
 					]
+				},
+					{
+					"pattern": "surveyComplete",
+					"name": "surveyComplete",
+					"target": [
+						"surveyComplete"
+					]
 				}
 			],
 			"targets": {
@@ -280,6 +287,10 @@
 				"question": {
 					"viewName": "Question",
 					"viewId": "question"
+				},
+				"surveyComplete": {
+					"viewName": "SurveyComplete",
+					"viewId": "surveyComplete"
 				}
 			}
 		},

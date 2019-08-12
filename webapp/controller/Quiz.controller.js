@@ -29,7 +29,7 @@ sap.ui.define([
 		
 		onPressSubmit: function (oEvent) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("userResults");
+			oRouter.navTo("surveyComplete");
 		},
 		
 		/* =========================================================== */
