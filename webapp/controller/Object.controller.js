@@ -135,10 +135,8 @@
 		
 		onPressQuiz: function (oEvent) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			//alert("{SQID}");
-			oRouter.navTo("quizpage"
-				//, {objectId: oItem.getBindingContext().getProperty("SQID")}
-				);
+			//alert(sObjectId);
+			oRouter.navTo("quizpage", {objectId: sObjectId});
 		},
 		
 		onDelete : function (oEvent) {

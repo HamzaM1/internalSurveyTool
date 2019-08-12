@@ -8,7 +8,7 @@ sap.ui.define([
 
    return BaseController.extend("demo.survey2.SurveyDemo2.controller.UserResults", {
    		onInit : function() {
-   			//this.getRouter().getRoute("SQ").attachPatternMatched(this._onObjectMatched, this);	
+   			this.getRouter().getRoute("quizpage").attachPatternMatched(this._onObjectMatched, this);	
    		},
    		
 		onNavBack : function() {

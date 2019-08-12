@@ -147,7 +147,7 @@
 					]
 				},
 				{
-					"pattern": "quizpage",
+					"pattern": "quizpage/{objectId}",
 					"name": "quizpage",
 					"target": [
 						"quiz"
