@@ -101,16 +101,21 @@ sap.ui.define([
 					NUM_OF_ANSWERS: oAnswersCount
 				};
 				oModel.create("/Questions", QuestionsoData);
+				var oCorrect;
+				if (sObjectId == "Quiz") {
+					oCorrect = 0;
+					}
 				
 				j = 0;
 		  		while (j < oAnswersCount) { //need to make "1" amount of questions on quiz
 					//oQuestion = sap.ui.getCore().getModel("question" + i).getData.question;
 					//oAnswer = sap.ui.getCore().getModel("answer" + i).getData().answer;
+					
 					AnswersoData = {
 						ANSWERID: oOwner + oQuizCount + i + j,
 						QUESTIONID: oOwner + oQuizCount + i,
 						ANSWER: "Answer" + (j + 1),
-						ANSWER_CORRECT: 0,
+						ANSWER_CORRECT: oCorrect,
 						ORDER: j + 1
 					};
 					oModel.create("/Answers", AnswersoData);

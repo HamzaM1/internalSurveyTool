@@ -67,7 +67,6 @@
 				<!-- Questions List -->
 				
 				<List
-			
 				id="list"
 				width="auto"
 				items="{path:'/Questions'}"
@@ -75,51 +74,14 @@
 				busyIndicatorDelay="{questionView>/tableBusyDelay}"
 				growing="true" 
 				updateFinished=".onUpdateFinished">
-
-				<headerToolbar>
-					<OverflowToolbar>
-						
-						<ToolbarSpacer/>
-						<SearchField id="searchField" tooltip="{i18n>questionSearchTooltip}" search=".onSearch">
-							<layoutData>
-								<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
-							</layoutData>
-						</SearchField>
-					</OverflowToolbar>
-				</headerToolbar>
-
-				<items>
-        			<ObjectListItem
-        				title="{QUESTION_TITLE}"
-        				type="Navigation"
-        				press="onPress"/>
-    			</items>
-    		
-			</List>
+					<items>
+        				<ObjectListItem
+        					title="{QUESTION_TITLE}"
+        					type="Navigation"
+        					press="onPress"/>
+    				</items>
+				</List>
 				
-				
-				<!-- Available Responses ( Buttons )  -->
-				
-		<!--	<Panel 
-					backgroundDesign="Transparent"
-					class="sapUiResponsiveMargin">
-					<content>
-						<Input
-							value="Placeholder"
-							editable="false"
-							class="myResults"
-							width="30%"/>
-						<RadioButtonGroup
-							editable="false"
-							class="myResults myInput">
-							<RadioButton
-								text="Placeholder"/>
-							<RadioButton
-								text="Placeholder"/>
-						</RadioButtonGroup>
-					</content>
-				</Panel>
-		-->		
 				<!-- Results header !-->
 				
 				<Panel
