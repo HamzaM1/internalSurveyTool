@@ -91,7 +91,6 @@
 				<items>
         			<ObjectListItem
         				title="{QUESTION_TITLE}"
-        				number="{SQID}"
         				type="Navigation"
         				press="onPress"/>
     			</items>

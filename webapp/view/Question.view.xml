@@ -45,16 +45,22 @@
 				</content>
 			</Panel>
 			
-			<Panel
-				backgroundDesign="Transparent"
-				class="sapUiResponsiveMargin">
-				<content> 
-					<Text
-						class="myResults myText"
-						text="--- PUT ANSWERS HERE ---"/>
-				</content>
-			</Panel>
-			
+			<List
+				id="list"
+				width="auto"
+				items="{path:'/Answers'}"
+				noDataText="{questionView>/tableNoDataText}"
+				busyIndicatorDelay="{questionView>/tableBusyDelay}"
+				growing="true" 
+				updateFinished=".onUpdateFinished">
+				<items>
+        			<ObjectListItem
+        				title="{ORDER}. {ANSWER}"
+        				number="{ANSWER_CORRECT}"
+        				type="Inactive"
+        				/>
+    			</items>
+			</List>
 			
 			<Panel
 				backgroundDesign="Transparent"

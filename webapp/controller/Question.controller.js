@@ -10,6 +10,7 @@ sap.ui.define([
 
 	var sObjectId;
 	var oFilter;
+	var updated = false;
 	
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.Question", {
    		onInit: function (oEvent) {
@@ -31,6 +32,24 @@ sap.ui.define([
 			);
    			this.getRouter().getRoute("question").attachPatternMatched(this._onObjectMatched, this);
    		},
+   		
+   		
+   		onUpdateFinished : function (oEvent) {
+			if (updated == false){
+				this._applySearch(oFilter);
+				updated = true;
+			}
+		},
+		
+		_applySearch: function(aTableSearchState) {
+			var oTable = this.byId("list"),
+				oViewModel = this.getModel("questionView");
+			oTable.getBinding("items").filter(aTableSearchState, "Application");
+			// changes the noDataText of the list in case there are no filter results
+			if (aTableSearchState.length !== 0) {
+				oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("questionNoDataWithSearchText"));
+			}
+		},
    		
 		onPressHome: function (oEvent) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -54,12 +73,26 @@ sap.ui.define([
 				operator: "EQ",
 				value1: sObjectId
 			});
+			var oTable = this.byId("list"),
+				oViewModel = this.getModel("questionView");
 			this.getModel().metadataLoaded().then( function() {
 				var sObjectPath = this.getModel().createKey("Questions", {
 					QUESTIONID :  sObjectId
 				});
 				this._bindView("/" + sObjectPath);
 			}.bind(this));
+			
+			oTable.getBinding("items").filter(oFilter, "Application");
+		
+			// Change O or 1 to Correct or Incorrect answer
+			// TODO
+			
+			//alert(oTable.getMetadata().getPublicMethods());
+			//var x = oTable.getItems("items");
+			//alert(x);
+			//for (var i in oTable.getItems("items")) {
+			//	alert(i);
+			//}
 		},
 		
 		_bindView : function (sObjectPath) {

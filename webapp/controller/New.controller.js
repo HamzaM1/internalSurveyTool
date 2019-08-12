@@ -108,10 +108,10 @@ sap.ui.define([
 					//oAnswer = sap.ui.getCore().getModel("answer" + i).getData().answer;
 					AnswersoData = {
 						ANSWERID: oOwner + oQuizCount + i + j,
-						QUESTIONID: oOwner + oQuizCount + oQuestionsCount,
+						QUESTIONID: oOwner + oQuizCount + i,
 						ANSWER: "Answer" + (j + 1),
 						ANSWER_CORRECT: 0,
-						ORDER: i
+						ORDER: j + 1
 					};
 					oModel.create("/Answers", AnswersoData);
 					j += 1; 

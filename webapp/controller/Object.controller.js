@@ -148,7 +148,7 @@
 				}));
 			
 			var i = 0;
-			while(i < 1){ //need to replace with no of questions
+			while(i < 2){ //need to replace with no of questions
 				oModel.remove(this.getModel().createKey("/Questions", {
 						QUESTIONID :  sObjectId + i
 					}));
