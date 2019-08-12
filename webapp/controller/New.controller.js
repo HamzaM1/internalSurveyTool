@@ -9,9 +9,10 @@ sap.ui.define([
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var oOwner;
 	
-	
    return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
    		onInit : function(){
+   			var oJsonModel = new sap.ui.model.json.JSONModel({anon : 0});
+				sap.ui.getCore().setModel(oJsonModel, "anon");
    			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
    			//alert("/Users('" + oOwner + "')");
    			oModel.read(
