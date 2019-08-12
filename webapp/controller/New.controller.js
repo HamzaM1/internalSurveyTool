@@ -9,6 +9,7 @@ sap.ui.define([
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var oOwner;
 	
+	
    return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
    		onInit : function(){
    			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
@@ -63,7 +64,7 @@ sap.ui.define([
 			var oQuizCount = ("00" + (sap.ui.getCore().getModel("count").getData().count)).slice(-3);
 			//alert(oQuizCount);
 			var d = new Date();
-
+			
 			
 			// create survey
 			var SQoData = {
@@ -73,7 +74,9 @@ sap.ui.define([
 				SQ_TYPE: sObjectId,		// this seems to be saving as undefined??
 				DATE: d /**(d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()) */,
 				SQ_OWNER: oOwner,
-				NUM_OF_QUESTIONS: 10 //to do
+				NUM_OF_QUESTIONS: 10, //to do
+				ANONYMOUS: sap.ui.getCore().getModel("anon").getData().anon,
+				LIVE: 1
 			};
 			oModel.create("/SQ", SQoData);
 			

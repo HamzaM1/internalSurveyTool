@@ -35,9 +35,11 @@ sap.ui.define([
 		
 		onPress : function (oEvent) {
 			 if (oEvent.getSource().getPressed()) {
-				alert("Pressed");
+				var oJsonModel = new sap.ui.model.json.JSONModel({anon : 1});
+				sap.ui.getCore().setModel(oJsonModel, "anon");
 			} else {
-					alert("Unpressed");
+				var oJsonModel = new sap.ui.model.json.JSONModel({anon : 0});
+				sap.ui.getCore().setModel(oJsonModel, "anon");
 			}
 		}
 	});
