@@ -1,0 +1,73 @@
+<mvc:View
+	controllerName="demo.survey2.SurveyDemo2.controller.Answer"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+	
+	<Page title="{QUESTION_TITLE}" id="page" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" showNavButton="true"
+			navButtonPress=".onNavBack">
+        <headerContent
+        	class="header">
+			<Button
+				icon="sap-icon://home"
+				press=".onPressHome"/>
+		</headerContent>
+		<content>
+			<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<Button 
+						icon="sap-icon://menu2"
+						press=".onPressMenu"/>
+				</Panel>
+			<Panel
+				backgroundDesign="Transparent"
+				class="sapUiResponsiveMargin">
+				<content>
+					<Text
+						class="myResults myHeader"
+						text="{QUESTION_TITLE}"/>
+
+				</content>
+			</Panel>
+			
+			
+			<Panel 
+				backgroundDesign="Transparent"
+				class="sapUiResponsiveMargin">
+				<content>
+					<Text
+						class="myResults myText"
+						text="{QUESTION}"/>
+				</content>
+			</Panel>
+
+			<Panel
+				backgroundDesign="Transparent"
+				class="sapUiResponsiveMargin">
+				<content> 
+					<Text
+						class="myResults myHeader"
+						text="{SQ_TYPE} Answers:"/>
+				</content>
+			</Panel>
+			
+			<Panel
+				id="answers"
+				backgroundDesign="Transparent"
+				class="sapUiResponsiceMargin">
+				<content>
+				</content>
+			</Panel>
+			
+			<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<Button 
+						text="Next Question"
+						press=".onPressNext"/>
+				</Panel>
+			
+		</content>
+	</Page>
+</mvc:View>

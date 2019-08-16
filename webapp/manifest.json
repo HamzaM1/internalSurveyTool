@@ -215,6 +215,13 @@
 					"target": [
 						"surveyComplete"
 					]
+				},
+				{
+					"pattern": "answer/{objectId}",
+					"name": "answer",
+					"target": [
+						"answer"
+					]
 				}
 			],
 			"targets": {
@@ -291,6 +298,10 @@
 				"surveyComplete": {
 					"viewName": "SurveyComplete",
 					"viewId": "surveyComplete"
+				},
+				"answer": {
+					"viewName": "Answer",
+					"viewId": "answer"
 				}
 			}
 		},

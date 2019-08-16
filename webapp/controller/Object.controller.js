@@ -43,7 +43,7 @@
 		 * @public
 		 */
 
-		oViewModel = new JSONModel({
+		var oViewModel = new JSONModel({
 				shareOnJamTitle: this.getResourceBundle().getText("questionTitle"),
 				tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
 				tableBusyDelay : 0
@@ -89,7 +89,7 @@
 		 */
 		
 		onUpdateFinished : function (oEvent) {
-			if (updated == false){
+			if (updated === false){
 				this._applySearch(oFilter);
 				updated = true;
 			}
@@ -151,7 +151,7 @@
 						QUESTIONID :  sObjectId + i
 					}));
 				var j = 0;
-				while (j < 1 /** sap.ui.getCore().getModel("answersCount").getData().answersCount */) {
+				while (j < 2 /** sap.ui.getCore().getModel("answersCount").getData().answersCount */) {
 					oModel.remove(this.getModel().createKey("/Answers", {
 						ANSWERID :  sObjectId + i + j
 					}));

@@ -84,7 +84,7 @@ sap.ui.define([
 			// create questions
 			var i = 0;
 			var j = 0;
-			var oAnswersCount = 1; //sap.ui.getCore().getModel("answersCount").getData().answersCount;
+			var oAnswersCount = 2; //sap.ui.getCore().getModel("answersCount").getData().answersCount;
 			var oQuestionsCount = 2; //to do
 			var oQuestion = "test";
 			var QuestionsoData;
@@ -99,7 +99,7 @@ sap.ui.define([
 				QuestionsoData = {
 					QUESTIONID: oOwner + oQuizCount + i,
 					SQID: oOwner + oQuizCount,
-					QUESTION_TITLE: "Question" + (i + 1), 
+					QUESTION_TITLE: "Question " + (i + 1), 
 					QUESTION: oQuestion,
 					ANSWER_TYPE: "Radio", //to do
 					NUM_OF_ANSWERS: oAnswersCount
@@ -118,7 +118,7 @@ sap.ui.define([
 					AnswersoData = {
 						ANSWERID: oOwner + oQuizCount + i + j,
 						QUESTIONID: oOwner + oQuizCount + i,
-						ANSWER: "Answer" + (j + 1),
+						ANSWER: "This is Answer " + (j + 1),
 						ANSWER_CORRECT: oCorrect,
 						ORDER: j + 1
 					};

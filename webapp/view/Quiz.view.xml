@@ -24,7 +24,7 @@
 						<!--Specfiy quiz name -->
 						<Text
 							class="myResults myHeader"
-							text="Placeholder: Non Anonymous Placeholder"/>
+							text="{SQ_TITLE}: Non-Anon({ANONYMOUS}) {SQ_TYPE}"/>
 					</content>
 				</Panel>
 				
@@ -34,26 +34,25 @@
 					<content>
 						<Text
 							class="myResults myHeader"
-							text="Question Placeholder:"/>
-						<Text
-							class="myResults myHeader"
-							text="Available Responses:"/>
+							text="Questions:"/>
 					</content> 
 				</Panel>
 				
-				<Panel
-					backgroundDesign="Transparent"
-					class="sapUiResponsiveMargin">
-					<content>
-						<Text class="myResults myText"
-							text="Placeholder"/>
-						<RadioButtonGroup editable="true" class="myResults myInput">
-							<RadioButton text="Placeholder"/>
-							<RadioButton text="Placeholder"/>
-							<RadioButton text="Placeholder"/>
-						</RadioButtonGroup>
-					</content> 
-				</Panel>
+				<List
+				id="list"
+				width="auto"
+				items="{path:'/Questions'}"
+				noDataText="{questionView>/tableNoDataText}"
+				busyIndicatorDelay="{questionView>/tableBusyDelay}"
+				growing="true" 
+				updateFinished=".onUpdateFinished">
+					<items>
+        				<ObjectListItem
+        					title="{QUESTION_TITLE}"
+        					type="Navigation"
+        					press="onPress"/>
+    				</items>
+				</List>
 				
 				<Panel
 					backgroundDesign="Transparent"
