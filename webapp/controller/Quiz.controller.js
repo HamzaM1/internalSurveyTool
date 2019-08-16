@@ -105,7 +105,7 @@ sap.ui.define([
 			
 			//TODO write SQ as submitted and nav to correct completed page
 			
-			var oOwner = sObjectId.slice(0,7);
+			var owner = sObjectId.slice(0,7);
 			
 			var UserSQoData = {
 				USQID: oOwner + sObjectId,
