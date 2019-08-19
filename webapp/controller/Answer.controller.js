@@ -11,10 +11,13 @@ sap.ui.define([
 	var sObjectId;
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var updated = false;
+	var oOwner;
+	var oAnswer;
 	var controller;
 	
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.Answer", {
    		onInit: function (oEvent) {
+   			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
    			controller = this;
    			var iOriginalBusyDelay,
 				oViewModel = new JSONModel({
@@ -141,7 +144,9 @@ sap.ui.define([
 			{	
 				success: function(oData) {
 					var oCount = new sap.ui.model.json.JSONModel({answerCount : oData.NUM_OF_ANSWERS});
+					var oType = new sap.ui.model.json.JSONModel({answerType : oData.ANSWER_TYPE});
 					controller.setModel(oCount, "answerCount");
+					controller.setModel(oType, "answerType"); 
 					controller._readAnswers();
 					}
 				}
@@ -152,30 +157,137 @@ sap.ui.define([
 			var oCount = controller.getModel("answerCount").getData().answerCount; 
 			var i = 0; 
    			while (i < oCount){
-   				var oAnswer = sObjectId + i;
+   				oAnswer = sObjectId + i;
    				oModel.read(
 				"/Answers('" + oAnswer + "')",
 				{
 					success: function(oData) {
+						var UserAnswersoData = {
+							UAID: (oOwner + oData.ANSWERID),
+							USERID: oOwner,
+							ANSWERID: oData.ANSWERID,
+							ANSWER: oData.ANSWER,
+							SELECTED: 0
+						};
+						oModel.create("/UserAnswers", UserAnswersoData);
 						controller._displayAnswer(oData);
-						}
 					}
+				}
 				);
    				i++;
    			}
+   			
    		}, 
    		
    		_displayAnswer : function (oData) {
-   			//TODO Display various types
-   			
-   			var oRadioButton = new sap.m.RadioButton({
-   					text: oData.ANSWER
-   			});
-   			controller.byId("answers").addContent(oRadioButton);
+   			var oType = controller.getModel("answerType").getData().answerType;
+   			if(oType === "Radio") {
+   				var oRadioButton = new sap.m.RadioButton({
+   					id: oOwner + oData.ANSWERID,
+   					text: oData.ANSWER,
+   					select: function(oEvent) {
+   						controller.onSelect(oEvent);
+   					} 
+   				});
+   				controller.byId("answers").addContent(oRadioButton);
+   			}
+   			else if (oType === "Check") {
+   				var oCheckBox = new sap.m.CheckBox({
+   					id: oOwner + oData.ANSWERID,
+   					text: oData.ANSWER,
+   					select: function(oEvent) {
+   						controller.onSelect(oEvent);
+   					}
+   				});
+   				controller.byId("answers").addContent(oCheckBox);
+   			}
+   			else if (oType === "Slide") {
+   				var oSlider = new sap.m.Slider({
+   					id: oOwner + oData.ANSWERID,
+   					min: 0,
+   					max: 10,
+   					change: function(oEvent) {
+   						controller.onSlide(oEvent);
+   					}
+   				});
+   				controller.byId("answers").addContent(oSlider);
+   			}
+   			else if (oType === "Text") {
+   				var oInput = new sap.m.Input({
+   					id: oOwner + oData.ANSWERID,
+   					liveChange: function(oEvent) {
+   						controller.onType(oEvent);
+   					}
+   				});
+   				controller.byId("answers").addContent(oInput);
+   			}
    		},
    		
-   		_writeAnswers : function () {
+   		onSelect : function (oEvent) {
+   			var oButton = oEvent.getSource();
+   			var oUAId = oButton.getId(); 
+   			var oAnswerId = oUAId.slice(7,19);
+   			
+   			var path = "/UserAnswers('"+ oUAId + "')";
+   			oModel.read(path, 
+   				{success: function(oData){
+   					var UserAnswersoData;
+   					if (oData.SELECTED === 0) {
+   						UserAnswersoData = {
+							UAID: oUAId,
+							USERID: oOwner,
+							ANSWERID: oAnswerId,
+							ANSWER: oButton.getText(),
+							SELECTED: 1
+						};
+   					}
+   					else {
+   						UserAnswersoData = {
+							UAID: oUAId,
+							USERID: oOwner,
+							ANSWERID: oAnswerId,
+							ANSWER: oButton.getText(),
+							SELECTED: 0
+   						};
+   					}
+					oModel.update(path, UserAnswersoData);
+   				}
+   			});
+   		},
+   		
+   		onSlide : function (oEvent) {
+   			var oSlide = oEvent.getSource();
+   			var oUAId = oSlide.getId();
+   			var oAnswerId = oUAId.slice(7, 19);
+   			var path = "/UserAnswers('"+ oUAId + "')";
+   			var UserAnswersoData = {
+   				UAID: oUAId,
+   				USERID: oOwner,
+   				ANSWERID: oAnswerId,
+   				ANSWER: oSlide.getValue().toString(),
+   				SELECTED: 1
+   			};
+   			oModel.update(path, UserAnswersoData);
+   		},
+   		
+   		onType : function (oEvent) {
+   			var oType = oEvent.getSource();
+   			var oUAId = oType.getId();
+   			var oAnswerId = oUAId.slice(7, 19);
+   			var path = "/UserAnswers('"+ oUAId + "')";
+   			var UserAnswersoData = {
+   				UAID: oUAId,
+   				USERID: oOwner,
+   				ANSWERID: oAnswerId,
+   				ANSWER: oType.getValue(),
+   				SELECTED: 1
+   			};
+   			oModel.update(path, UserAnswersoData);
+   		},
+   		
+   		_writeAnswers : function (oData) {
    			//TODO write answers chosen when page is routed from
+   			//alert(controller.byId("'" + oOwner + oData.ANSWERID + "'"));
    		}
    });
 });

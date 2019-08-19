@@ -9,21 +9,9 @@ sap.ui.define([
 	var oModel;
 	var oData;
 	var answers = 2;
-
+	var sObjectId;
 	
 	return Controller.extend("demo.survey2.SurveyDemo2.controller.SurveyQuestion", {
-		getQuestion : function () {
-			// read msg from i18n model
-			var oBundle = this.getView().getModel("i18n").getResourceBundle();
-			var sRecipient = this.getView().getModel().getProperty("/InputValue");
-			var sMsg = oBundle.getText("question", [sRecipient]);
-
-			// show message
-			MessageToast.show(sMsg);
-		},
-		onOpenQDialog : function () {
-			this.getOwnerComponent().openSaveQDialog();
-		},
 		onInit : function () {
 			oData = {
 				//answers : {
@@ -38,7 +26,38 @@ sap.ui.define([
 			this.getView().setModel(oModel);
 			var oJsonModel = new sap.ui.model.json.JSONModel({answersCount : answers});
 			sap.ui.getCore().setModel(oJsonModel, "answersCount");
+			
+			this.getRouter().getRoute("surveyQuestion").attachPatternMatched(this._onObjectMatched, this);
 		},
+		
+		onNavBack : function() {
+			var sPreviousHash = History.getInstance().getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				history.go(-1);
+			} else {
+				this.getRouter().navTo("overview", {}, true);
+			}
+		},
+		
+		onPressHome: function (oEvent) {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("overview");
+		},
+		
+		getQuestion : function () {
+			// read msg from i18n model
+			var oBundle = this.getView().getModel("i18n").getResourceBundle();
+			var sRecipient = this.getView().getModel().getProperty("/InputValue");
+			var sMsg = oBundle.getText("question", [sRecipient]);
+
+			// show message
+			MessageToast.show(sMsg);
+		},
+		onOpenQDialog : function () {
+			this.getOwnerComponent().openSaveQDialog();
+		},
+		
 		handleLiveChange : function (oEvent) {
 			var sValue = oEvent.getParameter("value");
 			var oJsonModel = new sap.ui.model.json.JSONModel({question : sValue});
@@ -63,6 +82,11 @@ sap.ui.define([
 				var oJsonModel = new sap.ui.model.json.JSONModel({answersCount : answers});
 				sap.ui.getCore().setModel(oJsonModel, "answersCount");
 			}
+		},
+		
+		_onObjectMatched : function (oEvent) {
+			sObjectId =  oEvent.getParameter("arguments").type;
 		}
+		
 	});
 });

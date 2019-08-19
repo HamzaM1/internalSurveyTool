@@ -24,7 +24,7 @@ sap.ui.define([
 		
 		questionCheckbox : function(oEvent){
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("questionCheckbox");
+			oRouter.navTo("surveyQuestion", {type: "Radio"});
 		},
 		
 		questionRadio : function(oEvent){

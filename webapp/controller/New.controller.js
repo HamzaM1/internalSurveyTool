@@ -8,25 +8,25 @@ sap.ui.define([
 	var sObjectId;
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var oOwner;
-	
-   return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
+	var controller;
+    
+    return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
    		onInit : function(){
+   			controller = this; 
    			var oJsonModel = new sap.ui.model.json.JSONModel({anon : 0});
 				sap.ui.getCore().setModel(oJsonModel, "anon");
    			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
-   			//alert("/Users('" + oOwner + "')");
    			oModel.read(
 				"/Users('" + oOwner + "')",
 				{
 					success: function(oData) {
     					var oCount = new sap.ui.model.json.JSONModel({count : oData.NUM_OF_SQ});
-    					
-						sap.ui.getCore().setModel(oCount, "count");
+						controller.setModel(oCount, "count");
+						controller._onCreate(oData);
 						}
 					}
 				);
    			this.getRouter().getRoute("new").attachPatternMatched(this._onObjectMatched, this);
-   			
    			this.setModel(sap.ui.getCore().getModel("titleType"), "new");
    		},
    		
@@ -44,43 +44,24 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("overview");
 		},
-		/**
+		
 		onPressPublish: function (oEvent) {
-			var oModel = new sap.ui.model.odata.v2.ODataModel("/test/dummy_pkg/myservice.xsodata/");
-			var oData = {
-				SQID: 0, SQ_TITLE: "Test"
-			};
-			oModel.create("/SQ", oData);
-		}
-		*/
-		
-		
-		  onPressPublish: function (oEvent) {
-			
 			var oTitle = sap.ui.getCore().getModel("title").getData().title;
-			
-			//var oCount = new sap.ui.model.json.JSONModel({count : 0});
-			//sap.ui.getCore().setModel(oCount, "count");
-			
-			var oQuizCount = ("00" + (sap.ui.getCore().getModel("count").getData().count)).slice(-3);
-			//alert(oQuizCount);
-			var d = new Date();
-			
-			
+			var oQuizCount = ("00" + (controller.getModel("count").getData().count)).slice(-3);
 			// create survey
 			var SQoData = {
 				SQID: oOwner + oQuizCount,
 				SQ_TITLE: oTitle, 
-				SQ_LINK: "www." + oTitle + ".com", //to do
-				SQ_TYPE: sObjectId,		// this seems to be saving as undefined??
-				DATE: d /**(d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()) */,
+				SQ_LINK: "", //TODO 
+				SQ_TYPE: sObjectId,
+				DATE: new Date(),
 				SQ_OWNER: oOwner,
-				NUM_OF_QUESTIONS: 10, //to do
+				NUM_OF_QUESTIONS: 0, //TODO
 				ANONYMOUS: sap.ui.getCore().getModel("anon").getData().anon,
 				LIVE: 1
 			};
-			oModel.create("/SQ", SQoData);
-			
+			oModel.update("/SQ('" + oOwner + oQuizCount + "')", SQoData);
+			/**
 			// create questions
 			var i = 0;
 			var j = 0;
@@ -129,21 +110,20 @@ sap.ui.define([
 			}
 			
 			
-			
+			**/
 		  	
 		  	var oUpdate = {
 				USERID: oOwner,
-				NUM_OF_SQ: (sap.ui.getCore().getModel("count").getData().count) + 1
-				}
+				NUM_OF_SQ: (controller.getModel("count").getData().count) + 1
+				};
 			oModel.update(
 				"/Users('" + oOwner + "')",
 				oUpdate
 			);
 			
-			var oCount = new sap.ui.model.json.JSONModel({count : (sap.ui.getCore().getModel("count").getData().count + 1)});
-			sap.ui.getCore().setModel(oCount, "count");
-			
-		  },
+			var oCount = new sap.ui.model.json.JSONModel({count : (controller.getModel("count").getData().count + 1)});
+			controller.setModel(oCount, "count");
+		},
 		
 		/* =========================================================== */
 		/* internal methods                                            */
@@ -159,6 +139,22 @@ sap.ui.define([
 		_onObjectMatched : function (oEvent) {
 			sObjectId =  oEvent.getParameter("arguments").type;
 			this.setModel(sap.ui.getCore().getModel("titleType"), "new");
+		},
+		
+		_onCreate : function (oData) {
+			var oQuizCount = ("00" + (oData.NUM_OF_SQ)).slice(-3);
+			var SQoData = {
+				SQID: oOwner + oQuizCount,
+				SQ_TITLE: "", 
+				SQ_LINK: "",
+				SQ_TYPE: sObjectId,
+				DATE: new Date(), 
+				SQ_OWNER: oOwner,
+				NUM_OF_QUESTIONS: 0,
+				ANONYMOUS: 0,
+				LIVE: 0
+			};
+			oModel.create("/SQ", SQoData);
 		}
 		
 	});

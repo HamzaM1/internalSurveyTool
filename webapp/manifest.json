@@ -175,6 +175,13 @@
 					]
 				},
 				{
+					"pattern": "surveyQuestion/{type}",
+					"name": "surveyQuestion",
+					"target": [
+						"surveyQuestion"
+					]
+				},
+				{
 					"pattern": "questionCheckbox",
 					"name": "questionCheckbox",
 					"target": [
@@ -274,6 +281,10 @@
 				"notFound": {
 					"viewName": "NotFound",
 					"viewId": "notFound"
+				},
+				"surveyQuestion": {
+					"viewName": "SurveyQuestion",
+					"viewId": "surveyQuestion"
 				},
 				"questionCheckbox": {
 					"viewName": "QuestionCheckbox",

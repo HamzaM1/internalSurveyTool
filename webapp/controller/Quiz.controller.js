@@ -19,14 +19,6 @@ sap.ui.define([
 		formatter: formatter,
 		
    		onInit : function() {
-   			
-   			// IMPORTANT HOW TO ADD A RADIO BUTTON ECT. TO THE CORRESPONDING VIEW ***
-   			// ********************************
-   			
-   			//var oRadioButton = new sap.m.RadioButton();
-   			//this.byId("content").addContent(oRadioButton);
-   			
-   			//*********************************
    			var oViewModel = new JSONModel({
 				shareOnJamTitle: this.getResourceBundle().getText("questionTitle"),
 				tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
@@ -78,11 +70,9 @@ sap.ui.define([
 		},
 		
 		_showObject : function (oItem) {
-			//if (oItem.getBindingContext().getProperty("quiz_owner") === sap.ui.getCore().getModel("user").getData().user){
-				this.getRouter().navTo("answer", {
-					objectId: oItem.getBindingContext().getProperty("QUESTIONID")
-				});
-			//}
+			this.getRouter().navTo("answer", {
+				objectId: oItem.getBindingContext().getProperty("QUESTIONID")
+			});
 		},
    			
 		onNavBack : function() {
@@ -102,28 +92,17 @@ sap.ui.define([
 		},
 		
 		onPressSubmit: function (oEvent) {
-			
-			//TODO write SQ as submitted and nav to correct completed page
-			
-			var owner = sObjectId.slice(0,7);
-			
+			oOwner = sObjectId.slice(0,7);
 			var UserSQoData = {
 				USQID: oOwner + sObjectId,
 				USERID: oOwner,
 				SQID: sObjectId,
 				SUBMITTED: 1
 			};
-			oModel.create("/UserSQ", UserSQoData);
+			var path = "/UserSQ('" + oOwner + sObjectId + "')";
+			oModel.update(path, UserSQoData);
 			
-			var oAnswer = sObjectId + "0";
-			
-			var UserAnswersoData = {
-				UAID: oOwner + oAnswer,
-				USERID: oOwner,
-				ANSWERID: oAnswer
-			};
-			oModel.create("/UserAnswers", UserAnswersoData);
-			
+			//TODO nav to correct completed page & correct quizzes
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("surveyComplete");
 		},
@@ -135,6 +114,15 @@ sap.ui.define([
 		
 		_onObjectMatched : function (oEvent) {
 			sObjectId =  oEvent.getParameter("arguments").objectId;
+			oOwner = sObjectId.slice(0,7);
+   			var UserSQoData = {
+				USQID: oOwner + sObjectId,
+				USERID: oOwner,
+				SQID: sObjectId,
+				SUBMITTED: 0
+			};
+			oModel.create("/UserSQ", UserSQoData);
+			
 			oFilter = new Filter({
 				path: "SQID",
 				operator: "EQ",
@@ -198,3 +186,12 @@ sap.ui.define([
 		
    	});
 });
+
+
+// IMPORTANT HOW TO ADD A RADIO BUTTON ECT. TO THE CORRESPONDING VIEW ***
+   			// ********************************
+   			
+   			//var oRadioButton = new sap.m.RadioButton();
+   			//this.byId("content").addContent(oRadioButton);
+   			
+   			//*********************************
