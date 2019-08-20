@@ -108,6 +108,35 @@ sap.ui.define([
 			// The source is the list item that got pressed
 			this._showObject(oEvent.getSource());
 		},
+		
+		
+		
+		
+			onFilter : function (oEvent) {
+
+			// build filter array
+			var aFilter = [];
+			var sQuery = oEvent.getParameter("query");
+			if (sQuery) {
+				aFilter.push(new Filter({
+											caseSensitive: false,
+											path:"SQ_TITLE",
+											operator: FilterOperator.Contains,
+											value1: sQuery
+											}));
+			}
+
+			// filter binding
+			var oList = this.byId("list");
+			var oBinding = oList.getBinding("items");
+			oBinding.filter(aFilter);
+		},
+		
+		
+		
+		
+		
+		
 
 		/**
 		 * Event handler for navigating back.
