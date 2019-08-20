@@ -2,7 +2,7 @@
 	xmlns:form="sap.ui.layout.form"
 	xmlns="sap.m"
 	xmlns:mvc="sap.iu.core.mvc"
-	controllerName="demo.survey2.SurveyDemo2.controller.QuestionRadio">
+	controllerName="demo.survey2.SurveyDemo2.controller.SurveyQuestion">
 	
 	<Page 
 		title="{i18n>addQuestion}"
@@ -31,8 +31,8 @@
 
 				<VBox>
 					<form:SimpleForm editable="true">
-						<form:content>
-							<RadioButtonGroup id="answers">
+						<form:content id="form">
+				<!--		<RadioButtonGroup id="answers">
 								<RadioButton id="radio0" text="{/answer0}"/>
 								<RadioButton id="radio1" text="{/answer1}"/>
 								<RadioButton id="radio2" text="{/answer2}" visible="false"/>
@@ -55,9 +55,16 @@
 								<InputListItem visible="false" id="inputlist4">
 									<Input ariaLabelledBy="__item1-label" value="{/answer4}" width="100%" id="input4" valueLiveUpdate="true"/>
 								</InputListItem>
+			    			</List> -->
+			    			
+			    			<RadioButtonGroup id="answers">
+			    			</RadioButtonGroup>
+			    			<List id="answers_list" width="50%" backgroundDesign="Transparent">
 			    			</List>
+			    			
 						</form:content>
 					</form:SimpleForm>
+					
 				
 					<Button icon="sap-icon://add" press="onAdd"/>
 					<Button icon="sap-icon://less" press="onRemove"/>

@@ -1,26 +1,26 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
-	"sap/m/MessageToast",
+	"./BaseController",
 	"sap/ui/core/Fragment",
-	"sap/ui/model/json/JSONModel"
-], function (Controller, MessageToast, Fragment, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/routing/History"
+], function (BaseController, Fragment, JSONModel, History) {
 	"use strict";
 	
 	var oModel;
 	var oData;
 	var answers = 2;
 	var sObjectId;
+	var controller;
 	
-	return Controller.extend("demo.survey2.SurveyDemo2.controller.SurveyQuestion", {
+	return BaseController.extend("demo.survey2.SurveyDemo2.controller.SurveyQuestion", {
 		onInit : function () {
+			controller = this;
 			oData = {
-				//answers : {
 					answer0 : "Yes",
 					answer1 : "No",
 					answer2 : "Maybe",
 					answer3 : "",
 					answer4 : ""
-				//} 
 			};
 			oModel = new JSONModel(oData);
 			this.getView().setModel(oModel);
@@ -52,7 +52,6 @@ sap.ui.define([
 			var sMsg = oBundle.getText("question", [sRecipient]);
 
 			// show message
-			MessageToast.show(sMsg);
 		},
 		onOpenQDialog : function () {
 			this.getOwnerComponent().openSaveQDialog();
@@ -63,6 +62,8 @@ sap.ui.define([
 			var oJsonModel = new sap.ui.model.json.JSONModel({question : sValue});
 			sap.ui.getCore().setModel(oJsonModel, "question0");
 		},
+		
+		//TODO add and remove question options
 		
 		onRemove : function () {
 			if (answers > 2){
@@ -75,12 +76,17 @@ sap.ui.define([
 		},
 		
 		onAdd : function () {
+			var oRadioButton = new sap.m.RadioButton({
+   					id: "radio0",
+   					text: "{/answer0}"
+   				});
+   			this.getView().byId("answers").addButton(oRadioButton);
 			if (answers < 5){
-				this.getView().byId("radio" + answers).setVisible(true);
-				this.getView().byId("inputlist" + answers).setVisible(true);
-				answers += 1;
-				var oJsonModel = new sap.ui.model.json.JSONModel({answersCount : answers});
-				sap.ui.getCore().setModel(oJsonModel, "answersCount");
+				//this.getView().byId("radio" + answers).setVisible(true);
+				//this.getView().byId("inputlist" + answers).setVisible(true);
+				//answers += 1;
+				//var oJsonModel = new sap.ui.model.json.JSONModel({answersCount : answers});
+				//sap.ui.getCore().setModel(oJsonModel, "answersCount");
 			}
 		},
 		

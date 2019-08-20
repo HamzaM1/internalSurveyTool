@@ -70,6 +70,7 @@ sap.ui.define([
 		},
 		
 		_showObject : function (oItem) {
+			//sap.ui.controller("demo.survey2.SurveyDemo2.controller.Answer").onInit();
 			this.getRouter().navTo("answer", {
 				objectId: oItem.getBindingContext().getProperty("QUESTIONID")
 			});

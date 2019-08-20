@@ -33,7 +33,19 @@ sap.ui.define([
 					oViewModel.setProperty("/delay", iOriginalBusyDelay);
 				}
 			);
-   			this.getRouter().getRoute("answer").attachPatternMatched(this._onObjectMatched, this);
+			this.getRouter().getRoute("answer").attachMatched(this._onRouteMatched, this);
+   			//this.getRouter().getRoute("answer").attachPatternMatched(this._onObjectMatched, this);
+   		},	
+   		
+   		_onRouteMatched : function (oEvent) {
+   			sObjectId =  oEvent.getParameter("arguments").objectId;
+			this.getModel().metadataLoaded().then( function() {
+				var sObjectPath = this.getModel().createKey("Questions", {
+					QUESTIONID :  sObjectId
+				});
+				this._bindView("/" + sObjectPath);
+			}.bind(this));
+			this._initAnswers();
    		},
    		
 		onPressHome: function (oEvent) {
@@ -42,8 +54,8 @@ sap.ui.define([
 		},
 		
 		onNavBack : function() {
+			controller.byId("answers").destroyContent();
 			var sPreviousHash = History.getInstance().getPreviousHash();
-
 			if (sPreviousHash !== undefined) {
 				history.go(-1);
 			} else {
@@ -52,11 +64,13 @@ sap.ui.define([
 		},
 		
 		onPressNext : function() {
+			controller.byId("answers").destroyContent();
 			var count = controller.getModel("answerCount").getData().answerCount;
 			var quiz = sObjectId.slice(0,10);
 			var question = sObjectId.slice(10,11);
+			
 			question++;
-			if (count !== question) {
+			if (count + 1 !== question) {
 				this.getRouter().navTo("answer", {
 					objectId: quiz + question
 				});
@@ -69,6 +83,7 @@ sap.ui.define([
 		},
 		
 		onPressMenu : function() {
+			controller.byId("answers").destroyContent();
 			var quiz = sObjectId.slice(0,10);
 			this.getRouter().navTo("quizpage", {
 					objectId: quiz
@@ -77,7 +92,6 @@ sap.ui.define([
 		
 		_onObjectMatched : function (oEvent) {
 			sObjectId =  oEvent.getParameter("arguments").objectId;
-	
 			this.getModel().metadataLoaded().then( function() {
 				var sObjectPath = this.getModel().createKey("Questions", {
 					QUESTIONID :  sObjectId
@@ -283,11 +297,6 @@ sap.ui.define([
    				SELECTED: 1
    			};
    			oModel.update(path, UserAnswersoData);
-   		},
-   		
-   		_writeAnswers : function (oData) {
-   			//TODO write answers chosen when page is routed from
-   			//alert(controller.byId("'" + oOwner + oData.ANSWERID + "'"));
    		}
    });
 });

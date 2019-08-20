@@ -16,7 +16,11 @@ sap.ui.define([
 			operator: "EQ",
 			value1: sap.ui.getCore().getModel("user").getData().user
 			});
-
+	var oFilter1 = new Filter({
+			path: "LIVE",
+			operator: "EQ",
+			value1: 1
+	});
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.Worklist", {
 
 		formatter: formatter,
@@ -92,6 +96,7 @@ sap.ui.define([
 			this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle);
 			
 			this._applySearch(oFilter);
+			this._applySearch(oFilter1);
 		},
 
 		/**

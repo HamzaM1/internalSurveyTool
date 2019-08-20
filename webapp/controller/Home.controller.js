@@ -16,6 +16,7 @@ sap.ui.define([
 			var oViewModel = new JSONModel({titleType : "Survey"});
    			sap.ui.getCore().setModel(oViewModel, "titleType");
 			oRouter.navTo("new", {type: "Survey"});
+			this.getRouter().getRoute("answer").attachPatternMatched(this._onObjectMatched, this);
 		},
 	onPressQ: function (oEvent) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

@@ -24,22 +24,22 @@ sap.ui.define([
 		
 		questionCheckbox : function(oEvent){
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("surveyQuestion", {type: "Radio"});
+			oRouter.navTo("surveyQuestion", {type: "Check"});
 		},
 		
 		questionRadio : function(oEvent){
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("questionRadio");
+			oRouter.navTo("surveyQuestion", {type: "Radio"});
 		},
 		
 		questionTextbox : function(oEvent){
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("questionTextbox");
+			oRouter.navTo("surveyQuestion", {type: "Text"});
 		},
 		
 		questionSlider : function(oEvent){
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("questionSlider");
+			oRouter.navTo("surveyQuestion", {type: "Slide"});
 		}
 	});
 
