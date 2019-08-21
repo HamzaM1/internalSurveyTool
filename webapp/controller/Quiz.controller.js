@@ -105,7 +105,7 @@ sap.ui.define([
 			
 			//TODO nav to correct completed page & correct quizzes
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("surveyComplete");
+			oRouter.navTo("userResults");
 		},
 		
 		/* =========================================================== */

@@ -49,6 +49,7 @@ sap.ui.define([
    		},
    		
 		onPressHome: function (oEvent) {
+			controller.byId("answers").destroyContent();
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("overview");
 		},
@@ -218,8 +219,14 @@ sap.ui.define([
    			else if (oType === "Slide") {
    				var oSlider = new sap.m.Slider({
    					id: oOwner + oData.ANSWERID,
-   					min: 0,
-   					max: 10,
+					enableTickmarks: true,
+					value: 0,
+					width: "60%",
+					min: 0,
+					max: 10,
+					showAdvancedTooltip: true,
+					showHandleTooltip: false,
+					inputsAsTooltips: true,
    					change: function(oEvent) {
    						controller.onSlide(oEvent);
    					}

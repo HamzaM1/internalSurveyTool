@@ -12,8 +12,10 @@ sap.ui.define([
     
     return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
    		onInit : function(){
-   			controller = this; 
-   			var oJsonModel = new sap.ui.model.json.JSONModel({anon : 0});
+   			controller = this;
+   			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : 0});
+				sap.ui.getCore().setModel(oJsonModel, "qcount");
+   			oJsonModel = new sap.ui.model.json.JSONModel({anon : 0});
 				sap.ui.getCore().setModel(oJsonModel, "anon");
    			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
    			oModel.read(
@@ -48,6 +50,7 @@ sap.ui.define([
 		onPressPublish: function (oEvent) {
 			var oTitle = sap.ui.getCore().getModel("title").getData().title;
 			var oQuizCount = ("00" + (controller.getModel("count").getData().count)).slice(-3);
+			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
 			// create survey
 			var SQoData = {
 				SQID: oOwner + oQuizCount,
@@ -56,11 +59,14 @@ sap.ui.define([
 				SQ_TYPE: sObjectId,
 				DATE: new Date(),
 				SQ_OWNER: oOwner,
-				NUM_OF_QUESTIONS: 0, //TODO
+				NUM_OF_QUESTIONS: oQuestionCount,
 				ANONYMOUS: sap.ui.getCore().getModel("anon").getData().anon,
 				LIVE: 1
 			};
 			oModel.update("/SQ('" + oOwner + oQuizCount + "')", SQoData);
+			
+			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : 0});
+				sap.ui.getCore().setModel(oJsonModel, "qcount");
 			/**
 			// create questions
 			var i = 0;
@@ -143,6 +149,8 @@ sap.ui.define([
 		
 		_onCreate : function (oData) {
 			var oQuizCount = ("00" + (oData.NUM_OF_SQ)).slice(-3);
+			var oJsonModel = new sap.ui.model.json.JSONModel({currentsq : (oOwner + oQuizCount)});
+				sap.ui.getCore().setModel(oJsonModel, "currentsq");
 			var SQoData = {
 				SQID: oOwner + oQuizCount,
 				SQ_TITLE: "", 

@@ -23,23 +23,35 @@ sap.ui.define([
 
 		
 		questionCheckbox : function(oEvent){
+			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
+			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : (oQuestionCount + 1)});
+				sap.ui.getCore().setModel(oJsonModel, "qcount");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("surveyQuestion", {type: "Check"});
+			oRouter.navTo("surveyQuestion", {sq: "Survey", type: "Check", count: oQuestionCount});
 		},
 		
 		questionRadio : function(oEvent){
+			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
+			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : (oQuestionCount + 1)});
+				sap.ui.getCore().setModel(oJsonModel, "qcount");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("surveyQuestion", {type: "Radio"});
+			oRouter.navTo("surveyQuestion", {sq: "Survey", type: "Radio", count: oQuestionCount});
 		},
 		
 		questionTextbox : function(oEvent){
+			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
+			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : (oQuestionCount + 1)});
+				sap.ui.getCore().setModel(oJsonModel, "qcount");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("surveyQuestion", {type: "Text"});
+			oRouter.navTo("surveyQuestion", {sq: "Survey", type: "Text", count: oQuestionCount});
 		},
 		
 		questionSlider : function(oEvent){
+			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
+			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : (oQuestionCount + 1)});
+				sap.ui.getCore().setModel(oJsonModel, "qcount");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("surveyQuestion", {type: "Slide"});
+			oRouter.navTo("surveyQuestion", {sq: "Survey", type: "Slide", count: oQuestionCount});
 		}
 	});
 

@@ -29,45 +29,7 @@
 					liveChange="handleLiveChange"
 					width="50%"/>
 
-				<VBox>
-					<form:SimpleForm editable="true">
-						<form:content id="form">
-				<!--		<RadioButtonGroup id="answers">
-								<RadioButton id="radio0" text="{/answer0}"/>
-								<RadioButton id="radio1" text="{/answer1}"/>
-								<RadioButton id="radio2" text="{/answer2}" visible="false"/>
-								<RadioButton id="radio3" text="{/answer3}" visible="false"/>
-								<RadioButton id="radio4" text="{/answer4}" visible="false"/>
-							</RadioButtonGroup>
-							<List id="answers_list" width="50%" backgroundDesign="Transparent">
-								<InputListItem id="inputlist0">
-									<Input ariaLabelledBy="__item0-label" value="{/answer0}" width="100%" id="input0" valueLiveUpdate="true"/>
-								</InputListItem>
-								<InputListItem id="inputlist1">
-									<Input ariaLabelledBy="__item1-label" value="{/answer1}" width="100%" id="input1" valueLiveUpdate="true"/>
-								</InputListItem>
-								<InputListItem visible="false" id="inputlist2">
-									<Input ariaLabelledBy="__item1-label" value="{/answer2}" width="100%" id="input2" valueLiveUpdate="true"/>
-								</InputListItem>
-								<InputListItem visible="false" id="inputlist3">
-									<Input ariaLabelledBy="__item1-label" value="{/answer3}" width="100%" id="input3" valueLiveUpdate="true"/>
-								</InputListItem>
-								<InputListItem visible="false" id="inputlist4">
-									<Input ariaLabelledBy="__item1-label" value="{/answer4}" width="100%" id="input4" valueLiveUpdate="true"/>
-								</InputListItem>
-			    			</List> -->
-			    			
-			    			<RadioButtonGroup id="answers">
-			    			</RadioButtonGroup>
-			    			<List id="answers_list" width="50%" backgroundDesign="Transparent">
-			    			</List>
-			    			
-						</form:content>
-					</form:SimpleForm>
-					
-				
-					<Button icon="sap-icon://add" press="onAdd"/>
-					<Button icon="sap-icon://less" press="onRemove"/>
+				<VBox id="vbox">
 				</VBox>
 			</content>
 		</Panel>

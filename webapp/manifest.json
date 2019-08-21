@@ -175,7 +175,7 @@
 					]
 				},
 				{
-					"pattern": "surveyQuestion/{type}",
+					"pattern": "surveyQuestion/{sq}/{type}/{count}",
 					"name": "surveyQuestion",
 					"target": [
 						"surveyQuestion"
