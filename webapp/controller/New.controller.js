@@ -1,14 +1,17 @@
 sap.ui.define([
    "./BaseController",
    	"sap/ui/model/json/JSONModel",
-   "sap/ui/core/routing/History"
-], function (BaseController, JSONModel, History) {
+   "sap/ui/core/routing/History",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (BaseController, JSONModel, History, Filter, FilterOperator) {
    "use strict";
 
 	var sObjectId;
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var oOwner;
 	var controller;
+	var updated = 0;
     
     return BaseController.extend("demo.survey2.SurveyDemo2.controller.New", {
    		onInit : function(){
@@ -40,6 +43,13 @@ sap.ui.define([
 			} else {
 				this.getRouter().navTo("overview", {}, true);
 			}
+		},
+		
+		
+		//TODO link to previous question
+		onPress : function (oEvent) {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("surveyQuestion", {sq: sObjectId, type: "Radio", count: "0"});
 		},
 		
 		onPressHome: function (oEvent) {
@@ -145,12 +155,21 @@ sap.ui.define([
 		_onObjectMatched : function (oEvent) {
 			sObjectId =  oEvent.getParameter("arguments").type;
 			this.setModel(sap.ui.getCore().getModel("titleType"), "new");
+			var oJsonModel = new sap.ui.model.json.JSONModel({sqtype : sObjectId});
+				sap.ui.getCore().setModel(oJsonModel, "sqtype");
 		},
 		
 		_onCreate : function (oData) {
 			var oQuizCount = ("00" + (oData.NUM_OF_SQ)).slice(-3);
 			var oJsonModel = new sap.ui.model.json.JSONModel({currentsq : (oOwner + oQuizCount)});
 				sap.ui.getCore().setModel(oJsonModel, "currentsq");
+			var oTable = this.byId("list");
+			var oFilter = new Filter({
+					path: "SQID",
+					operator: "EQ",
+					value1: sap.ui.getCore().getModel("currentsq").getData().currentsq
+				}); 
+			oTable.getBinding("items").filter(oFilter, "Application");
 			var SQoData = {
 				SQID: oOwner + oQuizCount,
 				SQ_TITLE: "", 
@@ -163,6 +182,15 @@ sap.ui.define([
 				LIVE: 0
 			};
 			oModel.create("/SQ", SQoData);
+		},
+		
+		onUpdateFinished : function (oEvent) {
+			if (updated === 1) { 
+				var oJsonModel = new sap.ui.model.json.JSONModel({qcount : oEvent.getParameters().total});
+				sap.ui.getCore().setModel(oJsonModel, "qcount");
+			}
+			updated++;
+			
 		}
 		
 	});

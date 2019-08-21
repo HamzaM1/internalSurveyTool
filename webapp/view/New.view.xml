@@ -22,6 +22,21 @@
 		
 		<content>
 			<mvc:XMLView viewName="demo.survey2.SurveyDemo2.view.SurveyTitle"/>
+			
+			<List
+				id="list"
+				width="auto"
+				items="{path:'/Questions'}"
+				growing="true"
+				updateFinished=".onUpdateFinished">
+					<items>
+        				<ObjectListItem
+        					title="{QUESTION_TITLE}"
+        					type="Navigation"
+        					press="onPress"/>
+    				</items>
+				</List>
+			
 			<mvc:XMLView viewName="demo.survey2.SurveyDemo2.view.Dropdown"/>
 		</content>
 	</Page>

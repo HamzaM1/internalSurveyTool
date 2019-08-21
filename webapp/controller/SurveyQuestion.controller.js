@@ -1,17 +1,19 @@
 sap.ui.define([
 	"./BaseController",
-	"sap/ui/core/Fragment",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History"
-], function (BaseController, Fragment, JSONModel, History) {
+], function (BaseController, JSONModel, History) {
 	"use strict";
 	
 	var oModel;
+	var oModel1 = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var oData;
 	var answers;
 	var sObjectId;
 	var sQuestionCount;
 	var sType;
+	var oSQID;
+	var sValue;
 	var controller;
 	
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.SurveyQuestion", {
@@ -36,17 +38,22 @@ sap.ui.define([
 			sObjectId =  oEvent.getParameter("arguments").type;
 			sQuestionCount = oEvent.getParameter("arguments").count;
 			sType = oEvent.getParameter("arguments").sq;
-			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
-			var oSQID = sap.ui.getCore().getModel("currentsq").getData().currentsq;
+			oSQID = sap.ui.getCore().getModel("currentsq").getData().currentsq;
+			alert(sQuestionCount);
+			var SQoData = {
+				SQID: oSQID,
+				NUM_OF_QUESTIONS: (parseInt(sQuestionCount, 10) + 1)
+				};
+			oModel1.update("/SQ('" + oSQID + "')", SQoData);
 			var QuestionsoData = {
-					QUESTIONID: oSQID + oQuestionCount,
+					QUESTIONID: oSQID + sQuestionCount,
 					SQID: oSQID,
-					QUESTION_TITLE: "Question " + (oQuestionCount + 1), 
+					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount, 10) + 1), 
 					QUESTION: "",
 					ANSWER_TYPE: sObjectId,
 					NUM_OF_ANSWERS: answers
 				};
-				//oModel.create("/Questions", QuestionsoData);
+			oModel1.create("/Questions", QuestionsoData);
 			this.createAnswers();
 
 		},
@@ -82,9 +89,16 @@ sap.ui.define([
 		},
 		
 		handleLiveChange : function (oEvent) {
-			var sValue = oEvent.getParameter("value");
-			var oJsonModel = new sap.ui.model.json.JSONModel({question : sValue});
-			sap.ui.getCore().setModel(oJsonModel, "question0");
+			sValue = oEvent.getParameter("value");
+			var QuestionsoData = {
+					QUESTIONID: oSQID + sQuestionCount,
+					SQID: oSQID,
+					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount) + 1),
+					QUESTION: sValue,
+					ANSWER_TYPE: sObjectId,
+					NUM_OF_ANSWERS: answers
+				};
+				oModel1.update("/Questions('" + oSQID + sQuestionCount + "')", QuestionsoData);
 		},
 		
 		createAnswers : function (){
@@ -208,6 +222,15 @@ sap.ui.define([
 				(this.getView().byId("vbox").getItems()[0].getContent()[1].getItems()[answers]).destroy();
 				var oJsonModel = new sap.ui.model.json.JSONModel({answersCount : answers});
 				sap.ui.getCore().setModel(oJsonModel, "answersCount");
+				var QuestionsoData = {
+					QUESTIONID: oSQID + sQuestionCount,
+					SQID: oSQID,
+					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount) + 1),
+					QUESTION: sValue,
+					ANSWER_TYPE: sObjectId,
+					NUM_OF_ANSWERS: answers
+				};
+				oModel1.update("/Questions('" + oSQID + sQuestionCount + "')", QuestionsoData);
 			}
 		},
 		
@@ -242,6 +265,16 @@ sap.ui.define([
    				answers++;
    				var oJsonModel = new sap.ui.model.json.JSONModel({answersCount : answers});
 				sap.ui.getCore().setModel(oJsonModel, "answersCount");
+
+				var QuestionsoData = {
+					QUESTIONID: oSQID + sQuestionCount,
+					SQID: oSQID,
+					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount) + 1),
+					QUESTION: sValue,
+					ANSWER_TYPE: sObjectId,
+					NUM_OF_ANSWERS: answers
+				};
+				oModel1.update("/Questions('" + oSQID + sQuestionCount + "')", QuestionsoData);
 			}
 		}
 		
