@@ -14,7 +14,8 @@
 				noDataText="{worklistView>/tableNoDataText}"
 				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
 				growing="true" 
-				updateFinished=".onUpdateFinished">
+				updateFinished=".onUpdateFinished"
+				class="myList">
 
 				<headerToolbar>
 					<OverflowToolbar>

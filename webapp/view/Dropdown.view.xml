@@ -9,7 +9,7 @@
 		<l:content>
 			<Button text="{i18n>actionType}"
 				press="handleOpen"
-				class="sapUiSmallMarginBottom" />
+				class="sapUiResponsiveMargin" />
 		</l:content>
 	</l:VerticalLayout>
 </mvc:View>

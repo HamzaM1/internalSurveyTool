@@ -47,3 +47,14 @@ html[dir="rtl"] .myAppDemoWT .myCustomButton.sapMBtn {
 .myAnomBtn{
 			padding-left:55%;
 }
+
+.myTextarea{
+	width: 50%;
+}
+
+.myList{
+	align-content: center;
+
+}
+
+

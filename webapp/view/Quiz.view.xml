@@ -45,7 +45,8 @@
 				noDataText="{questionView>/tableNoDataText}"
 				busyIndicatorDelay="{questionView>/tableBusyDelay}"
 				growing="true" 
-				updateFinished=".onUpdateFinished">
+				updateFinished=".onUpdateFinished"
+				class="myList">
 					<items>
         				<ObjectListItem
         					title="{QUESTION_TITLE}"
