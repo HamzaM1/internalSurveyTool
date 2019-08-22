@@ -33,10 +33,28 @@ html[dir="rtl"] .myAppDemoWT .myCustomButton.sapMBtn {
 	padding:2% 10% 2% 10%;
 }
 
-.myQuestionDetails{
+.myiNumber{
 	float:right;
 }
 
 .myResults{
 	width: 50%;
 }
+.myInput{
+			padding-left:50%;
+}
+
+.myAnomBtn{
+			padding-left:55%;
+}
+
+.myTextarea{
+	width: 50%;
+}
+
+.myList{
+	align-content: center;
+
+}
+
+

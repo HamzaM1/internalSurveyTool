@@ -4,7 +4,7 @@ sap.ui.define([
 ], function (ManagedObject, Fragment) {
 	"use strict";
 
-	return ManagedObject.extend("sap.ui.demo.walkthrough.controller.SaveQDialog", {
+	return ManagedObject.extend("demo.survey2.SurveyDemo2.controller.SaveQDialog", {
 
 		constructor : function (oView) {
 			this._oView = oView;
@@ -27,7 +27,7 @@ sap.ui.define([
 				// load asynchronous XML fragment
 				Fragment.load({
 					id: oView.getId(),
-					name: "sap.ui.demo.walkthrough.view.SaveQDialog",
+					name: "demo.survey2.SurveyDemo2.view.SaveQDialog",
 					controller: oFragmentController
 				}).then(function (oDialog) {
 					// connect dialog to the root view of this component (models, lifecycle)

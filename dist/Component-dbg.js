@@ -2,8 +2,11 @@ sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
 	"./model/models",
-	"./controller/ErrorHandler"
-], function (UIComponent, Device, models, ErrorHandler) {
+	"./controller/ErrorHandler",
+	"sap/ui/model/json/JSONModel",
+	"./controller/SaveQDialog",
+	"./controller/SaveTDialog"
+], function (UIComponent, Device, models, ErrorHandler, JSONModel, SaveQDialog, SaveTDialog) {
 	"use strict";
 
 	return UIComponent.extend("demo.survey2.SurveyDemo2.Component", {
@@ -30,6 +33,21 @@ sap.ui.define([
 
 			// create the views based on the url/hash
 			this.getRouter().initialize();
+			
+			// set data model
+			var oData = {
+				recipient : {
+					title : "Please enter the Survey Title here",
+					question : "Please enter the question here"
+					// question : sap.ui.getCore().byId("enterQ").getText()
+				}
+			};
+			var oModel = new JSONModel(oData);
+			//this.setModel(oModel);
+			
+			// set dialog
+			this._saveQDialog = new SaveQDialog(this.getRootControl());
+			this._saveTDialog = new SaveTDialog(this.getRootControl());
 		},
 
 		/**
@@ -64,8 +82,21 @@ sap.ui.define([
 				}
 			}
 			return this._sContentDensityClass;
+		},
+		
+		exit : function () {
+			this._saveQDialog.destroy();
+			this._saveTDialog.destroy();
+			delete this._saveQDialog;
+			delete this._saveTDialog;
+		},
+		openSaveQDialog : function () {
+			this._saveQDialog.open();
+		},
+		openSaveTDialog : function () {
+			this._saveTDialog.open();
 		}
-
+//Edward
 	});
 
 });

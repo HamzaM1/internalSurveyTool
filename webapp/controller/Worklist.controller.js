@@ -131,7 +131,12 @@ sap.ui.define([
 											value1: sQuery
 											}));
 			}
-
+				aFilter.push(new Filter({
+											path: "SQ_OWNER",
+											operator: "EQ",
+											value1: sap.ui.getCore().getModel("userapi").getData().name
+											}));
+			
 			// filter binding
 			var oList = this.byId("list");
 			var oBinding = oList.getBinding("items");
@@ -191,6 +196,13 @@ sap.ui.define([
 		onRefresh : function () {
 			var oTable = this.byId("list");
 			oTable.getBinding("items").refresh();
+			var filter = new Filter({
+											path: "SQ_OWNER",
+											operator: "EQ",
+											value1: sap.ui.getCore().getModel("userapi").getData().name
+				});
+			var oBinding = oTable.getBinding("items");
+			oBinding.filter(filter);
 		},
 		
 		/* =========================================================== */

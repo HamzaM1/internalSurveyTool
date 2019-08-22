@@ -1,35 +1,26 @@
-<mvc:View
-	controllerName="sap.ui.demo.walkthrough.controller.SurveyTitle"
-	xmlns:form="sap.ui.layout.form"
-	xmlns="sap.m"
+<mvc:View controllerName="demo.survey2.SurveyDemo2.controller.SurveyTitle" xmlns:form="sap.ui.layout.form" xmlns="sap.m"
 	xmlns:mvc="sap.iu.core.mvc">
-	<Panel
-		headerText="{i18n>createSTitlePanelTitle}"
-		class="sapUiResponsiveMargin"
-		width="auto" >
+	
+	
+	<Panel backgroundDesign="Transparent" class="sapUiResponsiveMargin" width="auto">
 		<content>
-			<form:SimpleForm editable="true">
-				<TextArea
-					id="TypeT"
-					placeholder="{i18n>placeholderTitle}"
-					value="{/InputValue}"
-					valueLiveUpdate="true"
-					liveChange="handleLiveChange"
-					width="50%"/>
-			</form:SimpleForm>
-			<Button
-				id="saveTDialogButton"
-				icon="sap-icon://save"
-				text="{i18n>saveTDialogButtonText}"
-				press=".onOpenTDialog"
-				class="sapUiResponsiveMargin"/>
-			<Button
-				text="{i18n>showEnterTButtonText}"
-				press=".getTitle"
-				class="sapUiSmallMargin"/>
-			<FormattedText
-				htmlText="{/InputValue}"
-				class="sapUiResponsiveMargin sapThemeHighlight-asColor myCustomText"/>
+			<Text class="myHeader" text="{new>/titleType} Title"/>
+			<ToggleButton text="Click for Anonymous survey takers" enabled="true" press="onPress" class="myAnomBtn" icon="sap-icon://cursor-arrow">
+				<layoutData>
+					<FlexItemData growFactor="1"/>
+				</layoutData>
+			</ToggleButton>
 		</content>
 	</Panel>
+	
+	
+	<Panel backgroundDesign="Transparent" class="sapUiResponsiveMargin" width="auto">
+		<content>
+			<form:SimpleForm editable="true">
+				<TextArea id="TypeT" placeholder="{i18n>placeholderTitle}" value="{/InputValue}" valueLiveUpdate="true" liveChange="handleLiveChange" 	width="50%"/>
+			</form:SimpleForm>
+		</content>
+	</Panel>
+	
+	
 </mvc:View>

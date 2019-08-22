@@ -11,11 +11,32 @@
         },
         "resources": "resources.json",
         "dataSources": {
+            "project.xsodata": {
+                "uri": "/SurveycrocdbDest2/project/project.xsodata/",
+                "type": "OData",
+                "settings": {
+                    "localUri": "localService/project.xsodata/metadata.xml"
+                }
+            },
+            "internProject.xsodata": {
+                "uri": "/QuizDb/internProject/internProject.xsodata/",
+                "type": "OData",
+                "settings": {
+                    "localUri": "localService/internProject.xsodata/metadata.xml"
+                }
+            },
             "myservice.xsodata": {
-                "uri": "/SurveycrocdbDest/survey_pkg/myservice.xsodata/",
+                "uri": "/test/dummy_pkg/myservice.xsodata/",
                 "type": "OData",
                 "settings": {
                     "localUri": "localService/myservice.xsodata/metadata.xml"
+                }
+            },
+            "intern-project-odata.xsodata": {
+                "uri": "/project/intern-project/intern-project-odata.xsodata/",
+                "type": "OData",
+                "settings": {
+                    "localUri": "localService/intern-project-odata.xsodata/metadata.xml"
                 }
             }
         },
@@ -67,6 +88,17 @@
                     "bundleName": "demo.survey2.SurveyDemo2.i18n.i18n"
                 }
             },
+            "surveys": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "OneWay",
+                    "defaultCountMode": "Request",
+                    "useBatch": true
+                },
+                "dataSource": "myservice.xsodata",
+                "preload": true
+            },
             "": {
                 "type": "sap.ui.model.odata.v2.ODataModel",
                 "settings": {
@@ -74,7 +106,7 @@
                     "defaultBindingMode": "OneWay",
                     "defaultCountMode": "Request"
                 },
-                "dataSource": "myservice.xsodata",
+                "dataSource": "intern-project-odata.xsodata",
                 "preload": true
             }
         },
@@ -115,17 +147,87 @@
                     ]
                 },
                 {
-                    "pattern": "quiz/{objectId}",
-                    "name": "quiz",
+                    "pattern": "quizpage/{objectId}",
+                    "name": "quizpage",
                     "target": [
                         "quiz"
                     ]
                 },
                 {
-                    "pattern": "SURVEYS/{objectId}",
+                    "pattern": "userResults",
+                    "name": "userResults",
+                    "target": [
+                        "userResults"
+                    ]
+                },
+                {
+                    "pattern": "new/{type}",
+                    "name": "new",
+                    "target": [
+                        "new"
+                    ]
+                },
+                {
+                    "pattern": "quiz/{objectId}",
                     "name": "object",
                     "target": [
                         "object"
+                    ]
+                },
+                {
+                    "pattern": "surveyQuestion/{sq}/{type}/{count}",
+                    "name": "surveyQuestion",
+                    "target": [
+                        "surveyQuestion"
+                    ]
+                },
+                {
+                    "pattern": "questionCheckbox",
+                    "name": "questionCheckbox",
+                    "target": [
+                        "questionCheckbox"
+                    ]
+                },
+                {
+                    "pattern": "questionSlider",
+                    "name": "questionSlider",
+                    "target": [
+                        "questionSlider"
+                    ]
+                },
+                {
+                    "pattern": "questionTextbox",
+                    "name": "questionTextbox",
+                    "target": [
+                        "questionTextbox"
+                    ]
+                },
+                {
+                    "pattern": "questionRadio",
+                    "name": "questionRadio",
+                    "target": [
+                        "questionRadio"
+                    ]
+                },
+                {
+                    "pattern": "question/{objectId}",
+                    "name": "question",
+                    "target": [
+                        "question"
+                    ]
+                },
+                {
+                    "pattern": "surveyComplete",
+                    "name": "surveyComplete",
+                    "target": [
+                        "surveyComplete"
+                    ]
+                },
+                {
+                    "pattern": "answer/{objectId}",
+                    "name": "answer",
+                    "target": [
+                        "answer"
                     ]
                 }
             ],
@@ -154,6 +256,18 @@
                     "viewLevel": 2,
                     "title": "{i18n>quizViewTitle}"
                 },
+                "userResults": {
+                    "viewName": "UserResults",
+                    "viewId": "userResults",
+                    "viewLevel": 2,
+                    "title": "{i18n>userResultsViewTitle}"
+                },
+                "new": {
+                    "viewName": "New",
+                    "viewId": "new",
+                    "viewLevel": 2,
+                    "title": "{i18n>newViewTitle}"
+                },
                 "object": {
                     "viewName": "Object",
                     "viewId": "object",
@@ -167,6 +281,38 @@
                 "notFound": {
                     "viewName": "NotFound",
                     "viewId": "notFound"
+                },
+                "surveyQuestion": {
+                    "viewName": "SurveyQuestion",
+                    "viewId": "surveyQuestion"
+                },
+                "questionCheckbox": {
+                    "viewName": "QuestionCheckbox",
+                    "viewId": "questionCheckbox"
+                },
+                "questionSlider": {
+                    "viewName": "QuestionSlider",
+                    "viewId": "questionSlider"
+                },
+                "questionTextbox": {
+                    "viewName": "QuestionTextbox",
+                    "viewId": "questionTextbox"
+                },
+                "questionRadio": {
+                    "viewName": "QuestionRadio",
+                    "viewId": "questionRadio"
+                },
+                "question": {
+                    "viewName": "Question",
+                    "viewId": "question"
+                },
+                "surveyComplete": {
+                    "viewName": "SurveyComplete",
+                    "viewId": "surveyComplete"
+                },
+                "answer": {
+                    "viewName": "Answer",
+                    "viewId": "answer"
                 }
             }
         },
@@ -178,5 +324,9 @@
             ]
         },
         "flexEnabled": true
+    },
+    "sap.platform.hcp": {
+        "uri": "webapp",
+        "_version": "1.1.0"
     }
 }

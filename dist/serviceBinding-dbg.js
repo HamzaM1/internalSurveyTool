@@ -1,5 +1,5 @@
 function initModel() {
-	var sUrl = "/SurveycrocdbDest/survey_pkg/myservice.xsodata/";
+	var sUrl = "/project/intern-project/intern-project-odata.xsodata/";
 	var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 	sap.ui.getCore().setModel(oModel);
 }

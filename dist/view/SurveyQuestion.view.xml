@@ -1,42 +1,37 @@
 <mvc:View
-	controllerName="sap.ui.demo.walkthrough.controller.SurveyQuestion"
 	xmlns:form="sap.ui.layout.form"
 	xmlns="sap.m"
-	xmlns:mvc="sap.iu.core.mvc">
-	<Panel
-		headerText="{i18n>createSQPanelTitle}"
-		class="sapUiResponsiveMargin"
-		width="auto" >
-		<content>
-			<form:SimpleForm editable="true">
-				<TextArea
-					id="TypeQ"
+	xmlns:mvc="sap.iu.core.mvc"
+	controllerName="demo.survey2.SurveyDemo2.controller.SurveyQuestion">
+	
+	<Page 
+		title="{i18n>addQuestion}"
+		showNavButton="true"
+		navButtonPress=".onNavBack">
+        <headerContent
+        	class="header">
+			<Button
+				icon="sap-icon://home"
+				press=".onPressHome"/>
+		</headerContent>
+		<Panel backgroundDesign="Transparent" class="sapUiResponsiveMargin" width="auto">
+	        <content>
+				<Text class="myHeader" text="{i18n>createSQPanelTitle}"/> 
+			</content>
+	    </Panel>
+	
+		<Panel backgroundDesign="Transparent" class="sapUiResponsiveMargin" width="auto">
+			<content>
+				<TextArea id="TypeQ"
 					placeholder="{i18n>placeholderQuestion}"
 					value="{/InputValue}"
 					valueLiveUpdate="true"
 					liveChange="handleLiveChange"
-					width="60%"/>
-				<VBox class="sapUiResponsiveMargin">
-					<RadioButton
-						text="Yes"/>
-					<RadioButton
-						text="No"/>
+					width="50%"/>
+
+				<VBox id="vbox">
 				</VBox>
-			</form:SimpleForm>
-			<Button
-				id="saveQDialogButton"
-				icon="sap-icon://save"
-				text="{i18n>saveQDialogButtonText}"
-				press=".onOpenQDialog"
-				class="sapUiResponsiveMargin"/>
-			<Button
-				text="{i18n>showEnterQButtonText}"
-				press=".getQuestion"
-				class="sapUiSmallMargin"/>
-			<FormattedText
-				htmlText="{/InputValue}"
-				class="sapUiResponsiveMargin sapThemeHighlight-asColor myCustomText"/>
-			
-		</content>
-	</Panel>
+			</content>
+		</Panel>
+	</Page> 
 </mvc:View>

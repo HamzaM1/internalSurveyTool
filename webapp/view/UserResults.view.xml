@@ -1,6 +1,6 @@
 <mvc:View controllerName="demo.survey2.SurveyDemo2.controller.UserResults" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<Shell>
-		<Page title="Quiz Results: User A" id="page" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" showNavButton="true"
+		<Page title="Quiz Results: User A" id="page" showNavButton="true"
 			navButtonPress=".onNavBack">
 			<!-- specify user's name-->
 			<headerContent class="header">

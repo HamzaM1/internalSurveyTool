@@ -1,137 +1,134 @@
 <mvc:View
 	controllerName="demo.survey2.SurveyDemo2.controller.Object"
-	xmlns="sap.m"
+	xmlns="sap.m" 
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic"
-	xmlns:viz="sap.viz.ui5.controls"
+	xmlns:semantic="sap.f.semantic" 
+	xmlns:viz="sap.viz.ui5.controls" 
 	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
-	xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:viz.data="sap.viz.ui5.data" 
 	xmlns:vtypes="sap.viz.ui5.types">
 	<Shell>
-		<Page
-			title="My {STYPE}"
-			id="page"
-			busy="{objectView>/busy}"
-			busyIndicatorDelay="{objectView>/delay}"
-			showNavButton="true"
+		<Page title="My {SQ_TYPE}" id="page" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" showNavButton="true"
 			navButtonPress=".onNavBack">
-			<headerContent
-        		class="header">
-				<Button
-					icon="sap-icon://home"
-					press=".onPressHome"/>
+			<headerContent class="header">
+				<Button icon="sap-icon://home" press=".onPressHome"/>
+				<Button icon="sap-icon://delete" press=".onDelete"/>
+
 			</headerContent>
 			<content>
-				<Panel backgroundDesign="Transparent"> 
-					<Text class="myResults myHeader"
-						text="{STYPE} Title"/>
-					<Text class="myResults myHeader"
-						text="{STYPE} Link"/>
-				</Panel>
-				<Panel backgroundDesign="Transparent"> 
-					<Text class="myResults"
-						text="{SNAME}"/>
-					<Text
-						text="www.SLINK.com"/>
-					<Button
-						press=".onPressQuiz" 
-						icon="sap-icon://home"/>
+				
+				<!-- Header Tilte -->
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Text
+							class="myResults myHeader"
+							text="{SQ_TYPE} Title"/>
+						<Text
+							class="myResults myHeader"
+							text="{SQ_TYPE} Link"/>
+					</content>
 				</Panel>
 				
-				<Panel backgroundDesign="Transparent"> 
-					<Text class="myResults myHeader"
-						text="{STYPE} Question:"/>
-					<Text class="myResults myHeader"
-						text="Available Responses:"/>
+				<!-- Question + Link to Survey -->
+				
+				<Panel 
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content> 
+						<Text
+							class="myResults myText"
+							text="{SQ_TITLE}"/>
+						<Input
+							value="{SQ_LINK}"
+							class="myResults myHeader"
+							editable="false"
+							width="30%"/>
+						<Button
+							press=".onPressQuiz" 
+							icon="sap-icon://navigation-right-arrow"/>
+					</content>
 				</Panel>
-				<Panel backgroundDesign="Transparent"> 
-					<Text class="myResults"
-						text="{SQUESTION}"/>
-					<RadioButtonGroup
-						editable="false"
-						class="myResults">
-						<RadioButton
-							text="Yes"/>
-						<RadioButton
-							text="No"/>
-					</RadioButtonGroup>
+				
+				<!-- -->
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content> 
+						<Text
+							class="myResults myHeader"
+							text="{SQ_TYPE} Questions:"/>
+					</content>
 				</Panel>
-				<viz:VizFrame uiConfig="{applicationSet:'fiori'}"
-    			height='100%' width="100%" vizType='pie' id="pieid">
-    			<viz:dataset>
-    				<viz.data:FlattenedDataset data="{/}">
-    					<viz.data:dimensions>
-    						<viz.data:DimensionDefinition
-    							name="SNAME"
-        						value="{SNAME}" />
-    					</viz.data:dimensions>
-    					
-    					<viz.data:measures>
-    						<viz.data:MeasureDefinition
-    							name="SLENGTH"
-        						value="{SLENGTH}" />
-    					</viz.data:measures>
-    				</viz.data:FlattenedDataset>
-    			</viz:dataset>
-    
-    			<viz:feeds>
-    				<viz.feeds:FeedItem 
-    					uid="size" 
-    					type="Measure"
-    					values="SLENGTH" />
-    				<viz.feeds:FeedItem
-    					uid="color" 
-    					type="Dimension"
-						values="SNAME" />
-    			</viz:feeds>
-			</viz:VizFrame>
-			</content> 
+				
+				<!-- Questions List -->
+				
+				<List
+				id="list"
+				width="auto"
+				items="{path:'/Questions'}"
+				noDataText="{questionView>/tableNoDataText}"
+				busyIndicatorDelay="{questionView>/tableBusyDelay}"
+				growing="true" 
+				updateFinished=".onUpdateFinished">
+					<items>
+        				<ObjectListItem
+        					title="{QUESTION_TITLE}"
+        					type="Navigation"
+        					press="onPress"/>
+    				</items>
+				</List>
+				
+				<!-- Results header !-->
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Text
+							class="myResults myHeader"
+							text="{SQ_TYPE} Results:"/>
+					</content>
+				</Panel>
+			
+				<!-- Yes/No Result !-->
+		<!--		
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+						<Text
+							class="myResults myText"
+							width="100%"
+							text="Placeholder: Placeholder"/>
+						<Text
+							class="myResults myText"
+							width="100%"
+							text="Placeholder: Placeholder"/>
+				</Panel>
+			-->
+				<!--
+				<Panel>
+					<viz:VizFrame height='100%' width="100%" vizType='pie' id="pieid">
+						<viz:dataset>
+							<viz.data:FlattenedDataset data="{/}">
+								<viz.data:dimensions>
+									<viz.data:DimensionDefinition name="Name" value="{SNAME}"/>
+								</viz.data:dimensions>
+								<viz.data:measures>
+									<viz.data:MeasureDefinition name="Length" value="{SLENGTH}"/>
+								</viz.data:measures>
+							</viz.data:FlattenedDataset>
+						</viz:dataset>
+						<viz:feeds>
+							<viz.feeds:FeedItem uid="size" type="Measure" values="Length"/>
+							<viz.feeds:FeedItem uid="color" type="Dimension" values="Name"/>
+						</viz:feeds>
+					</viz:VizFrame>
+				</Panel> -->
+			</content>
 		</Page>
-	</Shell> 
-
+	</Shell>
 </mvc:View>
-
-<!-- <core:View
-	controllerName="demo.survey2.SurveyDemo2.controller.Object"
-	xmlns:core="sap.ui.core"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	xmlns:viz="sap.viz.ui5.controls"
-	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
-	xmlns:viz.data="sap.viz.ui5.data"
-	xmlns:vtypes="sap.viz.ui5.types">
- 
-	<Page title="Pie Chart Example">
-		<content>
-			<viz:VizFrame uiConfig="{applicationSet:'fiori'}"
-    			height='100%' width="100%" vizType='pie' id="pieid">
-    			<viz:dataset>
-    				<viz.data:FlattenedDataset data="{/}">
-    					<viz.data:dimensions>
-    						<viz.data:DimensionDefinition
-    							name="SNAME"
-        						value="{SNAME}" />
-    					</viz.data:dimensions>
-    					
-    					<viz.data:measures>
-    						<viz.data:MeasureDefinition
-    							name="SLENGTH"
-        						value="{SLENGTH}" />
-    					</viz.data:measures>
-    				</viz.data:FlattenedDataset>
-    			</viz:dataset>
-    
-    			<viz:feeds>
-    				<viz.feeds:FeedItem 
-    					uid="size" 
-    					type="Measure"
-    					values="SLENGTH" />
-    				<viz.feeds:FeedItem
-    					uid="color" 
-    					type="Dimension"
-						values="SNAME" />
-    			</viz:feeds>
-			</viz:VizFrame>
-		</content>
-	</Page>
-</core:View> -->

@@ -4,6 +4,9 @@
             "name": "manifest.json"
         },
         {
+            "name": "placeholder.json"
+        },
+        {
             "name": "serviceBinding.js"
         },
         {
@@ -19,10 +22,16 @@
             "name": "controller/Worklist.controller.js"
         },
         {
+            "name": "controller/UserResults.controller.js"
+        },
+        {
             "name": "controller/SurveyTitle.controller.js"
         },
         {
             "name": "controller/SurveyQuestion.controller.js"
+        },
+        {
+            "name": "controller/SurveyComplete.controller.js"
         },
         {
             "name": "controller/SaveTDialog.js"
@@ -32,6 +41,18 @@
         },
         {
             "name": "controller/Quiz.controller.js"
+        },
+        {
+            "name": "controller/QuestionSlider.controller.js"
+        },
+        {
+            "name": "controller/QuestionRadio.controller.js"
+        },
+        {
+            "name": "controller/QuestionCheckbox.controller.js"
+        },
+        {
+            "name": "controller/Question.controller.js"
         },
         {
             "name": "controller/Overview.controller.js"
@@ -46,16 +67,25 @@
             "name": "controller/NotFound.controller.js"
         },
         {
+            "name": "controller/New.controller.js"
+        },
+        {
             "name": "controller/Home.controller.js"
         },
         {
-            "name": "placeholder.json"
+            "name": "controller/ErrorHandler.js"
         },
         {
             "name": "controller/BaseController.js"
         },
         {
             "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/Answer.controller.js"
+        },
+        {
+            "name": "controller/ActionSheet.controller.js"
         },
         {
             "name": "Component.js"
@@ -68,7 +98,8 @@
             "merged": true
         },
         {
-            "name": "controller/ErrorHandler.js"
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
         },
         {
             "name": "serviceBinding-dbg.js",
@@ -91,11 +122,19 @@
             "isDebug": true
         },
         {
+            "name": "controller/UserResults-dbg.controller.js",
+            "isDebug": true
+        },
+        {
             "name": "controller/SurveyTitle-dbg.controller.js",
             "isDebug": true
         },
         {
             "name": "controller/SurveyQuestion-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/SurveyComplete-dbg.controller.js",
             "isDebug": true
         },
         {
@@ -108,6 +147,22 @@
         },
         {
             "name": "controller/Quiz-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/QuestionSlider-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/QuestionRadio-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/QuestionCheckbox-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Question-dbg.controller.js",
             "isDebug": true
         },
         {
@@ -127,6 +182,10 @@
             "isDebug": true
         },
         {
+            "name": "controller/New-dbg.controller.js",
+            "isDebug": true
+        },
+        {
             "name": "controller/Home-dbg.controller.js",
             "isDebug": true
         },
@@ -139,7 +198,11 @@
             "isDebug": true
         },
         {
-            "name": "controller/App-dbg.controller.js",
+            "name": "controller/Answer-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ActionSheet-dbg.controller.js",
             "isDebug": true
         },
         {
@@ -159,10 +222,16 @@
             "name": "view/Worklist.view.xml"
         },
         {
+            "name": "view/UserResults.view.xml"
+        },
+        {
             "name": "view/SurveyTitle.view.xml"
         },
         {
             "name": "view/SurveyQuestion.view.xml"
+        },
+        {
+            "name": "view/SurveyComplete.view.xml"
         },
         {
             "name": "view/SaveTDialog.fragment.xml"
@@ -172,6 +241,21 @@
         },
         {
             "name": "view/Quiz.view.xml"
+        },
+        {
+            "name": "view/QuestionTextbox.view.xml"
+        },
+        {
+            "name": "view/QuestionSlider.view.xml"
+        },
+        {
+            "name": "view/QuestionRadio.view.xml"
+        },
+        {
+            "name": "view/QuestionCheckbox.view.xml"
+        },
+        {
+            "name": "view/Question.view.xml"
         },
         {
             "name": "view/Overview.view.xml"
@@ -186,19 +270,43 @@
             "name": "view/Object.view.xml"
         },
         {
+            "name": "view/Object-Old.view.xml"
+        },
+        {
             "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/New.view.xml"
         },
         {
             "name": "view/Home.view.xml"
         },
         {
+            "name": "view/Dropdown.view.xml"
+        },
+        {
             "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/Answer.view.xml"
+        },
+        {
+            "name": "view/ActionSheet.fragment.xml"
+        },
+        {
+            "name": "localService/project.xsodata/metadata.xml"
         },
         {
             "name": "localService/myservice.xsodata/metadata.xml"
         },
         {
             "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/internProject.xsodata/metadata.xml"
+        },
+        {
+            "name": "localService/intern-project-odata.xsodata/metadata.xml"
         },
         {
             "name": "index.html"
