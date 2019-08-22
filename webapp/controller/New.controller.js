@@ -67,7 +67,7 @@ sap.ui.define([
 			var SQoData = {
 				SQID: oOwner + oQuizCount,
 				SQ_TITLE: oTitle, 
-				SQ_LINK: "", //TODO 
+				SQ_LINK: "https://internalsurveytool-i505340trial.dispatcher.hanatrial.ondemand.com/index.html?hc_reset#/quizpage/" + oOwner + oQuizCount,
 				SQ_TYPE: sObjectId,
 				DATE: new Date(),
 				SQ_OWNER: oOwner,
