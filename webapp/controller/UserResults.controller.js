@@ -5,8 +5,14 @@ sap.ui.define([
 	"../model/formatter"
 ], function (BaseController, JSONModel, History, formatter) {
    "use strict";
-
-   return BaseController.extend("demo.survey2.SurveyDemo2.controller.UserResults", {
+	
+	var sObjectId;
+	
+	return BaseController.extend("demo.survey2.SurveyDemo2.controller.UserResults", {
+   		onInit : function() {
+   			this.getRouter().getRoute("userResults").attachPatternMatched(this._onObjectMatched, this);	
+   		},
+   	
 		onNavBack : function() {
 			var sPreviousHash = History.getInstance().getPreviousHash();
 
@@ -21,6 +27,10 @@ sap.ui.define([
 		onPressHome: function (oEvent) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("overview");
+		},
+		
+		_onObjectMatched : function (oEvent) {
+			sObjectId = oEvent.getParameter("arguments").objectId;
 		}
    	});
 });

@@ -105,16 +105,23 @@ sap.ui.define([
 			var path = "/UserSQ('" + oOwner + sObjectId + "')";
 			oModel.update(path, UserSQoData);
 			
-			//TODO nav to correct completed page & correct quizzes
+			//TODO correct quizzes
 			oModel.read("/SQ('" + sObjectId + "')",
 				{success : function(oData) {
+					var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
 					if (oData.SQ_TYPE === "Survey") {
-						var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
 						oRouter.navTo("surveyComplete");
 					}
 					else {
-						var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
-						oRouter.navTo("userResults");
+						/**
+							read each question from the quiz
+								read each answer by the user
+								compare the actual answer to the users answer
+								increment 'correct' if right answer correct / num_of_questions = percentage
+						 */
+						oRouter.navTo("userResults", {
+							objectId: oData.SQID
+							});
 					}
 				}
 			});
