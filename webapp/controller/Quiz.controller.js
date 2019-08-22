@@ -127,7 +127,11 @@ sap.ui.define([
 
 		
 		_onObjectMatched : function (oEvent) {
-			sObjectId =  oEvent.getParameter("arguments").objectId;
+			
+			var url = window.location.href;
+			var pieces = url.split("/");
+			var id = pieces.length - 1;
+			sObjectId =  pieces[id];
 			oOwner = sObjectId.slice(0,7);
    			var UserSQoData = {
 				USQID: oOwner + sObjectId,
