@@ -5,7 +5,7 @@
 	<Panel backgroundDesign="Transparent" class="sapUiResponsiveMargin" width="auto">
 		<content>
 			<Text class="myHeader" text="{new>/titleType} Title"/>
-			<ToggleButton text="{i18n>anonymous}" enabled="true" press="onPress" class="myAnomBtn" icon="sap-icon://hide">
+			<ToggleButton text="{i18n>anonymous}" enabled="true" press="onPress" class="myAnomBtn" icon="sap-icon://show">
 				<layoutData>
 					<FlexItemData growFactor="1"/>
 				</layoutData>
@@ -21,6 +21,5 @@
 			</form:SimpleForm>
 		</content>
 	</Panel>
-	
 	
 </mvc:View>
