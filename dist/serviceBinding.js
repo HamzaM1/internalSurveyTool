@@ -1,1 +1,1 @@
-function initModel(){var e="/SurveycrocdbDest/survey_pkg/myservice.xsodata/";var a=new sap.ui.model.odata.ODataModel(e,true);sap.ui.getCore().setModel(a)}
+function initModel(){var e="/project/intern-project/intern-project-odata.xsodata/";var t=new sap.ui.model.odata.ODataModel(e,true);sap.ui.getCore().setModel(t)}

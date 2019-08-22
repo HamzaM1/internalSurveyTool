@@ -1,13 +1,15 @@
-<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
 	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
-		<Schema xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
-			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm"
-			Namespace="survey_pkg.myservice">
-			<EntityType Name="mytableType">
-				<Key><PropertyRef Name="ID"/></Key><Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="2"/><Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="20"/></EntityType>
-			<EntityType Name="SURVEYSType">
-				<Key><PropertyRef Name="SURVEYID"/></Key><Property Name="SURVEYID" Type="Edm.Int32" Nullable="false"/><Property Name="SNAME" Type="Edm.String" MaxLength="255"/><Property Name="SOWNER" Type="Edm.String" MaxLength="255"/><Property Name="STYPE" Type="Edm.String" MaxLength="255"/><Property Name="SDATE" Type="Edm.DateTime"/><Property Name="SLENGTH" Type="Edm.Int32"/><Property Name="SQUESTION" Type="Edm.String" MaxLength="255"/><Property Name="SANSWERS" Type="Edm.String" MaxLength="255"/></EntityType>
-			<EntityContainer Name="myservice" m:IsDefaultEntityContainer="true"><EntitySet Name="mytable" EntityType="survey_pkg.myservice.mytableType"/><EntitySet Name="SURVEYS" EntityType="survey_pkg.myservice.SURVEYSType"/></EntityContainer>
+		<Schema Namespace="dummy_pkg.myservice" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="quizType">
+				<Key><PropertyRef Name="quiz_id"/></Key><Property Name="quiz_id" Type="Edm.String" Nullable="false" MaxLength="10"/><Property Name="quiz_name" Type="Edm.String" Nullable="false" MaxLength="20"/><Property Name="quiz_type" Type="Edm.String" Nullable="false" MaxLength="6"/><Property Name="quiz_length" Type="Edm.Int32" Nullable="false"/><Property Name="quiz_date" Type="Edm.String" Nullable="false" MaxLength="10"/><Property Name="quiz_owner" Type="Edm.String" Nullable="false" MaxLength="7"/></EntityType>
+			<EntityType Name="questionType">
+				<Key><PropertyRef Name="question_id"/></Key><Property Name="question_id" Type="Edm.Int32" Nullable="false"/><Property Name="question_text" Type="Edm.String" Nullable="false" MaxLength="100"/><Property Name="question_type" Type="Edm.String" Nullable="false" MaxLength="20"/><Property Name="question_options" Type="Edm.Int32" Nullable="false"/><Property Name="question_answers" Type="Edm.Int32"/></EntityType>
+			<EntityType Name="userType">
+				<Key><PropertyRef Name="user_id"/></Key><Property Name="user_id" Type="Edm.String" Nullable="false" MaxLength="7"/><Property Name="user_name" Type="Edm.String" Nullable="false" MaxLength="20"/><Property Name="user_quiz" Type="Edm.Int32"/></EntityType>
+			<EntityContainer Name="myservice" m:IsDefaultEntityContainer="true"><EntitySet Name="quiz" EntityType="dummy_pkg.myservice.quizType"/><EntitySet Name="question" EntityType="dummy_pkg.myservice.questionType"/><EntitySet Name="user" EntityType="dummy_pkg.myservice.userType"/></EntityContainer>
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

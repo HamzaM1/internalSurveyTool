@@ -4,7 +4,7 @@ sap.ui.define([
 ], function (ManagedObject, Fragment) {
 	"use strict";
 
-	return ManagedObject.extend("sap.ui.demo.walkthrough.controller.SaveTDialog", {
+	return ManagedObject.extend("demo.survey2.SurveyDemo2.controller.SaveTDialog", {
 
 		constructor : function (oView) {
 			this._oView = oView;
@@ -27,7 +27,7 @@ sap.ui.define([
 				// load asynchronous XML fragment
 				Fragment.load({
 					id: oView.getId(),
-					name: "sap.ui.demo.walkthrough.view.SaveTDialog",
+					name: "demo.survey2.SurveyDemo2.view.SaveTDialog",
 					controller: oFragmentController
 				}).then(function (oDialog) {
 					// connect dialog to the root view of this component (models, lifecycle)
@@ -42,3 +42,11 @@ sap.ui.define([
 	});
 
 });
+
+/** Code to write to database
+ * var oModel = new sap.ui.model.odata.v2.ODataModel("/SurveycrocdbDest/survey_pkg/myservice.xsodata/");
+			var oData = {
+				SURVEYID:100, SNAME:"Test2", SOWNER:"Ian", STYPE:"Quiz", SDATE: new Date(),  SLENGTH:1, SQUESTION:"Question", SANSWERS:"Answers"
+			};
+			oModel.create("/SURVEYS", oData);
+ */

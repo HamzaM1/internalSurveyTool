@@ -4,7 +4,7 @@
 	xmlns:mvc="sap.ui.core.mvc">
 	<Shell>
 		<Page
-			title="{SNAME}"
+			title="{SQ_TITLE}"
 			id="page"
 			busy="{objectView>/busy}"
 			busyIndicatorDelay="{objectView>/delay}"
@@ -17,9 +17,51 @@
 					press=".onPressHome"/>
 			</headerContent>
 			<content>
-			<Text
-				text="Hello World"
-				/>
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<!--Specfiy quiz name -->
+						<Text
+							class="myResults myHeader"
+							text="{SQ_TITLE}: Non-Anon({ANONYMOUS}) {SQ_TYPE}"/>
+					</content>
+				</Panel>
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Text
+							class="myResults myHeader"
+							text="Questions:"/>
+					</content> 
+				</Panel>
+				
+				<List
+				id="list"
+				width="auto"
+				items="{path:'/Questions'}"
+				noDataText="{questionView>/tableNoDataText}"
+				busyIndicatorDelay="{questionView>/tableBusyDelay}"
+				growing="true" 
+				updateFinished=".onUpdateFinished"
+				class="myList">
+					<items>
+        				<ObjectListItem
+        					title="{QUESTION_TITLE}"
+        					type="Navigation"
+        					press="onPress"/>
+    				</items>
+				</List>
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<Button 
+						text="Submit"
+						press=".onPressSubmit"/>
+				</Panel>
 			</content> 
 		</Page>
 	</Shell>

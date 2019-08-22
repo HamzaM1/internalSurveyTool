@@ -43,6 +43,45 @@
         "name": "SurveycrocdbDest"
       },
       "description": "SurveycrocdbDest"
+    },
+    {
+      "path": "/SurveycrocdbDest2",
+      "target": {
+        "type": "destination",
+        "name": "SurveycrocdbDest2"
+      },
+      "description": "SurveycrocdbDest2"
+    },
+    {
+      "path": "/QuizDb",
+      "target": {
+        "type": "destination",
+        "name": "QuizDb"
+      },
+      "description": "QuizDb"
+    },
+    {
+      "path": "/test",
+      "target": {
+        "type": "destination",
+        "name": "test"
+      },
+      "description": "test"
+    },
+    {
+      "path": "/project",
+      "target": {
+        "type": "destination",
+        "name": "project"
+      },
+      "description": "project"
+    },
+    {
+      "path": "/services/userapi",
+      "target": {
+        "type": "service",
+        "name": "userapi"
+      }
     }
   ],
   "welcomeFile": "/index.html",

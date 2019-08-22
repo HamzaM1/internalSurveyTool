@@ -6,7 +6,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, History, formatter) {
 	"use strict";
 
-	return BaseController.extend("demo.crocdb.crocDbdemo.controller.Object", {
+	return BaseController.extend("demo.survey.SurveyDemo2.controller.ObjectConor", {
 
 		formatter: formatter,
 

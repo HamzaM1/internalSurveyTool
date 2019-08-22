@@ -216,7 +216,7 @@
 						"question"
 					]
 				},
-					{
+				{
 					"pattern": "surveyComplete",
 					"name": "surveyComplete",
 					"target": [
@@ -324,5 +324,9 @@
 			]
 		},
 		"flexEnabled": true
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
 	}
 }
