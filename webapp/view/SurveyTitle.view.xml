@@ -13,7 +13,7 @@
 		</content>
 	</Panel>
 	
-	
+
 	<Panel backgroundDesign="Transparent" class="sapUiResponsiveMargin" width="auto">
 		<content>
 			<form:SimpleForm editable="true">
