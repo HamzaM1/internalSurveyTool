@@ -140,6 +140,8 @@ sap.ui.define([
 			if (updated === 1) { 
 				var oJsonModel = new sap.ui.model.json.JSONModel({qcount : oEvent.getParameters().total});
 				sap.ui.getCore().setModel(oJsonModel, "qcount");
+			}
+			if (updated > 0){
 				var oTable = this.byId("list");
 				var oFilter = new Filter({
 					path: "SQID",
@@ -147,10 +149,8 @@ sap.ui.define([
 					value1: sap.ui.getCore().getModel("currentsq").getData().currentsq
 				}); 
 				oTable.getBinding("items").filter(oFilter, "Application");
-				updated++;
-			}
-			
-			
+			} 
+			updated++;
 		}
 		
 	});

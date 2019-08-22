@@ -140,41 +140,49 @@
 		},
 		
 		onDelete : function (oEvent) {
-			
-			oModel.remove(this.getModel().createKey("/SQ", {
-					SQID :  sObjectId
-				}));
-			
-			var i = 0;
-			while(i < 2){ //need to replace with no of questions
-				oModel.remove(this.getModel().createKey("/Questions", {
-						QUESTIONID :  sObjectId + i
+			if (parseInt(sObjectId.slice(-1), 10) === (sap.ui.getCore().getModel("count").getData().count - 1)) {
+				oModel.remove(this.getModel().createKey("/SQ", {
+						SQID :  sObjectId
 					}));
-				var j = 0;
-				while (j < 2 /** sap.ui.getCore().getModel("answersCount").getData().answersCount */) {
-					oModel.remove(this.getModel().createKey("/Answers", {
-						ANSWERID :  sObjectId + i + j
-					}));
-					j += 1;
-				}
-			i += 1;
-			}
 			
-			var oUpdate = {
-				USERID: oOwner,
-				NUM_OF_SQ: (sap.ui.getCore().getModel("count").getData().count) - 1
+				//TODO find amount of q&as and delete them
+				var i = 0;
+				while(i < 10){
+					try {
+						oModel.remove(this.getModel().createKey("/Questions", {
+								QUESTIONID :  sObjectId + i
+							}));
+						var j = 0;
+						while (j < 5) {
+							try {
+								oModel.remove(this.getModel().createKey("/Answers", {
+									ANSWERID :  sObjectId + i + j
+								}));
+							}
+							catch(err) {alert(j);}
+							j += 1;
+						}
+					}
+					catch(err) {alert(i);}
+					i += 1;
 				}
+			
+				var oUpdate = {
+					USERID: oOwner,
+					NUM_OF_SQ: (sap.ui.getCore().getModel("count").getData().count) - 1
+					};
 
-			oModel.update(
-				"/Users('" + oOwner + "')",
-				oUpdate
-			);
+				oModel.update(
+					"/Users('" + oOwner + "')",
+					oUpdate
+				);
 			
-			var oCount = new sap.ui.model.json.JSONModel({count : (sap.ui.getCore().getModel("count").getData().count - 1)});
-			sap.ui.getCore().setModel(oCount, "count");
+				var oCount = new sap.ui.model.json.JSONModel({count : (sap.ui.getCore().getModel("count").getData().count - 1)});
+				sap.ui.getCore().setModel(oCount, "count");
 			
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("overview");
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo("overview");
+			} 
 		},
 		
 		/* =========================================================== */

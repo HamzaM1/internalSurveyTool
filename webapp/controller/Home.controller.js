@@ -1,10 +1,10 @@
 sap.ui.define([
-   "./BaseController",
+   "sap/ui/core/mvc/Controller",
    "sap/ui/model/json/JSONModel"
-], function (BaseController, JSONModel) {
+], function (Controller, JSONModel) {
    "use strict";
 
-   return BaseController.extend("demo.survey2.SurveyDemo2.controller.Home", {
+   return Controller.extend("demo.survey2.SurveyDemo2.controller.Home", {
    	onInit: function () {
 			var userModel = new sap.ui.model.json.JSONModel("/services/userapi/currentUser");
 			this.getView().setModel(userModel, "userapi");

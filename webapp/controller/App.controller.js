@@ -7,6 +7,7 @@ sap.ui.define([
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.App", {
 
 		onInit : function () {
+			
 			//var oJsonModel = new sap.ui.model.json.JSONModel({user: "i505340"}); //Put user HERE
 			//sap.ui.getCore().setModel(oJsonModel, "user");
 			

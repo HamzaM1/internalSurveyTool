@@ -11,11 +11,7 @@ sap.ui.define([
 	var oJsonModel = new sap.ui.model.json.JSONModel({user: "I505340"}); //Put user HERE
 			sap.ui.getCore().setModel(oJsonModel, "user");
 			
-	var oFilter = new Filter({
-			path: "SQ_OWNER",
-			operator: "EQ",
-			value1: sap.ui.getCore().getModel("user").getData().user
-			});
+	var updated = 0;
 	var oFilter1 = new Filter({
 			path: "LIVE",
 			operator: "EQ",
@@ -82,6 +78,17 @@ sap.ui.define([
 		 * @public
 		 */
 		onUpdateFinished : function (oEvent) {
+			if (updated === 1){
+				var filter = new Filter({
+											path: "SQ_OWNER",
+											operator: "EQ",
+											value1: sap.ui.getCore().getModel("userapi").getData().name
+				});
+				var oList = this.byId("list");
+				var oBinding = oList.getBinding("items");
+				oBinding.filter(filter);
+			}
+			updated++;
 			// update the worklist's object counter after the table update
 			var sTitle,
 				oTable = oEvent.getSource(),
@@ -95,7 +102,6 @@ sap.ui.define([
 			}
 			this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle);
 			
-			this._applySearch(oFilter);
 			this._applySearch(oFilter1);
 		},
 
