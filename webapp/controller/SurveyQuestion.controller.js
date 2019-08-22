@@ -34,18 +34,30 @@ sap.ui.define([
 		},
 		
 		_onRouteMatched : function(oEvent) {
-			answers = 2;
 			sObjectId =  oEvent.getParameter("arguments").type;
 			sQuestionCount = oEvent.getParameter("arguments").count;
+			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
 			sType = oEvent.getParameter("arguments").sq;
+			if (sObjectId === "Radio" || sObjectId === "Check") {
+				answers = 2;
+			}
+			else {
+				answers = 1;
+			}
 			oSQID = sap.ui.getCore().getModel("currentsq").getData().currentsq;
-			alert(sQuestionCount);
-			var SQoData = {
-				SQID: oSQID,
-				NUM_OF_QUESTIONS: (parseInt(sQuestionCount, 10) + 1)
-				};
-			oModel1.update("/SQ('" + oSQID + "')", SQoData);
-			var QuestionsoData = {
+			
+			// if a new question
+			if (sQuestionCount.toString() === oQuestionCount.toString()) {
+				var SQoData = {
+					SQID: oSQID,
+					NUM_OF_QUESTIONS: (parseInt(sQuestionCount, 10) + 1)
+					};
+				oModel1.update("/SQ('" + oSQID + "')", SQoData);
+				oQuestionCount++;
+				var oJsonModel = new sap.ui.model.json.JSONModel({qcount : oQuestionCount});
+				sap.ui.getCore().setModel(oJsonModel, "qcount");
+				
+				var QuestionsoData = {
 					QUESTIONID: oSQID + sQuestionCount,
 					SQID: oSQID,
 					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount, 10) + 1), 
@@ -54,8 +66,10 @@ sap.ui.define([
 					NUM_OF_ANSWERS: answers
 				};
 			oModel1.create("/Questions", QuestionsoData);
+			
+			}
 			this.createAnswers();
-
+			//TODO display old answers if old question
 		},
 		
 		onNavBack : function() {
@@ -93,7 +107,7 @@ sap.ui.define([
 			var QuestionsoData = {
 					QUESTIONID: oSQID + sQuestionCount,
 					SQID: oSQID,
-					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount) + 1),
+					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount, 10) + 1),
 					QUESTION: sValue,
 					ANSWER_TYPE: sObjectId,
 					NUM_OF_ANSWERS: answers
@@ -102,9 +116,21 @@ sap.ui.define([
 		},
 		
 		createAnswers : function (){
+			var active = true;
+			if (sType === "Survey") {
+				active = false;
+			}
+			var AnswersoData;
+			var correct0;
+			var correct1;
+				if (sType === "Quiz") {
+					correct0 = 0;
+					correct1 = 1;
+				}
 			if (sObjectId === "Slide") {
 				var oSlide = new sap.m.Slider({
-					id: "slide0",
+					id: oSQID + sQuestionCount + "0",
+					enabled: active,
 					enableTickmarks: true,
 					value: 5,
 					width: "60%",
@@ -112,17 +138,42 @@ sap.ui.define([
 					max: 10,
 					showAdvancedTooltip: true,
 					showHandleTooltip: false,
-					inputsAsTooltips: true
+					inputsAsTooltips: true,
+					change: function(oEvent) {
+   						controller.onSlide(oEvent);
+   					}
 				});
 				this.getView().byId("vbox").addItem(oSlide);
+				
+				AnswersoData = {
+						ANSWERID: oSQID + sQuestionCount + "0",
+						QUESTIONID: oSQID + sQuestionCount,
+						ANSWER: "0",
+						ANSWER_CORRECT: correct0,
+						ORDER: 1
+					};
+				oModel1.create("/Answers", AnswersoData);
 			}
 			else if (sObjectId === "Text") {
 				var oInput = new sap.m.Input({
-					id: "input0",
+					id: oSQID + sQuestionCount + "0",
+					enabled: active,
 					width: "50%",
-					value: "{/answer0}"
+					value: "{/answer0}",
+					liveChange: function(oEvent) {
+   						controller.onType(oEvent);
+   					}
 				});
 				this.getView().byId("vbox").addItem(oInput);
+				
+				AnswersoData = {
+						ANSWERID: oSQID + sQuestionCount + "0",
+						QUESTIONID: oSQID + sQuestionCount,
+						ANSWER: oData.answer0,
+						ANSWER_CORRECT: correct0,
+						ORDER: 1
+					};
+				oModel1.create("/Answers", AnswersoData);
 			}
 			else if (sObjectId === "Radio" || sObjectId === "Check") {
 				var oForm; 
@@ -135,18 +186,24 @@ sap.ui.define([
    					id: "inputlist0"
    					});
    				var oInput0 = new sap.m.Input({
-   					id: "input0",
+   					id: oSQID + sQuestionCount + "0t",
    					value: "{/answer0}",
-   					valueLiveUpdate: true
+   					valueLiveUpdate: true,
+   					liveChange: function(oEvent) {
+   						controller.onType2(oEvent);
+   					}
    					});
    				oInputList0.addContent(oInput0);
    				var oInputList1 = new sap.m.InputListItem({
    					id: "inputlist1"
    					});
    				var oInput1 = new sap.m.Input({
-   					id: "input1",
+   					id: oSQID + sQuestionCount + "1t",
    					value: "{/answer1}",
-   					valueLiveUpdate: true
+   					valueLiveUpdate: true,
+   					liveChange: function(oEvent) {
+   						controller.onType2(oEvent);
+   					}
    					});
    				oInputList1.addContent(oInput1);
    				oList.addItem(oInputList0);
@@ -167,41 +224,94 @@ sap.ui.define([
 					});
 				if (sObjectId === "Radio") {
 					var oRadioGroup = new sap.m.RadioButtonGroup({
-						id: "radio"
+						id: "radio",
+						enabled: active
 					});
 					var oRadioButton0 = new sap.m.RadioButton({
-   						id: "radio0",
-   						text: "{/answer0}"
+   						id: oSQID + sQuestionCount + "0",
+   						text: "{/answer0}",
+   						select: function(oEvent) {
+   							controller.onSelect(oEvent);
+   							} 
    						});
    					var oRadioButton1 = new sap.m.RadioButton({
-   						id: "radio1",
-   						text: "{/answer1}"
+   						id: oSQID + sQuestionCount + "1",
+   						text: "{/answer1}",
+   						select: function(oEvent) {
+   							controller.onSelect(oEvent);
+   							} 
    						});
    					oRadioGroup.addButton(oRadioButton0);
    					oRadioGroup.addButton(oRadioButton1);
    					oForm = new sap.ui.layout.form.SimpleForm({
 					editable: true,
 					content: [oRadioGroup]
-				});
+					});
+					
+					AnswersoData = {
+						ANSWERID: oSQID + sQuestionCount + "0",
+						QUESTIONID: oSQID + sQuestionCount,
+						ANSWER: oData.answer0,
+						ANSWER_CORRECT: correct1,
+						ORDER: 1
+					};
+					oModel1.create("/Answers", AnswersoData);
+				
+					AnswersoData = {
+						ANSWERID: oSQID + sQuestionCount + "1",
+						QUESTIONID: oSQID + sQuestionCount,
+						ANSWER: oData.answer1,
+						ANSWER_CORRECT: correct0,
+						ORDER: 2
+					};
+					oModel1.create("/Answers", AnswersoData);
+				
 				}
 				else {
 					var oCheckGroup = new sap.m.VBox({
 						id: "check"
 					});
 					var oCheckBox0 = new sap.m.CheckBox({
-   						id: "check0",
-   						text: "{/answer0}"
+   						id: oSQID + sQuestionCount + "0",
+   						enabled: active,
+   						text: "{/answer0}",
+   						select: function(oEvent) {
+   							controller.onSelect(oEvent);
+   							} 
    						});
    					var oCheckBox1 = new sap.m.CheckBox({
-   						id: "check1",
-   						text: "{/answer1}"
+   						id: oSQID + sQuestionCount + "1",
+   						enabled: active,
+   						text: "{/answer1}",
+   						select: function(oEvent) {
+   							controller.onSelect(oEvent);
+   							} 
    						});
    					oCheckGroup.addItem(oCheckBox0);
    					oCheckGroup.addItem(oCheckBox1);
    					oForm = new sap.ui.layout.form.SimpleForm({
 						editable: true,
 						content: [oCheckGroup] 
+					
 					});
+					
+					AnswersoData = {
+						ANSWERID: oSQID + sQuestionCount + "0",
+						QUESTIONID: oSQID + sQuestionCount,
+						ANSWER: oData.answer0,
+						ANSWER_CORRECT: correct0,
+						ORDER: 1
+					};
+					oModel1.create("/Answers", AnswersoData);
+				
+					AnswersoData = {
+						ANSWERID: oSQID + sQuestionCount + "1",
+						QUESTIONID: oSQID + sQuestionCount,
+						ANSWER: oData.answer1,
+						ANSWER_CORRECT: correct0,
+						ORDER: 2
+					};
+					oModel1.create("/Answers", AnswersoData);
 				}
 				oForm.addContent(oList);
 				this.getView().byId("vbox").addItem(oForm);
@@ -225,39 +335,77 @@ sap.ui.define([
 				var QuestionsoData = {
 					QUESTIONID: oSQID + sQuestionCount,
 					SQID: oSQID,
-					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount) + 1),
+					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount, 10) + 1),
 					QUESTION: sValue,
 					ANSWER_TYPE: sObjectId,
 					NUM_OF_ANSWERS: answers
 				};
 				oModel1.update("/Questions('" + oSQID + sQuestionCount + "')", QuestionsoData);
+				oModel1.remove("/Answers('" + oSQID + sQuestionCount + answers + "')");
 			}
 		},
 		
 		onAdd : function () {
+			var active = true;
+			if (sType === "Survey") {
+				active = false;
+			}
+			var ans;
+			if (answers === 2) {
+				ans = oData.answer2;
+			}
+			else if (answers === 3) {
+				ans = oData.answer3;
+			}
+			else if (answers === 4) {
+				ans = oData.answer4;
+			}
+			var correct0;
+				if (sType === "Quiz") {
+					correct0 = 0;
+				}
 			if (answers < 5) {
 				if (sObjectId === "Radio") {
 					var oRadioButton = new sap.m.RadioButton({
-   						id: "radio" + answers,
-   						text: "{/answer" + answers + "}"
+   						id: oSQID + sQuestionCount + answers,
+   						text: "{/answer" + answers + "}",
+   						select: function(oEvent) {
+   							controller.onSelect(oEvent);
+   							} 
    						});
    					(this.getView().byId("vbox").getItems()[0].getContent()[0]).addButton(oRadioButton);
 				}
 				else{
    					var oCheckBox = new sap.m.CheckBox({
-   						id: "check" + answers,
-   						text: "{/answer" + answers + "}"
+   						id: oSQID + sQuestionCount + answers,
+   						enabled: active,
+   						text: "{/answer" + answers + "}",
+   						select: function(oEvent) {
+   							controller.onSelect(oEvent);
+   							} 
    						});
    					(this.getView().byId("vbox").getItems()[0].getContent()[0]).addItem(oCheckBox);
 				}
-   			
+   				
+   				var AnswersoData = {
+						ANSWERID: oSQID + sQuestionCount + answers,
+						QUESTIONID: oSQID + sQuestionCount,
+						ANSWER: ans,
+						ANSWER_CORRECT: correct0,
+						ORDER: (answers + 1) 
+					};
+					oModel1.create("/Answers", AnswersoData);
+   				
    				var oInputList = new sap.m.InputListItem({
    					id: "inputlist" + answers
    					});
    				var oInput = new sap.m.Input({
-   					id: "input" + answers,
+   					id: oSQID + sQuestionCount + answers + "t",
    					value: "{/answer" + answers + "}",
-   					valueLiveUpdate: true
+   					valueLiveUpdate: true,
+   					liveChange: function(oEvent) {
+   						controller.onType2(oEvent);
+   					}
    					});
    				oInputList.addContent(oInput);
    				(this.getView().byId("vbox").getItems()[0].getContent()[1]).addItem(oInputList);
@@ -269,14 +417,69 @@ sap.ui.define([
 				var QuestionsoData = {
 					QUESTIONID: oSQID + sQuestionCount,
 					SQID: oSQID,
-					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount) + 1),
+					QUESTION_TITLE: "Question " + (parseInt(sQuestionCount, 10) + 1),
 					QUESTION: sValue,
 					ANSWER_TYPE: sObjectId,
 					NUM_OF_ANSWERS: answers
 				};
 				oModel1.update("/Questions('" + oSQID + sQuestionCount + "')", QuestionsoData);
 			}
+		},
+		
+		onSelect : function (oEvent) {
+			var oButton = oEvent.getSource();
+   			var oAnswerId = oButton.getId(); 
+   			var path = "/Answers('"+ oAnswerId + "')";
+   			oModel.read(path, 
+   				{success: function(oData1){
+   					var AnswersoData;
+   					if (oData1.CORRECT !== 1) {
+   						AnswersoData = {
+   							ANSWER: oButton.getText(),
+							ANSWER_CORRECT: 1
+						};
+   					}
+   					else {
+   						AnswersoData = {
+							ANSWER: oButton.getText(),
+							ANSWER_CORRECT: 0
+   						};
+   					}
+					oModel1.update(path, AnswersoData);
+   				}
+   			});
+		},
+		
+		onSlide : function (oEvent) {
+			var oSlide = oEvent.getSource();
+   			var oAnswerId = oSlide.getId();
+   			var path = "/UserAnswers('"+ oAnswerId + "')";
+   			var AnswersoData = {
+   				ANSWER: oSlide.getValue().toString()
+   				};
+   			oModel.update(path, AnswersoData);
+		},
+		
+		onType : function (oEvent) {
+   			var oType = oEvent.getSource();
+   			var oAnswerId = oType.getId();
+   			var path = "/UserAnswers('"+ oAnswerId + "')";
+   			var UserAnswersoData = {
+   				ANSWER: oType.getValue()
+   			};
+   			oModel.update(path, UserAnswersoData);
+		},
+		
+		onType2 : function (oEvent) {
+			var oType = oEvent.getSource();
+   			var oAnswerId = oType.getId().slice(0, -1);
+   			var path = "/Answers('"+ oAnswerId + "')";
+   			var UserAnswersoData = {
+   				ANSWER: oType.getValue()
+   			};
+   			oModel1.update(path, UserAnswersoData);
 		}
+		
 		
 	});
 });

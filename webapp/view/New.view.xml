@@ -33,6 +33,7 @@
         				<ObjectListItem
         					title="{QUESTION_TITLE}"
         					type="Navigation"
+        					number="{ANSWER_TYPE}"
         					press="onPress"/>
     				</items>
 				</List>

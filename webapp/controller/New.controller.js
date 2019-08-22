@@ -46,10 +46,12 @@ sap.ui.define([
 		},
 		
 		
-		//TODO link to previous question
+		//TODO get count of question + MAYBE have a "previously made" argument
 		onPress : function (oEvent) {
+			var c = parseInt(oEvent.getSource().getTitle().split(" ")[1], 10) - 1;
+			var t = oEvent.getSource().getNumber();
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("surveyQuestion", {sq: sObjectId, type: "Radio", count: "0"});
+			oRouter.navTo("surveyQuestion", {sq: sObjectId, type: t, count: c});
 		},
 		
 		onPressHome: function (oEvent) {
@@ -77,56 +79,6 @@ sap.ui.define([
 			
 			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : 0});
 				sap.ui.getCore().setModel(oJsonModel, "qcount");
-			/**
-			// create questions
-			var i = 0;
-			var j = 0;
-			var oAnswersCount = 2; //sap.ui.getCore().getModel("answersCount").getData().answersCount;
-			var oQuestionsCount = 2; //to do
-			var oQuestion = "test";
-			var QuestionsoData;
-			// create answers
-			var oAnswer = "test";
-			var AnswersoData;
-			
-			while (i < oQuestionsCount) { //need to make "1" amount of questions on quiz
-				//oQuestion = sap.ui.getCore().getModel("question" + i).getData.question;
-				//oQuestion = sap.ui.getCore().getModel("question" + i).getData().question;
-				
-				QuestionsoData = {
-					QUESTIONID: oOwner + oQuizCount + i,
-					SQID: oOwner + oQuizCount,
-					QUESTION_TITLE: "Question " + (i + 1), 
-					QUESTION: oQuestion,
-					ANSWER_TYPE: "Radio", //to do
-					NUM_OF_ANSWERS: oAnswersCount
-				};
-				oModel.create("/Questions", QuestionsoData);
-				var oCorrect;
-				if (sObjectId == "Quiz") {
-					oCorrect = 0;
-					}
-				
-				j = 0;
-		  		while (j < oAnswersCount) { //need to make "1" amount of questions on quiz
-					//oQuestion = sap.ui.getCore().getModel("question" + i).getData.question;
-					//oAnswer = sap.ui.getCore().getModel("answer" + i).getData().answer;
-					
-					AnswersoData = {
-						ANSWERID: oOwner + oQuizCount + i + j,
-						QUESTIONID: oOwner + oQuizCount + i,
-						ANSWER: "This is Answer " + (j + 1),
-						ANSWER_CORRECT: oCorrect,
-						ORDER: j + 1
-					};
-					oModel.create("/Answers", AnswersoData);
-					j += 1; 
-		  		}
-				i += 1; 
-			}
-			
-			
-			**/
 		  	
 		  	var oUpdate = {
 				USERID: oOwner,
@@ -188,8 +140,16 @@ sap.ui.define([
 			if (updated === 1) { 
 				var oJsonModel = new sap.ui.model.json.JSONModel({qcount : oEvent.getParameters().total});
 				sap.ui.getCore().setModel(oJsonModel, "qcount");
+				var oTable = this.byId("list");
+				var oFilter = new Filter({
+					path: "SQID",
+					operator: "EQ",
+					value1: sap.ui.getCore().getModel("currentsq").getData().currentsq
+				}); 
+				oTable.getBinding("items").filter(oFilter, "Application");
+				updated++;
 			}
-			updated++;
+			
 			
 		}
 		

@@ -8,6 +8,8 @@ sap.ui.define([
 	
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.SurveyTitle", {
 		onInit: function () {
+			var oJsonModel = new sap.ui.model.json.JSONModel({title : ""});
+			sap.ui.getCore().setModel(oJsonModel, "title");
 			//var oJsonModel = new sap.ui.model.json.JSONModel({data : {}});
 			//sap.ui.getCore().setModel(oJsonModel, "title");
 

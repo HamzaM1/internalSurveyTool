@@ -27,8 +27,6 @@ sap.ui.define([
 		questionCheckbox : function(oEvent){
 			var oSQType = sap.ui.getCore().getModel("sqtype").getData().sqtype;
 			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
-			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : (oQuestionCount + 1)});
-				sap.ui.getCore().setModel(oJsonModel, "qcount");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("surveyQuestion", {sq: oSQType, type: "Check", count: oQuestionCount});
 		},
@@ -36,8 +34,6 @@ sap.ui.define([
 		questionRadio : function(oEvent){
 			var oSQType = sap.ui.getCore().getModel("sqtype").getData().sqtype;
 			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
-			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : (oQuestionCount + 1)});
-				sap.ui.getCore().setModel(oJsonModel, "qcount");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("surveyQuestion", {sq: oSQType, type: "Radio", count: oQuestionCount});
 		},
@@ -45,8 +41,6 @@ sap.ui.define([
 		questionTextbox : function(oEvent){
 			var oSQType = sap.ui.getCore().getModel("sqtype").getData().sqtype;
 			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
-			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : (oQuestionCount + 1)});
-				sap.ui.getCore().setModel(oJsonModel, "qcount");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("surveyQuestion", {sq: oSQType, type: "Text", count: oQuestionCount});
 		},
@@ -54,8 +48,6 @@ sap.ui.define([
 		questionSlider : function(oEvent){
 			var oSQType = sap.ui.getCore().getModel("sqtype").getData().sqtype;
 			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;
-			var oJsonModel = new sap.ui.model.json.JSONModel({qcount : (oQuestionCount + 1)});
-				sap.ui.getCore().setModel(oJsonModel, "qcount");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("surveyQuestion", {sq: oSQType, type: "Slide", count: oQuestionCount});
 		}
