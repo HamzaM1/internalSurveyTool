@@ -11,6 +11,7 @@ sap.ui.define([
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var sObjectId;
 	var oOwner;
+	var controller;
 	var oFilter;
 	var updated = false;
 	
@@ -19,6 +20,7 @@ sap.ui.define([
 		formatter: formatter,
 		
    		onInit : function() {
+   			controller = this; 
    			var oViewModel = new JSONModel({
 				shareOnJamTitle: this.getResourceBundle().getText("questionTitle"),
 				tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
@@ -104,8 +106,19 @@ sap.ui.define([
 			oModel.update(path, UserSQoData);
 			
 			//TODO nav to correct completed page & correct quizzes
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("userResults");
+			oModel.read("/SQ('" + sObjectId + "')",
+				{success : function(oData) {
+					if (oData.SQ_TYPE === "Survey") {
+						var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
+						oRouter.navTo("surveyComplete");
+					}
+					else {
+						var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
+						oRouter.navTo("userResults");
+					}
+				}
+			});
+			
 		},
 		
 		/* =========================================================== */
