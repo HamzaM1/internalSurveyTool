@@ -154,7 +154,7 @@
 					]
 				},
 				{
-					"pattern": "userResults",
+					"pattern": "userResults/{objectId}",
 					"name": "userResults",
 					"target": [
 						"userResults"
