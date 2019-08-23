@@ -7,7 +7,7 @@ sap.ui.define([
 	
 	var oModel;
 	var oModel1 = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
-	var oData;
+	var oData1;
 	var answers;
 	var sObjectId;
 	var sQuestionCount;
@@ -19,14 +19,14 @@ sap.ui.define([
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.SurveyQuestion", {
 		onInit : function () {
 			controller = this;
-			oData = {
+			oData1 = {
 					answer0 : "Yes",
 					answer1 : "No",
 					answer2 : "Maybe",
 					answer3 : "",
 					answer4 : ""
 			};
-			oModel = new JSONModel(oData);
+			oModel = new JSONModel(oData1);
 			this.getView().setModel(oModel);
 			var oJsonModel = new sap.ui.model.json.JSONModel({answersCount : answers});
 			sap.ui.getCore().setModel(oJsonModel, "answersCount");
@@ -169,7 +169,7 @@ sap.ui.define([
 				AnswersoData = {
 						ANSWERID: oSQID + sQuestionCount + "0",
 						QUESTIONID: oSQID + sQuestionCount,
-						ANSWER: oData.answer0,
+						ANSWER: oData1.answer0,
 						ANSWER_CORRECT: correct0,
 						ORDER: 1
 					};
@@ -251,7 +251,7 @@ sap.ui.define([
 					AnswersoData = {
 						ANSWERID: oSQID + sQuestionCount + "0",
 						QUESTIONID: oSQID + sQuestionCount,
-						ANSWER: oData.answer0,
+						ANSWER: oData1.answer0,
 						ANSWER_CORRECT: correct1,
 						ORDER: 1
 					};
@@ -260,7 +260,7 @@ sap.ui.define([
 					AnswersoData = {
 						ANSWERID: oSQID + sQuestionCount + "1",
 						QUESTIONID: oSQID + sQuestionCount,
-						ANSWER: oData.answer1,
+						ANSWER: oData1.answer1,
 						ANSWER_CORRECT: correct0,
 						ORDER: 2
 					};
@@ -298,7 +298,7 @@ sap.ui.define([
 					AnswersoData = {
 						ANSWERID: oSQID + sQuestionCount + "0",
 						QUESTIONID: oSQID + sQuestionCount,
-						ANSWER: oData.answer0,
+						ANSWER: oData1.answer0,
 						ANSWER_CORRECT: correct0,
 						ORDER: 1
 					};
@@ -307,7 +307,7 @@ sap.ui.define([
 					AnswersoData = {
 						ANSWERID: oSQID + sQuestionCount + "1",
 						QUESTIONID: oSQID + sQuestionCount,
-						ANSWER: oData.answer1,
+						ANSWER: oData1.answer1,
 						ANSWER_CORRECT: correct0,
 						ORDER: 2
 					};
@@ -352,13 +352,13 @@ sap.ui.define([
 			}
 			var ans;
 			if (answers === 2) {
-				ans = oData.answer2;
+				ans = oData1.answer2;
 			}
 			else if (answers === 3) {
-				ans = oData.answer3;
+				ans = oData1.answer3;
 			}
 			else if (answers === 4) {
-				ans = oData.answer4;
+				ans = oData1.answer4;
 			}
 			var correct0;
 				if (sType === "Quiz") {
@@ -430,10 +430,10 @@ sap.ui.define([
 			var oButton = oEvent.getSource();
    			var oAnswerId = oButton.getId(); 
    			var path = "/Answers('"+ oAnswerId + "')";
-   			oModel.read(path, 
-   				{success: function(oData1){
+   			oModel1.read(path, 
+   				{success : function(oData){
    					var AnswersoData;
-   					if (oData1.CORRECT !== 1) {
+   					if (oData.ANSWER_CORRECT !== 1) {
    						AnswersoData = {
    							ANSWER: oButton.getText(),
 							ANSWER_CORRECT: 1
@@ -453,21 +453,21 @@ sap.ui.define([
 		onSlide : function (oEvent) {
 			var oSlide = oEvent.getSource();
    			var oAnswerId = oSlide.getId();
-   			var path = "/UserAnswers('"+ oAnswerId + "')";
+   			var path = "/Answers('"+ oAnswerId + "')";
    			var AnswersoData = {
    				ANSWER: oSlide.getValue().toString()
    				};
-   			oModel.update(path, AnswersoData);
+   			oModel1.update(path, AnswersoData);
 		},
 		
 		onType : function (oEvent) {
    			var oType = oEvent.getSource();
    			var oAnswerId = oType.getId();
-   			var path = "/UserAnswers('"+ oAnswerId + "')";
+   			var path = "/Answers('"+ oAnswerId + "')";
    			var UserAnswersoData = {
    				ANSWER: oType.getValue()
    			};
-   			oModel.update(path, UserAnswersoData);
+   			oModel1.update(path, UserAnswersoData);
 		},
 		
 		onType2 : function (oEvent) {

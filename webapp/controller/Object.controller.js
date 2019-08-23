@@ -112,8 +112,9 @@
 		
 		_showObject : function (oItem) {
 			//if (oItem.getBindingContext().getProperty("quiz_owner") === sap.ui.getCore().getModel("user").getData().user){
+			var aId = oItem.getBindingContext().getProperty("QUESTIONID"); 
 				this.getRouter().navTo("question", {
-					objectId: oItem.getBindingContext().getProperty("QUESTIONID")
+					objectId: aId
 				});
 			//}
 		},
@@ -244,7 +245,24 @@
 				}
 			});
 		},
-
+		
+		
+		onFilter : function () {
+			var oFilter1 = []; 
+			oFilter1.push(new Filter({
+				path: "SQID",
+				operator: "EQ",
+				value1: sObjectId
+			}));
+			oFilter1.push(new Filter({
+				path: "SUBMITTED",
+				operator: "EQ",
+				value1: 1
+			}));
+			var oTable = this.byId("list1"); 
+			oTable.getBinding("items").filter(oFilter1, "Application");
+		},
+		
 		_onBindingChange : function () {
 			var oView = this.getView(),
 				oViewModel = this.getModel("objectView"),

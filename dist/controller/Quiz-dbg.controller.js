@@ -95,7 +95,7 @@ sap.ui.define([
 		},
 		
 		onPressSubmit: function (oEvent) {
-			oOwner = sObjectId.slice(0,7);
+			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
 			var UserSQoData = {
 				USQID: oOwner + sObjectId,
 				USERID: oOwner,
@@ -105,16 +105,16 @@ sap.ui.define([
 			var path = "/UserSQ('" + oOwner + sObjectId + "')";
 			oModel.update(path, UserSQoData);
 			
-			//TODO nav to correct completed page & correct quizzes
 			oModel.read("/SQ('" + sObjectId + "')",
 				{success : function(oData) {
+					var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
 					if (oData.SQ_TYPE === "Survey") {
-						var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
 						oRouter.navTo("surveyComplete");
 					}
 					else {
-						var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
-						oRouter.navTo("userResults");
+						oRouter.navTo("userResults", {
+							objectId: oData.SQID
+							});
 					}
 				}
 			});
@@ -127,8 +127,12 @@ sap.ui.define([
 
 		
 		_onObjectMatched : function (oEvent) {
-			sObjectId =  oEvent.getParameter("arguments").objectId;
-			oOwner = sObjectId.slice(0,7);
+			
+			var url = window.location.href;
+			var pieces = url.split("/");
+			var id = pieces.length - 1;
+			sObjectId =  pieces[id];
+			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
    			var UserSQoData = {
 				USQID: oOwner + sObjectId,
 				USERID: oOwner,

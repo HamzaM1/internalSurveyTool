@@ -154,7 +154,7 @@
                     ]
                 },
                 {
-                    "pattern": "userResults",
+                    "pattern": "userResults/{objectId}",
                     "name": "userResults",
                     "target": [
                         "userResults"
@@ -228,6 +228,13 @@
                     "name": "answer",
                     "target": [
                         "answer"
+                    ]
+                },
+                {
+                    "pattern": "quizEntry/{objectId}",
+                    "name": "quizEntry",
+                    "target": [
+                        "quizEntry"
                     ]
                 }
             ],
@@ -313,6 +320,10 @@
                 "answer": {
                     "viewName": "Answer",
                     "viewId": "answer"
+                },
+                "quizEntry": {
+                    "viewName": "QuizEntry",
+                    "viewId": "quizEntry"
                 }
             }
         },

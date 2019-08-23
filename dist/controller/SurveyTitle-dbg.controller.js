@@ -36,10 +36,15 @@ sap.ui.define([
 		},
 		
 		onPress : function (oEvent) {
-			 if (oEvent.getSource().getPressed()) {
+			var oSource = oEvent.getSource();
+			if (oEvent.getSource().getPressed()) {
+				//toggle icon change
+			 	oSource.setIcon("sap-icon://hide");
 				var oJsonModel = new sap.ui.model.json.JSONModel({anon : 1});
 				sap.ui.getCore().setModel(oJsonModel, "anon");
 			} else {
+				//toggle icon change
+				oSource.setIcon("sap-icon://show");
 				var oJsonModel = new sap.ui.model.json.JSONModel({anon : 0});
 				sap.ui.getCore().setModel(oJsonModel, "anon");
 			}

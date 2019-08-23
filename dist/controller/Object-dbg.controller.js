@@ -136,7 +136,7 @@
 		onPressQuiz: function (oEvent) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			//alert(sObjectId);
-			oRouter.navTo("quizpage", {objectId: sObjectId});
+			oRouter.navTo("quizEntry", {objectId: sObjectId});
 		},
 		
 		onDelete : function (oEvent) {

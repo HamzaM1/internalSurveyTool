@@ -4,7 +4,7 @@
             "name": "manifest.json"
         },
         {
-            "name": "placeholder.json"
+            "name": "controller/BaseController.js"
         },
         {
             "name": "serviceBinding.js"
@@ -38,6 +38,9 @@
         },
         {
             "name": "controller/SaveQDialog.js"
+        },
+        {
+            "name": "controller/QuizEntry.controller.js"
         },
         {
             "name": "controller/Quiz.controller.js"
@@ -76,7 +79,7 @@
             "name": "controller/ErrorHandler.js"
         },
         {
-            "name": "controller/BaseController.js"
+            "name": "placeholder.json"
         },
         {
             "name": "controller/App.controller.js"
@@ -96,10 +99,6 @@
         {
             "name": "Component-preload.js",
             "merged": true
-        },
-        {
-            "name": "controller/App-dbg.controller.js",
-            "isDebug": true
         },
         {
             "name": "serviceBinding-dbg.js",
@@ -143,6 +142,10 @@
         },
         {
             "name": "controller/SaveQDialog-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/QuizEntry-dbg.controller.js",
             "isDebug": true
         },
         {
@@ -198,6 +201,10 @@
             "isDebug": true
         },
         {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
             "name": "controller/Answer-dbg.controller.js",
             "isDebug": true
         },
@@ -238,6 +245,9 @@
         },
         {
             "name": "view/SaveQDialog.fragment.xml"
+        },
+        {
+            "name": "view/QuizEntry.view.xml"
         },
         {
             "name": "view/Quiz.view.xml"

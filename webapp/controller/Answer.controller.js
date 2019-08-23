@@ -246,8 +246,7 @@ sap.ui.define([
    		
    		onSelect : function (oEvent) {
    			var oButton = oEvent.getSource();
-   			var oUAId = oButton.getId(); 
-   			var oAnswerId = oUAId.slice(7,19);
+   			var oUAId = oButton.getId();
    			
    			var path = "/UserAnswers('"+ oUAId + "')";
    			oModel.read(path, 
@@ -255,18 +254,12 @@ sap.ui.define([
    					var UserAnswersoData;
    					if (oData.SELECTED === 0) {
    						UserAnswersoData = {
-							UAID: oUAId,
-							USERID: oOwner,
-							ANSWERID: oAnswerId,
 							ANSWER: oButton.getText(),
 							SELECTED: 1
 						};
    					}
    					else {
    						UserAnswersoData = {
-							UAID: oUAId,
-							USERID: oOwner,
-							ANSWERID: oAnswerId,
 							ANSWER: oButton.getText(),
 							SELECTED: 0
    						};

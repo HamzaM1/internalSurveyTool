@@ -55,7 +55,7 @@
 				updateFinished=".onUpdateFinished">
 				<items>
         			<ObjectListItem
-        				title="{ORDER}. {ANSWER}"
+        				title="{ANSWER}"
         				number="{ANSWER_CORRECT}"
         				type="Inactive"
         				/>
@@ -71,6 +71,21 @@
 						text="Results:"/>
 				</content>
 			</Panel>
+			
+			<List
+				id="list1"
+				width="auto"
+				items="{path:'/UserAnswers'}"
+				growing="true" 
+				updateFinished=".onFilter">
+					<items>
+        				<ObjectListItem
+        					title="{ANSWER}"
+        					type="Inactive"
+        					number="{USERID}"
+        					/>
+    				</items>
+				</List>
 			
 		</content>
 	</Page>

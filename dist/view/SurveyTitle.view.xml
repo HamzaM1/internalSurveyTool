@@ -5,7 +5,7 @@
 	<Panel backgroundDesign="Transparent" class="sapUiResponsiveMargin" width="auto">
 		<content>
 			<Text class="myHeader" text="{new>/titleType} Title"/>
-			<ToggleButton text="Click for Anonymous survey takers" enabled="true" press="onPress" class="myAnomBtn" icon="sap-icon://cursor-arrow">
+			<ToggleButton text="{i18n>anonymous}" enabled="true" press="onPress" class="myAnomBtn" icon="sap-icon://show">
 				<layoutData>
 					<FlexItemData growFactor="1"/>
 				</layoutData>
@@ -13,7 +13,7 @@
 		</content>
 	</Panel>
 	
-	
+
 	<Panel backgroundDesign="Transparent" class="sapUiResponsiveMargin" width="auto">
 		<content>
 			<form:SimpleForm editable="true">
@@ -21,6 +21,5 @@
 			</form:SimpleForm>
 		</content>
 	</Panel>
-	
 	
 </mvc:View>
