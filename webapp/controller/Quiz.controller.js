@@ -95,7 +95,7 @@ sap.ui.define([
 		},
 		
 		onPressSubmit: function (oEvent) {
-			oOwner = sObjectId.slice(0,7);
+			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
 			var UserSQoData = {
 				USQID: oOwner + sObjectId,
 				USERID: oOwner,
@@ -105,7 +105,6 @@ sap.ui.define([
 			var path = "/UserSQ('" + oOwner + sObjectId + "')";
 			oModel.update(path, UserSQoData);
 			
-			//TODO correct quizzes
 			oModel.read("/SQ('" + sObjectId + "')",
 				{success : function(oData) {
 					var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
@@ -113,12 +112,6 @@ sap.ui.define([
 						oRouter.navTo("surveyComplete");
 					}
 					else {
-						/**
-							read each question from the quiz
-								read each answer by the user
-								compare the actual answer to the users answer
-								increment 'correct' if right answer correct / num_of_questions = percentage
-						 */
 						oRouter.navTo("userResults", {
 							objectId: oData.SQID
 							});
@@ -139,7 +132,7 @@ sap.ui.define([
 			var pieces = url.split("/");
 			var id = pieces.length - 1;
 			sObjectId =  pieces[id];
-			oOwner = sObjectId.slice(0,7);
+			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
    			var UserSQoData = {
 				USQID: oOwner + sObjectId,
 				USERID: oOwner,

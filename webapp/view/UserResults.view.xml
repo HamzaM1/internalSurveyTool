@@ -14,14 +14,15 @@
 						<!--Specfiy quiz name -->
 						<Text
 							class="myResults myHeader"
-							text="Placeholder: Non Anonymous Placeholder"/>
+							text="Placeholder:::: Quiz"/>
 						<!--Specfiy quiz score -->
 						<Text
 							class="myResults myHeader"
-							text="Placeholder Score: Placeholder%"/>
+							text="Quiz Score: xx%"/>
 					</content>
 				</Panel>
 				
+				<!-- IF Time display all user answers
 				<Panel
 					backgroundDesign="Transparent"
 					class="sapUiResponsiveMargin">
@@ -48,7 +49,7 @@
 						</RadioButtonGroup>
 					</content> 
 				</Panel>
-			
+				-->
 			</content>
 		</Page>
 	</Shell>

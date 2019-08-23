@@ -229,6 +229,13 @@
 					"target": [
 						"answer"
 					]
+				},
+				{
+					"pattern": "quizEntry/{objectId}",
+					"name": "quizEntry",
+					"target": [
+						"quizEntry"
+					]
 				}
 			],
 			"targets": {
@@ -313,6 +320,10 @@
 				"answer": {
 					"viewName": "Answer",
 					"viewId": "answer"
+				},
+				"quizEntry": {
+					"viewName": "QuizEntry",
+					"viewId": "quizEntry"
 				}
 			}
 		},
