@@ -141,10 +141,9 @@
 		},
 		
 		onDelete : function (oEvent) {
-			if (parseInt(sObjectId.slice(-1), 10) === (sap.ui.getCore().getModel("count").getData().count - 1)) {
-				oModel.remove(this.getModel().createKey("/SQ", {
-						SQID :  sObjectId
-					}));
+			oModel.remove(this.getModel().createKey("/SQ", {
+					SQID :  sObjectId
+				}));
 			
 				//TODO find amount of q&as and delete them
 				/**
@@ -182,9 +181,9 @@
 				var oCount = new sap.ui.model.json.JSONModel({count : (sap.ui.getCore().getModel("count").getData().count - 1)});
 				sap.ui.getCore().setModel(oCount, "count");
 				*/
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo("overview");
-			} 
+				
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("overview");
 		},
 		
 		/* =========================================================== */
