@@ -166,14 +166,26 @@ sap.ui.define([
 				});
 				this.getView().byId("vbox").addItem(oInput);
 				
-				AnswersoData = {
-						ANSWERID: oSQID + sQuestionCount + "0",
-						QUESTIONID: oSQID + sQuestionCount,
-						ANSWER: oData1.answer0,
-						ANSWER_CORRECT: correct0,
-						ORDER: 1
-					};
-				oModel1.create("/Answers", AnswersoData);
+				if (sType === "Survey") {
+					AnswersoData = {
+							ANSWERID: oSQID + sQuestionCount + "0",
+							QUESTIONID: oSQID + sQuestionCount,
+							ANSWER: "",
+							ANSWER_CORRECT: 1,
+							ORDER: 1
+						};
+					oModel1.create("/Answers", AnswersoData);
+				}
+				else {
+					AnswersoData = {
+							ANSWERID: oSQID + sQuestionCount + "0",
+							QUESTIONID: oSQID + sQuestionCount,
+							ANSWER: oData1.answer0,
+							ANSWER_CORRECT: 1,
+							ORDER: 1
+						};
+					oModel1.create("/Answers", AnswersoData);
+				}
 			}
 			else if (sObjectId === "Radio" || sObjectId === "Check") {
 				var oForm; 

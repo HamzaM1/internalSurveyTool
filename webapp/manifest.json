@@ -224,7 +224,7 @@
 					]
 				},
 				{
-					"pattern": "answer/{objectId}",
+					"pattern": "answer/{objectId}/{count}",
 					"name": "answer",
 					"target": [
 						"answer"

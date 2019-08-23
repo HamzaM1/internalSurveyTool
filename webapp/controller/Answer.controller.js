@@ -14,6 +14,7 @@ sap.ui.define([
 	var oOwner;
 	var oAnswer;
 	var controller;
+	var sCount;
 	
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.Answer", {
    		onInit: function (oEvent) {
@@ -39,6 +40,7 @@ sap.ui.define([
    		
    		_onRouteMatched : function (oEvent) {
    			sObjectId =  oEvent.getParameter("arguments").objectId;
+   			sCount =  oEvent.getParameter("arguments").count;
 			this.getModel().metadataLoaded().then( function() {
 				var sObjectPath = this.getModel().createKey("Questions", {
 					QUESTIONID :  sObjectId
@@ -66,14 +68,12 @@ sap.ui.define([
 		
 		onPressNext : function() {
 			controller.byId("answers").destroyContent();
-			var count = controller.getModel("answerCount").getData().answerCount;
 			var quiz = sObjectId.slice(0,10);
 			var question = sObjectId.slice(10,11);
-			
-			question++;
-			if (count + 1 !== question) {
+			if (parseInt(sCount, 10) - 1 !== parseInt(question, 10)) {
 				this.getRouter().navTo("answer", {
-					objectId: quiz + question
+					objectId: quiz + (parseInt(question, 10) + 1),
+					count: sCount
 				});
 			}
 			else {
@@ -93,6 +93,7 @@ sap.ui.define([
 		
 		_onObjectMatched : function (oEvent) {
 			sObjectId =  oEvent.getParameter("arguments").objectId;
+			sCount =  oEvent.getParameter("arguments").count;
 			this.getModel().metadataLoaded().then( function() {
 				var sObjectPath = this.getModel().createKey("Questions", {
 					QUESTIONID :  sObjectId
