@@ -12,13 +12,11 @@ sap.ui.define([
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.UserResults", {
    		onInit : function() {
-   			alert("called");
    			controller = this;
    			var oJsonModel = new sap.ui.model.json.JSONModel({correct : 0});
 				this.setModel(oJsonModel, "correct");
 			oJsonModel = new sap.ui.model.json.JSONModel({iscorrect : true});
 				this.setModel(oJsonModel, "iscorrect");
-			alert("called");
    			this.getRouter().getRoute("userResults").attachPatternMatched(this._onObjectMatched, this);
    		},
    	
@@ -39,10 +37,8 @@ sap.ui.define([
 		},
 		
 		_onObjectMatched : function (oEvent) {
-			alert("called");
 			sObjectId = oEvent.getParameter("arguments").objectId;
 			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
-			alert("called");
 			this.initSQ();
 		},
 		/**
@@ -52,7 +48,6 @@ sap.ui.define([
 					increment 'correct' if right answer correct / num_of_questions = percentage
 						 */
 		initSQ : function (){
-			alert("called1");
 			var correct = 0;
 			oModel.read("/SQ('" + sObjectId + "')",
 				{success : function(oData) {
@@ -67,7 +62,6 @@ sap.ui.define([
 		},
 		
 		initQs : function (oData, i, qcount){
-			alert("called2");
 			oModel.read("/Questions('" + oData.SQID + i + "')",
 				{success : function(oData1) {
 					var j = 0;
@@ -80,7 +74,6 @@ sap.ui.define([
 		},
 		
 		initAs : function (oData, i, j, atype, acount, qcount){
-			alert("called3");
 			oModel.read("/Answers('" + oData.SQID + i + j + "')",
 				{success : function(oData1) {
 					controller.initUAs(oData1, i, j, atype, acount, qcount, oData1.ANSWER, oData1.ANSWER_CORRECT);
@@ -89,7 +82,6 @@ sap.ui.define([
 		},
 		
 		initUAs : function (oData, i, j, atype, acount, qcount, ans, acorrect){
-			alert("called4");
 			oModel.read("/UserAnswers('" + oOwner + oData.SQID + i + j + "')",
 				{success : function(oData1) {
 					if (atype === "Radio" || atype === "Check"){
