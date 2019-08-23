@@ -102,26 +102,20 @@ sap.ui.define([
 			oModel.read("/SQ('" + sObjectId + "')",
 				{success : function(oData) {
 					var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
+					var UserSQoData;
+					var path = "/UsersSQ('" + oOwner + sObjectId + "')";
 					if (oData.SQ_TYPE === "Survey") {
-						var UserSQoData = {
-							USQID: oOwner + sObjectId,
-							USERID: oOwner,
-							SQID: sObjectId,
+						UserSQoData = {
 							SUBMITTED: 1
 							};
-						var path = "/UserSQ('" + oOwner + sObjectId + "')";
 						oModel.update(path, UserSQoData);
 						oRouter.navTo("surveyComplete");
 					}
-					else {
+					else if (oData.SQ_TYPE === "Quiz") {
 						UserSQoData = {
-							USQID: oOwner + sObjectId,
-							USERID: oOwner,
-							SQID: sObjectId,
 							SUBMITTED: 1,
 							PASSED: 1
 							};
-						path = "/UserSQ('" + oOwner + sObjectId + "')";
 						oModel.update(path, UserSQoData);
 						oRouter.navTo("userResults", {
 							objectId: oData.SQID
@@ -148,9 +142,10 @@ sap.ui.define([
 				USQID: oOwner + sObjectId,
 				USERID: oOwner,
 				SQID: sObjectId,
-				SUBMITTED: 0
+				SUBMITTED: 0,
+				PASSED: -1
 			};
-			oModel.create("/UserSQ", UserSQoData);
+			oModel.create("/UsersSQ", UserSQoData);
 			
 			oFilter = new Filter({
 				path: "SQID",

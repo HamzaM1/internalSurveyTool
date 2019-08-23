@@ -5,8 +5,6 @@ sap.ui.define([
 ], function(Fragment, Controller, MessageToast) {
 	"use strict";
 	
-	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
-	
 	var CController = Controller.extend("demo.survey2.SurveyDemo2.C", {
 		handleOpen : function (oEvent) {
 			var oButton = oEvent.getSource();
@@ -23,7 +21,6 @@ sap.ui.define([
 			this._actionSheet.openBy(oButton);
 		},
 
-		//TODO update amount of questions on db
 		questionCheckbox : function(oEvent){
 			var oSQType = sap.ui.getCore().getModel("sqtype").getData().sqtype;
 			var oQuestionCount = sap.ui.getCore().getModel("qcount").getData().qcount;

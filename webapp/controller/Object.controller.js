@@ -4,14 +4,17 @@
 	"sap/ui/core/routing/History",
 	"../model/formatter",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator) {
+	"sap/ui/model/FilterOperator",
+	"sap/ui/core/Fragment"
+], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, Fragment) {
 	"use strict";
 	
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var oOwner;
 	var sObjectId;
 	var oFilter;
+	var controller;
+	var dialog = 0;
 	var updated = false;
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.Object", {
 
@@ -20,6 +23,7 @@
 		
 		// Initialization of application
 		onInit:function(){
+			controller = this;
 			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
 			oModel.read(
 				"/Users('" + oOwner + "')",
@@ -44,6 +48,7 @@
 		 */
 
 		var oViewModel = new JSONModel({
+				userSQTitle: "",
 				shareOnJamTitle: this.getResourceBundle().getText("questionTitle"),
 				tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
 				tableBusyDelay : 0
@@ -139,6 +144,31 @@
 			//alert(sObjectId);
 			oRouter.navTo("quizEntry", {objectId: sObjectId});
 		},
+		
+		onPressCopy: function (oEvent) {
+			var oView = controller.getView();
+			
+			if (dialog === 0) {
+				Fragment.load({
+					id: "copyLink",
+					controller: controller,
+					type: "XML",
+					name: "demo.survey2.SurveyDemo2.view.Copy"
+				}).then(function (oDialog) {
+					oView.addDependent(oDialog);
+					dialog = oDialog;
+					oDialog.open();
+				});
+			}
+			else {
+				dialog.open();
+			}
+
+		},
+		
+		onCloseDialog : function () {
+			dialog.close();
+		}, 
 		
 		onDelete : function (oEvent) {
 			oModel.remove(this.getModel().createKey("/SQ", {
@@ -247,7 +277,9 @@
 		},
 		
 		
-		onFilter : function () {
+		onFilter : function (oEvent) {
+			var iTotalItems = oEvent.getParameter("total");
+			this.getModel("questionView").setProperty("/userSQTitle", iTotalItems);
 			var oFilter1 = []; 
 			oFilter1.push(new Filter({
 				path: "SQID",
