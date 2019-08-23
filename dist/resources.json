@@ -1,10 +1,11 @@
 {
     "resources": [
         {
-            "name": "manifest.json"
+            "name": "Component-preload.js",
+            "merged": true
         },
         {
-            "name": "controller/BaseController.js"
+            "name": "manifest.json"
         },
         {
             "name": "serviceBinding.js"
@@ -16,7 +17,7 @@
             "name": "model/formatter.js"
         },
         {
-            "name": "localService/mockserver.js"
+            "name": "placeholder.json"
         },
         {
             "name": "controller/Worklist.controller.js"
@@ -79,7 +80,7 @@
             "name": "controller/ErrorHandler.js"
         },
         {
-            "name": "placeholder.json"
+            "name": "controller/BaseController.js"
         },
         {
             "name": "controller/App.controller.js"
@@ -97,8 +98,7 @@
             "name": "manifest-bundle.zip"
         },
         {
-            "name": "Component-preload.js",
-            "merged": true
+            "name": "localService/mockserver.js"
         },
         {
             "name": "serviceBinding-dbg.js",

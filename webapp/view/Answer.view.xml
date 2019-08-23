@@ -6,14 +6,14 @@
 	
 	<Page title="{QUESTION_TITLE}" id="page" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" showNavButton="true"
 			navButtonPress=".onNavBack">
+		<headerContent
+        	class="header">
+			<Button
+				text="Back to Questions"
+				icon="sap-icon://menu2"
+				press=".onPressMenu"/>
+		</headerContent>
 		<content>
-			<Panel
-					backgroundDesign="Transparent"
-					class="sapUiResponsiveMargin">
-					<Button 
-						icon="sap-icon://menu2"
-						press=".onPressMenu"/>
-				</Panel>
 			<Panel
 				backgroundDesign="Transparent"
 				class="sapUiResponsiveMargin">

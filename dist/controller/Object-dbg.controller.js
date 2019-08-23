@@ -112,8 +112,9 @@
 		
 		_showObject : function (oItem) {
 			//if (oItem.getBindingContext().getProperty("quiz_owner") === sap.ui.getCore().getModel("user").getData().user){
+			var aId = oItem.getBindingContext().getProperty("QUESTIONID"); 
 				this.getRouter().navTo("question", {
-					objectId: oItem.getBindingContext().getProperty("QUESTIONID")
+					objectId: aId
 				});
 			//}
 		},
@@ -140,12 +141,12 @@
 		},
 		
 		onDelete : function (oEvent) {
-			if (parseInt(sObjectId.slice(-1), 10) === (sap.ui.getCore().getModel("count").getData().count - 1)) {
-				oModel.remove(this.getModel().createKey("/SQ", {
-						SQID :  sObjectId
-					}));
+			oModel.remove(this.getModel().createKey("/SQ", {
+					SQID :  sObjectId
+				}));
 			
 				//TODO find amount of q&as and delete them
+				/**
 				var i = 0;
 				while(i < 10){
 					try {
@@ -179,10 +180,10 @@
 			
 				var oCount = new sap.ui.model.json.JSONModel({count : (sap.ui.getCore().getModel("count").getData().count - 1)});
 				sap.ui.getCore().setModel(oCount, "count");
-			
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo("overview");
-			} 
+				*/
+				
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("overview");
 		},
 		
 		/* =========================================================== */
@@ -244,7 +245,24 @@
 				}
 			});
 		},
-
+		
+		
+		onFilter : function () {
+			var oFilter1 = []; 
+			oFilter1.push(new Filter({
+				path: "SQID",
+				operator: "EQ",
+				value1: sObjectId
+			}));
+			oFilter1.push(new Filter({
+				path: "SUBMITTED",
+				operator: "EQ",
+				value1: 1
+			}));
+			var oTable = this.byId("list1"); 
+			oTable.getBinding("items").filter(oFilter1, "Application");
+		},
+		
 		_onBindingChange : function () {
 			var oView = this.getView(),
 				oViewModel = this.getModel("objectView"),

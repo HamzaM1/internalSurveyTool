@@ -72,10 +72,13 @@ sap.ui.define([
 		},
 		
 		_showObject : function (oItem) {
-			//sap.ui.controller("demo.survey2.SurveyDemo2.controller.Answer").onInit();
-			this.getRouter().navTo("answer", {
-				objectId: oItem.getBindingContext().getProperty("QUESTIONID")
-			});
+			oModel.read("/SQ('" + sObjectId + "')",
+				{success : function(oData) {
+					controller.getRouter().navTo("answer", {
+						objectId: oItem.getBindingContext().getProperty("QUESTIONID"),
+						count: oData.NUM_OF_QUESTIONS
+					});
+				}});
 		},
    			
 		onNavBack : function() {
@@ -96,22 +99,30 @@ sap.ui.define([
 		
 		onPressSubmit: function (oEvent) {
 			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
-			var UserSQoData = {
-				USQID: oOwner + sObjectId,
-				USERID: oOwner,
-				SQID: sObjectId,
-				SUBMITTED: 1
-			};
-			var path = "/UserSQ('" + oOwner + sObjectId + "')";
-			oModel.update(path, UserSQoData);
-			
 			oModel.read("/SQ('" + sObjectId + "')",
 				{success : function(oData) {
 					var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
 					if (oData.SQ_TYPE === "Survey") {
+						var UserSQoData = {
+							USQID: oOwner + sObjectId,
+							USERID: oOwner,
+							SQID: sObjectId,
+							SUBMITTED: 1
+							};
+						var path = "/UserSQ('" + oOwner + sObjectId + "')";
+						oModel.update(path, UserSQoData);
 						oRouter.navTo("surveyComplete");
 					}
 					else {
+						UserSQoData = {
+							USQID: oOwner + sObjectId,
+							USERID: oOwner,
+							SQID: sObjectId,
+							SUBMITTED: 1,
+							PASSED: 1
+							};
+						path = "/UserSQ('" + oOwner + sObjectId + "')";
+						oModel.update(path, UserSQoData);
 						oRouter.navTo("userResults", {
 							objectId: oData.SQID
 							});

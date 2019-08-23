@@ -93,7 +93,22 @@
 							text="{SQ_TYPE} Results:"/>
 					</content>
 				</Panel>
-			
+				
+				<List
+				id="list1"
+				width="auto"
+				items="{path:'/UserSQ'}"
+				growing="true" 
+				updateFinished=".onFilter">
+					<items>
+        				<ObjectListItem
+        					title="{USERID}"
+        					type="Inactive"
+        					number="{PASSED}"
+        					/>
+    				</items>
+				</List>
+				
 				<!-- Yes/No Result !-->
 		<!--		
 				<Panel
