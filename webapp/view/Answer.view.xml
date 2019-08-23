@@ -6,12 +6,6 @@
 	
 	<Page title="{QUESTION_TITLE}" id="page" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" showNavButton="true"
 			navButtonPress=".onNavBack">
-        <headerContent
-        	class="header">
-			<Button
-				icon="sap-icon://home"
-				press=".onPressHome"/>
-		</headerContent>
 		<content>
 			<Panel
 					backgroundDesign="Transparent"

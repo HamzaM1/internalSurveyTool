@@ -6,13 +6,7 @@
 		<Page
 			title="Welcome"
 			id="page"
-			showNavButton="true">
-			<headerContent
-        		class="header">
-				<Button
-					icon="sap-icon://home"
-					press=".onPressHome"/>
-			</headerContent>
+			>
 			<content>
 				<Button
 					text="Start"

@@ -91,6 +91,8 @@ sap.ui.define([
 			
 			var oCount = new sap.ui.model.json.JSONModel({count : (controller.getModel("count").getData().count + 1)});
 			controller.setModel(oCount, "count");
+			
+			this.getRouter().navTo("overview", {}, true);
 		},
 		
 		/* =========================================================== */

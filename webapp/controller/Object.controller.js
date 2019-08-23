@@ -147,6 +147,7 @@
 					}));
 			
 				//TODO find amount of q&as and delete them
+				/**
 				var i = 0;
 				while(i < 10){
 					try {
@@ -180,7 +181,7 @@
 			
 				var oCount = new sap.ui.model.json.JSONModel({count : (sap.ui.getCore().getModel("count").getData().count - 1)});
 				sap.ui.getCore().setModel(oCount, "count");
-			
+				*/
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.navTo("overview");
 			} 
