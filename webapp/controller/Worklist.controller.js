@@ -78,7 +78,21 @@ sap.ui.define([
 		 * @public
 		 */
 		onUpdateFinished : function (oEvent) {
-			if (updated === 1){
+			if(updated === 2){
+				var oTable = this.byId("list");
+				var itemList = oTable.getItems();
+
+				for (var i in itemList) {
+					if(itemList[i].getType() === "Navigation"){
+						var x = itemList[i].getNumber();
+						x = (x.split(" ")[1] + "-" + x.split(" ")[2] + "-" + x.split(" ")[3]);
+						itemList[i].setNumber(x);
+					}
+				}
+				
+			}
+			
+			else if (updated === 1){
 				var filter = new Filter({
 											path: "SQ_OWNER",
 											operator: "EQ",
@@ -87,7 +101,9 @@ sap.ui.define([
 				var oList = this.byId("list");
 				var oBinding = oList.getBinding("items");
 				oBinding.filter(filter);
+				
 			}
+			
 			updated++;
 			// update the worklist's object counter after the table update
 			var sTitle,
@@ -141,6 +157,7 @@ sap.ui.define([
 			var oList = this.byId("list");
 			var oBinding = oList.getBinding("items");
 			oBinding.filter(aFilter);
+			updated = 2; 
 		},
 		
 		

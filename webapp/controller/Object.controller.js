@@ -278,6 +278,30 @@
 		
 		
 		onFilter : function (oEvent) {
+			var oTable = this.byId("list1");
+			var itemList = oTable.getItems();
+			oModel.read("/SQ('" + sObjectId + "')", {
+				success : function(oData) {
+					for (var i in itemList) {
+						if (oData.ANONYMOUS === 1) {
+							itemList[i].setTitle("Anonymous User");
+						}
+						var x = itemList[i].getNumber();
+						if (x === "1") {
+							itemList[i].setNumber("Quiz Passed");
+						}
+						else if (x === "0") {
+							itemList[i].setNumber("Quiz Failed");
+						}
+						else if (x === "-1") {
+							itemList[i].setNumber("");
+						}
+					}	
+				}
+			});
+			
+
+			
 			var iTotalItems = oEvent.getParameter("total");
 			this.getModel("questionView").setProperty("/userSQTitle", iTotalItems);
 			var oFilter1 = []; 
@@ -291,7 +315,6 @@
 				operator: "EQ",
 				value1: 1
 			}));
-			var oTable = this.byId("list1"); 
 			oTable.getBinding("items").filter(oFilter1, "Application");
 		},
 		

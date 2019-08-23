@@ -121,8 +121,8 @@ sap.ui.define([
 				active = false;
 			}
 			var AnswersoData;
-			var correct0;
-			var correct1;
+			var correct0 = -1;
+			var correct1 = -1;
 				if (sType === "Quiz") {
 					correct0 = 0;
 					correct1 = 1;
@@ -149,7 +149,7 @@ sap.ui.define([
 						ANSWERID: oSQID + sQuestionCount + "0",
 						QUESTIONID: oSQID + sQuestionCount,
 						ANSWER: "0",
-						ANSWER_CORRECT: correct0,
+						ANSWER_CORRECT: 1,
 						ORDER: 1
 					};
 				oModel1.create("/Answers", AnswersoData);
@@ -171,7 +171,7 @@ sap.ui.define([
 							ANSWERID: oSQID + sQuestionCount + "0",
 							QUESTIONID: oSQID + sQuestionCount,
 							ANSWER: "",
-							ANSWER_CORRECT: 1,
+							ANSWER_CORRECT: -1,
 							ORDER: 1
 						};
 					oModel1.create("/Answers", AnswersoData);
@@ -374,7 +374,7 @@ sap.ui.define([
 			else if (answers === 4) {
 				ans = oData1.answer4;
 			}
-			var correct0;
+			var correct0 = -1;
 				if (sType === "Quiz") {
 					correct0 = 0;
 				}

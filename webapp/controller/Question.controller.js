@@ -7,7 +7,8 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator"
 ], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator) {
    "use strict";
-
+	
+	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var sObjectId;
 	var oFilter;
 	var updated = false;
@@ -19,9 +20,6 @@ sap.ui.define([
 					busy : true,
 					delay : 0
 				});
-
-			this.getRouter().getRoute("question").attachPatternMatched(this._onObjectMatched, this);
-
 			// Store original busy indicator delay, so it can be restored later on
 			iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
 			this.setModel(oViewModel, "questionView");
@@ -35,6 +33,21 @@ sap.ui.define([
    		
    		
    		onUpdateFinished : function (oEvent) {
+				var oTable = this.byId("list");
+				var itemList = oTable.getItems();
+				for (var i in itemList) {
+					var x = itemList[i].getNumber();
+					if (x === "1") {
+						itemList[i].setNumber("Answer Correct");
+					}
+					else if (x === "0") {
+						itemList[i].setNumber("Answer Incorrect");
+					}
+					else if (x === "-1") {
+						itemList[i].setNumber("");
+					}
+				}
+				
 			if (updated == false){
 				this._applySearch(oFilter);
 				updated = true;
@@ -120,6 +133,18 @@ sap.ui.define([
 		},
 		
 		onFilter : function () {
+			var oTable = this.byId("list1");
+			var itemList = oTable.getItems();
+			oModel.read("/SQ('" + sObjectId.slice(0, -1) + "')", {
+				success : function(oData) {
+					for (var i in itemList) {
+						if (oData.ANONYMOUS === 1) {
+							itemList[i].setNumber("Anonymous User");
+						}
+					}
+				}
+			});
+			
 			var oFilter1 = []; 
 			oFilter1.push(new Filter({
 				path: "ANSWERID",
@@ -131,7 +156,6 @@ sap.ui.define([
 				operator: "EQ",
 				value1: 1
 			}));
-			var oTable = this.byId("list1"); 
 			oTable.getBinding("items").filter(oFilter1, "Application");
 		},
 		
