@@ -36,7 +36,7 @@
 				id="list"
 				width="auto"
 				items="{path:'/Questions'}"
-				noDataText="{questionView>/tableNoDataText}"
+				noDataText="No Questions Available"
 				busyIndicatorDelay="{questionView>/tableBusyDelay}"
 				growing="true" 
 				updateFinished=".onUpdateFinished"

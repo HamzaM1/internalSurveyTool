@@ -223,6 +223,7 @@ sap.ui.define([
 				var oButton0 = new sap.m.Button({
 					id: "button0",
 					icon: "sap-icon://add",
+					tooltip: "Add Answer",
 					press: function(){
 						controller.onAdd();
 						}
@@ -230,6 +231,7 @@ sap.ui.define([
 				var oButton1 = new sap.m.Button({
 					id: "button1",
 					icon: "sap-icon://less",
+					tooltip: "Remove Answer",
 					press: function(){
 						controller.onRemove();
 						}

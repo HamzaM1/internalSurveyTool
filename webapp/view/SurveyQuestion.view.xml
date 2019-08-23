@@ -12,7 +12,8 @@
         	class="header">
 			<Button
 				icon="sap-icon://home"
-				press=".onPressHome"/>
+				press=".onPressHome"
+				tooltip="Home"/>
 		</headerContent>
 		<Panel backgroundDesign="Transparent" class="sapUiResponsiveMargin" width="auto">
 	        <content>

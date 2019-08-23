@@ -10,7 +10,8 @@
         	class="header">
 			<Button
 				icon="sap-icon://home"
-				press=".onPressHome"/>
+				press=".onPressHome"
+				tooltip="Home"/>
 		</headerContent>
 		<content>
 			<Panel
@@ -76,6 +77,7 @@
 				id="list1"
 				width="auto"
 				items="{path:'/UserAnswers'}"
+				noDataText="No Answers Submitted"
 				growing="true" 
 				updateFinished=".onFilter">
 					<items>

@@ -12,10 +12,10 @@
         	class="header">
 			<Button
 				icon="sap-icon://home"
-				press=".onPressHome"/>
+				press=".onPressHome"
+				tooltip="Home"/>
 			<Button
-				icon="sap-icon://share-2"
-				text="Publish"
+				text="Publish {new>/titleType}"
 				press=".onPressPublish"/>
 				
 		</headerContent>
@@ -27,6 +27,7 @@
 				id="list"
 				width="auto"
 				items="{path:'/Questions'}"
+				noDataText="No Questions Created"
 				growing="true"
 				updateFinished=".onUpdateFinished">
 					<items>

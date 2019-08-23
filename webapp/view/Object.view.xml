@@ -11,8 +11,8 @@
 		<Page title="My {SQ_TYPE}" id="page" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" showNavButton="true"
 			navButtonPress=".onNavBack">
 			<headerContent class="header">
-				<Button icon="sap-icon://home" press=".onPressHome"/>
-				<Button icon="sap-icon://delete" press=".onDelete"/>
+				<Button icon="sap-icon://home" press=".onPressHome" tooltip="Home"/>
+				<Button icon="sap-icon://delete" press=".onDelete" tooltip="Delete {SQ_TYPE}"/>
 
 			</headerContent>
 			<content>
@@ -48,7 +48,8 @@
 							width="30%"/>
 						<Button
 							press=".onPressQuiz" 
-							icon="sap-icon://navigation-right-arrow"/>
+							icon="sap-icon://navigation-right-arrow"
+							tooltip="Link to {SQ_TYPE}"/>
 					</content>
 				</Panel>
 				
@@ -70,7 +71,7 @@
 				id="list"
 				width="auto"
 				items="{path:'/Questions'}"
-				noDataText="{questionView>/tableNoDataText}"
+				noDataText="No Questions! Delete and Try Again"
 				busyIndicatorDelay="{questionView>/tableBusyDelay}"
 				growing="true" 
 				updateFinished=".onUpdateFinished">
@@ -98,6 +99,7 @@
 				id="list1"
 				width="auto"
 				items="{path:'/UserSQ'}"
+				noDataText="No Attempts Submitted"
 				growing="true" 
 				updateFinished=".onFilter">
 					<items>

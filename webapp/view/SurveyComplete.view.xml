@@ -4,7 +4,7 @@
 			navButtonPress=".onNavBack">
 			<!-- specify user's name-->
 			<headerContent class="header">
-				<Button icon="sap-icon://home" press=".onPressHome"/>
+				<Button icon="sap-icon://home" press=".onPressHome" tooltip="Home"/>
 			</headerContent>
 			<content>
 				<Panel
