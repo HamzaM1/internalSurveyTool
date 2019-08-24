@@ -34,7 +34,7 @@ sap.ui.define([
    			oModel.read("/UsersSQ('" + oOwner + sObjectId + "')", {
    				success: function(oData){
    					//todo change back to 0
-   					if (oData.SUBMITTED === 1) { 
+   					if (oData.SUBMITTED === 0) { 
    						controller.getRouter().navTo("quizpage", {
 							objectId: sObjectId
 						});

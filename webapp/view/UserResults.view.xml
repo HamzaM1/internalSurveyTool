@@ -1,7 +1,6 @@
 <mvc:View controllerName="demo.survey2.SurveyDemo2.controller.UserResults" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<Shell>
-		<Page title="Quiz Results: User A" id="page" showNavButton="true"
-			navButtonPress=".onNavBack">
+		<Page title="Quiz Completed" id="page" class="myPage">
 			<!-- specify user's name-->
 			<headerContent class="header">
 				<Button icon="sap-icon://home" press=".onPressHome" tooltip="Home"/>
@@ -11,45 +10,44 @@
 					backgroundDesign="Transparent"
 					class="sapUiResponsiveMargin">
 					<content>
-						<!--Specfiy quiz name -->
 						<Text
-							class="myResults myHeader"
-							text="Placeholder:::: Quiz"/>
-						<!--Specfiy quiz score -->
-						<Text
-							class="myResults myHeader"
-							text="Quiz Score: xx%"/>
+							class="myHeader"
+							text="Your Quiz has been submitted"/>
 					</content>
 				</Panel>
 				
-				<!-- IF Time display all user answers
 				<Panel
 					backgroundDesign="Transparent"
 					class="sapUiResponsiveMargin">
 					<content>
 						<Text
-							class="myResults myHeader"
-							text="Question Placeholder:"/>
-						<Text
-							class="myResults myHeader"
-							text="User Response:"/>
-					</content> 
+							id="score"
+							class="myHeader"
+							text=""/>
+					</content>
 				</Panel>
 				
 				<Panel
 					backgroundDesign="Transparent"
 					class="sapUiResponsiveMargin">
 					<content>
-						<Text class="myResults myText"
-							text="Placeholder"/>
-						<RadioButtonGroup editable="false" class="myResults myInput">
-							<RadioButton text="Placeholder"/>
-							<RadioButton text="Placeholder"/>
-							<RadioButton text="Placeholder"/>
-						</RadioButtonGroup>
-					</content> 
+						<Button
+							class="myText"
+							press=".onPressHome"
+							text="Back to Homepage"/>
+					</content>
 				</Panel>
-				-->
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Text
+							class="myHeader"
+							text="Thank you for taking the Quiz!"/>
+					</content>
+				</Panel>
+
 			</content>
 		</Page>
 	</Shell>
