@@ -18,7 +18,7 @@
 						<!--Specfiy quiz name -->
 						<Text
 							class="myResults myHeader"
-							text="{SQ_TITLE}: Non-Anon({ANONYMOUS}) {SQ_TYPE}"/>
+							text="{SQ_TYPE} {SQ_TITLE}"/>
 					</content>
 				</Panel>
 				

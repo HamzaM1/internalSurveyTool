@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="previouslyCompleted"
+		title="Error!">
+		<content>
+			<Text
+				text="You have already completed this {SQ_TYPE}!"
+				class="sapUiMediumMargin"/>
+		</content>
+		<beginButton>
+			<Button
+				text="Back to Homepage"
+				press=".onCloseDialog"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

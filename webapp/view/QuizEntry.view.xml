@@ -4,14 +4,65 @@
 	xmlns:mvc="sap.ui.core.mvc">
 	<Shell>
 		<Page
-			title="Welcome"
-			id="page"
-			>
+			title="Welcome to {SQ_TITLE}"
+			id="page">
 			<content>
-				<Button
-					text="Start"
-					press=".onPress"> 
-				</Button>
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin myiNumber"
+					width="auto">
+					<Text
+						class="myText"
+						text="Created by {SQ_OWNER}"/> 
+				</Panel>
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<Text 
+						class="myHeader"
+						text="{SQ_TYPE} Title"/>
+				</Panel>
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<Text
+						width="50%"
+						class="myText"
+						text="{SQ_TITLE}"/> 
+				</Panel>
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<Text
+						id="anon"
+						class="myText"
+						text="{ANONYMOUS} {SQ_TYPE}"/>
+				</Panel>
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<Text
+						class="myText"
+						text="There are a total of {NUM_OF_QUESTIONS} Questions in this {SQ_TYPE}"/> 
+				</Panel>
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<Text
+						class="myHeader"
+						text="Click below to begin {SQ_TYPE}:"/> 
+				</Panel>
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<Button
+						class="myText"
+						width="auto"
+						text="Start {SQ_TYPE}"
+						icon="sap-icon://navigation-right-arrow"
+						press=".onPress"/> 
+				</Panel>
 			</content> 
 		</Page>
 	</Shell>
