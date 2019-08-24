@@ -33,7 +33,8 @@ sap.ui.define([
    			var oOwner = sap.ui.getCore().getModel("userapi").getData().name;
    			oModel.read("/UsersSQ('" + oOwner + sObjectId + "')", {
    				success: function(oData){
-   					if (oData.SUBMITTED === 0) { 
+   					//todo change back to 0
+   					if (oData.SUBMITTED === 1) { 
    						controller.getRouter().navTo("quizpage", {
 							objectId: sObjectId
 						});

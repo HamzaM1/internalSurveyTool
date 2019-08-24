@@ -97,35 +97,6 @@ sap.ui.define([
 			oRouter.navTo("overview");
 		},
 		
-		onPressSubmit: function (oEvent) {
-			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
-			oModel.read("/SQ('" + sObjectId + "')",
-				{success : function(oData) {
-					var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
-					var UserSQoData;
-					var path = "/UsersSQ('" + oOwner + sObjectId + "')";
-					if (oData.SQ_TYPE === "Survey") {
-						UserSQoData = {
-							SUBMITTED: 1
-							};
-						oModel.update(path, UserSQoData);
-						oRouter.navTo("surveyComplete");
-					}
-					else if (oData.SQ_TYPE === "Quiz") {
-						UserSQoData = {
-							SUBMITTED: 1,
-							PASSED: 1
-							};
-						oModel.update(path, UserSQoData);
-						oRouter.navTo("userResults", {
-							objectId: oData.SQID
-							});
-					}
-				}
-			});
-			
-		},
-		
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */
@@ -206,6 +177,43 @@ sap.ui.define([
 			oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 			oViewModel.setProperty("/shareSendEmailMessage",
 			oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+		},
+		
+		onPressSubmit: function (oEvent) {
+			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
+			oModel.read("/SQ('" + sObjectId + "')",
+				{success : function(oData) {
+					var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
+					var UserSQoData;
+					var path = "/UsersSQ('" + oOwner + sObjectId + "')";
+					if (oData.SQ_TYPE === "Survey") {
+						UserSQoData = {
+							SUBMITTED: 1
+							};
+						oModel.update(path, UserSQoData);
+						oRouter.navTo("surveyComplete");
+					}
+					else if (oData.SQ_TYPE === "Quiz") {
+						controller.onCalculate(oData);
+						/**
+						UserSQoData = {
+							SUBMITTED: 1,
+							PASSED: 1
+							};
+						oModel.update(path, UserSQoData);
+						
+						oRouter.navTo("userResults", {
+							objectId: oData.SQID
+							});
+						*/
+					}
+				}
+			});
+			
+		},
+		
+		onCalculate : function (oData) {
+			//todo calculate
 		}
 		
    	});

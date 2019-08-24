@@ -17,6 +17,7 @@ sap.ui.define([
 				this.setModel(oJsonModel, "correct");
 			oJsonModel = new sap.ui.model.json.JSONModel({iscorrect : true});
 				this.setModel(oJsonModel, "iscorrect");
+			alert("initing");
    			this.getRouter().getRoute("userResults").attachPatternMatched(this._onObjectMatched, this);
    		},
    	
@@ -39,7 +40,8 @@ sap.ui.define([
 		_onObjectMatched : function (oEvent) {
 			sObjectId = oEvent.getParameter("arguments").objectId;
 			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
-			this.initSQ();
+			alert("matching");
+			//this.initSQ();
 		},
 		/**
 			read each question from the quiz

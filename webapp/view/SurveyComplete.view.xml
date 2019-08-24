@@ -1,7 +1,6 @@
 <mvc:View controllerName="demo.survey2.SurveyDemo2.controller.SurveyComplete" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<Shell>
-		<Page title="Survey Completed: User A" id="page" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" showNavButton="true"
-			navButtonPress=".onNavBack">
+		<Page title="Survey Completed" id="page" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" class="myPage">
 			<!-- specify user's name-->
 			<headerContent class="header">
 				<Button icon="sap-icon://home" press=".onPressHome" tooltip="Home"/>
@@ -11,22 +10,33 @@
 					backgroundDesign="Transparent"
 					class="sapUiResponsiveMargin">
 					<content>
-						<!--Specfiy quiz name -->
 						<Text
-							class="myResults myHeader"
-							text="You have Completed the survey"/>
-						<!--Specfiy quiz score -->
-						<Text
-							class="myResults myHeader"
-							text="Thank you for taking the survey"/>
+							class="myHeader"
+							text="Your Survey has been submitted"/>
 					</content>
 				</Panel>
 				
-			 
-			
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Button
+							class="myText"
+							press=".onPressHome"
+							text="Back to Homepage"/>
+					</content>
+				</Panel>
 				
-			
-			
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Text
+							class="myHeader"
+							text="Thank you for taking the Survey!"/>
+					</content>
+				</Panel>
+
 			</content>
 		</Page>
 	</Shell>
