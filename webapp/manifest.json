@@ -263,7 +263,7 @@
 					"viewLevel": 2,
 					"title": "{i18n>quizViewTitle}"
 				},
-				"userResults": {
+				"quizComplete": {
 					"viewName": "QuizComplete",
 					"viewId": "quizComplete",
 					"viewLevel": 2,
