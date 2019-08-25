@@ -1,7 +1,9 @@
-<mvc:View controllerName="demo.survey2.SurveyDemo2.controller.UserResults" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+<mvc:View
+	controllerName="demo.survey2.SurveyDemo2.controller.UserResults"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
 	<Shell>
 		<Page title="Quiz Completed" id="page" class="myPage">
-			<!-- specify user's name-->
 			<headerContent class="header">
 				<Button icon="sap-icon://home" press=".onPressHome" tooltip="Home"/>
 			</headerContent>

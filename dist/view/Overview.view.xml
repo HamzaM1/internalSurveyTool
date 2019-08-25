@@ -10,7 +10,8 @@
         	class="header">
 			<Button
 				icon="sap-icon://home"
-				press=".onPressHome"/>
+				press=".onPressHome"
+				tooltip="Home"/>
 		</headerContent>
 		<content>
 			<mvc:XMLView viewName="demo.survey2.SurveyDemo2.view.Home"/>

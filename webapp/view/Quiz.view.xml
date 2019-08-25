@@ -18,7 +18,7 @@
 						<!--Specfiy quiz name -->
 						<Text
 							class="myResults myHeader"
-							text="{SQ_TYPE} {SQ_TITLE}"/>
+							text="{SQ_TYPE} {SQ_TITLE} {quizView>unanswered}"/>
 					</content>
 				</Panel>
 				

@@ -4,13 +4,15 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"../model/formatter",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator) {
+	"sap/ui/model/FilterOperator",
+	"sap/ui/core/Fragment"
+], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, Fragment) {
    "use strict";
 	
 	var oModel = new sap.ui.model.odata.v2.ODataModel("/project/intern-project/intern-project-odata.xsodata/");
 	var sObjectId;
 	var oOwner;
+	var dialog = 0; 
 	var controller;
 	var oFilter;
 	var updated = false;
@@ -26,11 +28,12 @@ sap.ui.define([
 			sap.ui.getCore().setModel(oCorrect, "correct");
    			controller = this; 
    			var oViewModel = new JSONModel({
+   				unanswered: "test",
 				shareOnJamTitle: this.getResourceBundle().getText("questionTitle"),
 				tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
 				tableBusyDelay : 0
 			});
-			this.setModel(oViewModel, "questionView");
+			this.setModel(oViewModel, "quizView");
 			// Model used to manipulate control states. The chosen values make sure,
 			// detail page is busy indication immediately so there is no break in
 			// between the busy indication for loading the view's meta data
@@ -62,7 +65,7 @@ sap.ui.define([
 		
 		_applySearch: function(aTableSearchState) {
 			var oTable = this.byId("list"),
-				oViewModel = this.getModel("questionView");
+				oViewModel = this.getModel("quizView");
 			oTable.getBinding("items").filter(aTableSearchState, "Application");
 			// changes the noDataText of the list in case there are no filter results
 			if (aTableSearchState.length !== 0) {
@@ -237,8 +240,9 @@ sap.ui.define([
 						if (oData2.ANSWER_TYPE === "Radio" || oData2.ANSWER_TYPE === "Check") {
 							correct = (oData.ANSWER_CORRECT === oData1.SELECTED);
 						}
+						// todo check answers in lowercase and try freetext similar answers
 						else {
-							correct = (oData.ANSWER === oData1.ANSWER);
+							correct = (oData.ANSWER.toLowerCase() === oData1.ANSWER.toLowerCase());
 						}
 					}
 					var oCorrect = new sap.ui.model.json.JSONModel({correct : correct});
@@ -270,8 +274,39 @@ sap.ui.define([
 							});
 						}
 					}
-				} 
+				},
+			error : function () {
+					if (oData.ANSWERID.slice(-1) === "0") {
+						var msg = ("Question " + (parseInt(oData2.QUESTIONID.slice(-1), 10) + 1) + " has not been answered.");
+						controller.onQuestionUnanswered(msg); 
+					}
+				}
 			});
+		},
+		
+		onQuestionUnanswered : function (msg) {
+			var oView = controller.getView();
+			
+			if (dialog === 0) {
+				Fragment.load({
+					id: "questionUnanswered",
+					controller: controller,
+					type: "XML",
+					name: "demo.survey2.SurveyDemo2.view.QuestionUnanswered"
+				}).then(function (oDialog) {
+					oView.addDependent(oDialog);
+					oDialog.getContent()[0].setText(msg);
+					dialog = oDialog;
+					oDialog.open();
+				});
+			}
+			else {
+				dialog.open();
+			}
+		},
+		
+		onCloseDialog : function () {
+			dialog.close();
 		}
    	});
 });

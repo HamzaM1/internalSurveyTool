@@ -20,6 +20,10 @@ sap.ui.define([
 		formatter: formatter,
 		
    		onInit : function() {
+   			var oCount = new sap.ui.model.json.JSONModel({acount : 0});
+			sap.ui.getCore().setModel(oCount, "acount");
+			var oCorrect = new sap.ui.model.json.JSONModel({correct : true});
+			sap.ui.getCore().setModel(oCorrect, "correct");
    			controller = this; 
    			var oViewModel = new JSONModel({
 				shareOnJamTitle: this.getResourceBundle().getText("questionTitle"),
@@ -97,41 +101,6 @@ sap.ui.define([
 			oRouter.navTo("overview");
 		},
 		
-		onPressSubmit: function (oEvent) {
-			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
-			oModel.read("/SQ('" + sObjectId + "')",
-				{success : function(oData) {
-					var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
-					if (oData.SQ_TYPE === "Survey") {
-						var UserSQoData = {
-							USQID: oOwner + sObjectId,
-							USERID: oOwner,
-							SQID: sObjectId,
-							SUBMITTED: 1
-							};
-						var path = "/UserSQ('" + oOwner + sObjectId + "')";
-						oModel.update(path, UserSQoData);
-						oRouter.navTo("surveyComplete");
-					}
-					else {
-						UserSQoData = {
-							USQID: oOwner + sObjectId,
-							USERID: oOwner,
-							SQID: sObjectId,
-							SUBMITTED: 1,
-							PASSED: 1
-							};
-						path = "/UserSQ('" + oOwner + sObjectId + "')";
-						oModel.update(path, UserSQoData);
-						oRouter.navTo("userResults", {
-							objectId: oData.SQID
-							});
-					}
-				}
-			});
-			
-		},
-		
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */
@@ -148,9 +117,10 @@ sap.ui.define([
 				USQID: oOwner + sObjectId,
 				USERID: oOwner,
 				SQID: sObjectId,
-				SUBMITTED: 0
+				SUBMITTED: 0,
+				PASSED: -1
 			};
-			oModel.create("/UserSQ", UserSQoData);
+			oModel.create("/UsersSQ", UserSQoData);
 			
 			oFilter = new Filter({
 				path: "SQID",
@@ -211,8 +181,98 @@ sap.ui.define([
 			oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 			oViewModel.setProperty("/shareSendEmailMessage",
 			oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
-		}
+		},
 		
+		onPressSubmit: function (oEvent) {
+			oOwner = sap.ui.getCore().getModel("userapi").getData().name;
+			oModel.read("/SQ('" + sObjectId + "')",
+				{success : function(oData) {
+					var oRouter = sap.ui.core.UIComponent.getRouterFor(controller);
+					var UserSQoData;
+					var path = "/UsersSQ('" + oOwner + sObjectId + "')";
+					if (oData.SQ_TYPE === "Survey") {
+						UserSQoData = {
+							SUBMITTED: 1
+							};
+						oModel.update(path, UserSQoData);
+						oRouter.navTo("surveyComplete");
+					}
+					else if (oData.SQ_TYPE === "Quiz") {
+						controller.onCalculate(oData);
+					}
+				}
+			});
+			
+		},
+		
+		onCalculate : function (oData) {
+			var i = 0;
+			while (i < oData.NUM_OF_QUESTIONS) {
+				oModel.read("/Questions('" + oData.SQID + i + "')",
+					{success : function(oData1) {
+						controller.calculateQuestion(oData1, oData);
+					}
+				}); 
+				i++; 
+			}
+		},
+		
+		calculateQuestion : function (oData, oData2){	
+			var i = 0;
+			while (i < oData.NUM_OF_ANSWERS) {
+				oModel.read("/Answers('" + oData.QUESTIONID + i + "')",
+					{success : function(oData1) {
+						controller.compareAnswers(oData1, oData, oData2);
+					}
+				}); 
+				i++; 
+			}
+		},
+		
+		compareAnswers : function (oData, oData2, oData3) {
+			oModel.read("/UserAnswers('" + oOwner + oData.ANSWERID + "')",
+				{success : function(oData1) {
+					var correct = sap.ui.getCore().getModel("correct").getData().correct;
+					if (correct === true) {
+						if (oData2.ANSWER_TYPE === "Radio" || oData2.ANSWER_TYPE === "Check") {
+							correct = (oData.ANSWER_CORRECT === oData1.SELECTED);
+						}
+						else {
+							correct = (oData.ANSWER === oData1.ANSWER);
+						}
+					}
+					var oCorrect = new sap.ui.model.json.JSONModel({correct : correct});
+					sap.ui.getCore().setModel(oCorrect, "correct");
+					if (oData.ORDER === oData2.NUM_OF_ANSWERS) {
+						var count = sap.ui.getCore().getModel("acount").getData().acount;
+						if (correct) {
+							count++;
+						}
+						oCorrect = new sap.ui.model.json.JSONModel({correct : true});
+						sap.ui.getCore().setModel(oCorrect, "correct");
+						var oCount = new sap.ui.model.json.JSONModel({acount : count});
+						sap.ui.getCore().setModel(oCount, "acount");
+						if (oData3.NUM_OF_QUESTIONS === parseInt(oData2.QUESTIONID.slice(-1), 10) + 1) {
+							var percent = (count / oData3.NUM_OF_QUESTIONS * 100);
+							var pass = 0;
+							if (percent >= 40.0) {
+								pass = 1;
+							}
+							var path = "/UsersSQ('" + oOwner + oData3.SQID + "')";
+							var UserSQoData = {
+								SUBMITTED: 1,
+								PASSED: pass
+							};
+							oModel.update(path, UserSQoData);
+						
+							controller.getRouter().navTo("userResults", {
+								objectId: percent.toFixed(2)
+							});
+						}
+					}
+				} 
+			});
+		}
    	});
 });
 

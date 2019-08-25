@@ -1,23 +1,22 @@
 {
     "resources": [
         {
-            "name": "Component-preload.js",
-            "merged": true
+            "name": "serviceBinding.js"
         },
         {
             "name": "manifest.json"
         },
         {
-            "name": "serviceBinding.js"
+            "name": "model/formatter.js"
         },
         {
             "name": "model/models.js"
         },
         {
-            "name": "model/formatter.js"
+            "name": "placeholder.json"
         },
         {
-            "name": "placeholder.json"
+            "name": "localService/mockserver.js"
         },
         {
             "name": "controller/Worklist.controller.js"
@@ -98,7 +97,12 @@
             "name": "manifest-bundle.zip"
         },
         {
-            "name": "localService/mockserver.js"
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "controller/SurveyTitle-dbg.controller.js",
+            "isDebug": true
         },
         {
             "name": "serviceBinding-dbg.js",
@@ -122,10 +126,6 @@
         },
         {
             "name": "controller/UserResults-dbg.controller.js",
-            "isDebug": true
-        },
-        {
-            "name": "controller/SurveyTitle-dbg.controller.js",
             "isDebug": true
         },
         {
@@ -268,6 +268,9 @@
             "name": "view/Question.view.xml"
         },
         {
+            "name": "view/PreviouslyCompleted.fragment.xml"
+        },
+        {
             "name": "view/Overview.view.xml"
         },
         {
@@ -293,6 +296,9 @@
         },
         {
             "name": "view/Dropdown.view.xml"
+        },
+        {
+            "name": "view/Copy.fragment.xml"
         },
         {
             "name": "view/App.view.xml"

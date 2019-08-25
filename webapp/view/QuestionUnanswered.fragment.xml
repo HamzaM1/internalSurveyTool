@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="questionUnanswered"
+		title="Error!">
+		<content>
+			<Text
+				id="msg" 
+				text="You have not answered a question! {quizView>unanswered}"
+				class="sapUiMediumMargin"/>
+		</content>
+		<beginButton>
+			<Button
+				text="Ok"
+				press=".onCloseDialog"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

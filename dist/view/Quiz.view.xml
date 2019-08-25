@@ -18,7 +18,7 @@
 						<!--Specfiy quiz name -->
 						<Text
 							class="myResults myHeader"
-							text="{SQ_TITLE}: Non-Anon({ANONYMOUS}) {SQ_TYPE}"/>
+							text="{SQ_TYPE} {SQ_TITLE}"/>
 					</content>
 				</Panel>
 				
@@ -36,7 +36,7 @@
 				id="list"
 				width="auto"
 				items="{path:'/Questions'}"
-				noDataText="{questionView>/tableNoDataText}"
+				noDataText="No Questions Available"
 				busyIndicatorDelay="{questionView>/tableBusyDelay}"
 				growing="true" 
 				updateFinished=".onUpdateFinished"
