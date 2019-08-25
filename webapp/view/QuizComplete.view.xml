@@ -1,0 +1,56 @@
+<mvc:View
+	controllerName="demo.survey2.SurveyDemo2.controller.QuizComplete"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Shell>
+		<Page title="Quiz Complete" id="page" class="myPage">
+			<headerContent class="header">
+				<Button icon="sap-icon://home" press=".onPressHome" tooltip="Home"/>
+			</headerContent>
+			<content>
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Text
+							class="myHeader"
+							text="Your Quiz has been submitted"/>
+					</content>
+				</Panel>
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Text
+							id="score"
+							class="myHeader"
+							text=""/>
+					</content>
+				</Panel>
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Button
+							class="myText"
+							press=".onPressHome"
+							text="Back to Homepage"/>
+					</content>
+				</Panel>
+				
+				<Panel
+					backgroundDesign="Transparent"
+					class="sapUiResponsiveMargin">
+					<content>
+						<Text
+							class="myHeader"
+							text="Thank you for taking the Quiz!"/>
+					</content>
+				</Panel>
+
+			</content>
+		</Page>
+	</Shell>
+</mvc:View>

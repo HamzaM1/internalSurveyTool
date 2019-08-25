@@ -17,7 +17,7 @@ sap.ui.define([
 	var oFilter;
 	var updated = false;
 	
-	return BaseController.extend("demo.survey2.SurveyDemo2.controller.UserResults", {
+	return BaseController.extend("demo.survey2.SurveyDemo2.controller.Quiz", {
 		
 		formatter: formatter,
 		
@@ -272,7 +272,7 @@ sap.ui.define([
 							};
 							oModel.update(path, UserSQoData);
 						
-							controller.getRouter().navTo("userResults", {
+							controller.getRouter().navTo("quizComplete", {
 								objectId: percent.toFixed(2)
 							});
 						}
