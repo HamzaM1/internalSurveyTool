@@ -240,9 +240,12 @@ sap.ui.define([
 						if (oData2.ANSWER_TYPE === "Radio" || oData2.ANSWER_TYPE === "Check") {
 							correct = (oData.ANSWER_CORRECT === oData1.SELECTED);
 						}
-						// todo check answers in lowercase and try freetext similar answers
-						else {
+						else if (oData2.ANSWER_TYPE === "Slide") {
 							correct = (oData.ANSWER.toLowerCase() === oData1.ANSWER.toLowerCase());
+						}
+						else if (oData2.ANSWER_TYPE === "Text") { 
+						
+							correct = (oData1.ANSWER.toLowerCase().includes(oData.ANSWER.toLowerCase()));
 						}
 					}
 					var oCorrect = new sap.ui.model.json.JSONModel({correct : correct});
