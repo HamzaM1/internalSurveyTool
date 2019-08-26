@@ -1,19 +1,22 @@
 {
     "resources": [
         {
-            "name": "serviceBinding.js"
+            "name": "view/QuestionSlider.view.xml"
         },
         {
             "name": "manifest.json"
         },
         {
-            "name": "model/formatter.js"
+            "name": "placeholder.json"
+        },
+        {
+            "name": "serviceBinding.js"
         },
         {
             "name": "model/models.js"
         },
         {
-            "name": "placeholder.json"
+            "name": "model/formatter.js"
         },
         {
             "name": "localService/mockserver.js"
@@ -41,6 +44,9 @@
         },
         {
             "name": "controller/QuizEntry.controller.js"
+        },
+        {
+            "name": "controller/QuizComplete.controller.js"
         },
         {
             "name": "controller/Quiz.controller.js"
@@ -101,7 +107,7 @@
             "merged": true
         },
         {
-            "name": "controller/SurveyTitle-dbg.controller.js",
+            "name": "controller/App-dbg.controller.js",
             "isDebug": true
         },
         {
@@ -129,6 +135,10 @@
             "isDebug": true
         },
         {
+            "name": "controller/SurveyTitle-dbg.controller.js",
+            "isDebug": true
+        },
+        {
             "name": "controller/SurveyQuestion-dbg.controller.js",
             "isDebug": true
         },
@@ -146,6 +156,10 @@
         },
         {
             "name": "controller/QuizEntry-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/QuizComplete-dbg.controller.js",
             "isDebug": true
         },
         {
@@ -201,10 +215,6 @@
             "isDebug": true
         },
         {
-            "name": "controller/App-dbg.controller.js",
-            "isDebug": true
-        },
-        {
             "name": "controller/Answer-dbg.controller.js",
             "isDebug": true
         },
@@ -250,13 +260,16 @@
             "name": "view/QuizEntry.view.xml"
         },
         {
+            "name": "view/QuizComplete.view.xml"
+        },
+        {
             "name": "view/Quiz.view.xml"
         },
         {
-            "name": "view/QuestionTextbox.view.xml"
+            "name": "view/QuestionUnanswered.fragment.xml"
         },
         {
-            "name": "view/QuestionSlider.view.xml"
+            "name": "view/QuestionTextbox.view.xml"
         },
         {
             "name": "view/QuestionRadio.view.xml"

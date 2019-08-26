@@ -154,10 +154,10 @@
                     ]
                 },
                 {
-                    "pattern": "userResults/{objectId}",
-                    "name": "userResults",
+                    "pattern": "quizComplete/{objectId}",
+                    "name": "quizComplete",
                     "target": [
-                        "userResults"
+                        "quizComplete"
                     ]
                 },
                 {
@@ -263,9 +263,9 @@
                     "viewLevel": 2,
                     "title": "{i18n>quizViewTitle}"
                 },
-                "userResults": {
-                    "viewName": "UserResults",
-                    "viewId": "userResults",
+                "quizComplete": {
+                    "viewName": "QuizComplete",
+                    "viewId": "quizComplete",
                     "viewLevel": 2,
                     "title": "{i18n>userResultsViewTitle}"
                 },

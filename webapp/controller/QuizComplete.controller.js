@@ -9,7 +9,7 @@ sap.ui.define([
 	var sPercent;
 	return BaseController.extend("demo.survey2.SurveyDemo2.controller.QuizComplete", {
    		onInit : function() {
-   			this.getRouter().getRoute("userResults").attachPatternMatched(this._onObjectMatched, this);
+   			this.getRouter().getRoute("quizComplete").attachPatternMatched(this._onObjectMatched, this);
    		},
    	
 		onNavBack : function() {
